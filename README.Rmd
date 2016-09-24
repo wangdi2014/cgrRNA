@@ -1,0 +1,14 @@
+---
+title: "cgrRNA"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is the repository for the CGR's whole transcriptome analysis pipeline
+

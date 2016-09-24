@@ -1,3 +1,4 @@
-# RNA-seq-workflow
+cgrRNA
+================
 
-Cancer Genomics Research Laboratory's Integrated RNA-seq workflow
+This is the repository for the CGR's whole transcriptome analysis pipeline
