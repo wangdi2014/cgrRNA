@@ -1,7 +1,22 @@
 
-Chats | [Public Gitter Chat](https://gitter.im/cgrlab/cgrRNA) | [teamcgc slack channel](https://teamcgc.slack.com/messages/cgr_rna/)
+Chats | [cgrlab Gitter](https://gitter.im/cgrlab/cgrRNA) | [teamcgc slack channel](https://teamcgc.slack.com/messages/cgr_rna/)
 
 <hr>
+Workflows Included in this Whole Transcriptome Analysis Pipeline
+
+-   Aligment and QC
+    -   STAR and Dedupication
+    -   RNA-SeQC
+    -   Multiple Sample QC Metric Wrangler
+-   mRNA Fusions
+    -   ChimeraScan / Chimera / Oncofuse
+        -   Preprocessing with Fastq decompress and merge
+    -   Multiple Sample Evidence based Fusion Summary Tool
+        -   Coming soon
+-   Differential Expression
+    -   cuff quant / cuff diff
+    -   Ht-seq / DESeq2
+
 Workflow Graphs
 ---------------
 
@@ -16,6 +31,10 @@ Workflow Graphs
 ### 3. QC Metrics Wrangler
 
 <a href="images/qc_metrics_wrangler.png" target="_blank"> <img width="1200" border="0" align="center" src="images/qc_metrics_wrangler.png"/> </a>
+
+### Fusions
+
+<a href="images/chimera_scan.png" target="_blank"> <img width="1200" border="0" align="center" src="images/chimera_scan.png"/> </a>
 
 ### Other Utility Workflows
 
