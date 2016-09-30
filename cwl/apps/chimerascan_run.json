@@ -1,0 +1,94 @@
+{
+  "sbg:id": "chimerascan_run",
+  "id": "#chimerascan_run",
+  "inputs": [
+    {
+      "type": [
+        "null",
+        {
+          "items": "File",
+          "type": "array"
+        }
+      ],
+      "label": "reads",
+      "description": "paired end reads",
+      "streamable": false,
+      "default": "",
+      "id": "#reads",
+      "required": false
+    },
+    {
+      "type": [
+        "null",
+        {
+          "items": "File",
+          "type": "array"
+        }
+      ],
+      "label": "index",
+      "description": "chimerascan index",
+      "streamable": false,
+      "default": "",
+      "id": "#index",
+      "sbg:stageInput": "link",
+      "required": false
+    }
+  ],
+  "outputs": [
+    {
+      "type": ["null", "File"],
+      "label": "std_out",
+      "description": "standard output",
+      "streamable": false,
+      "default": "",
+      "id": "#std_out",
+      "outputBinding": {
+        "glob": "\"std.out\"",
+        "sbg:metadata": {
+          "from_tool": "chimerascan_run"
+        }
+      }
+    }
+  ],
+  "requirements": [],
+  "hints": [
+    {
+      "class": "DockerRequirement",
+      "dockerPull": "cgrlab/chimerascan:latest"
+    },
+    {
+      "class": "sbg:CPURequirement",
+      "value": 1
+    },
+    {
+      "class": "sbg:MemRequirement",
+      "value": 1000
+    }
+  ],
+  "label": "Chimerascan Run",
+  "class": "CommandLineTool",
+  "baseCommand": [
+    "CPU=`grep -c ^processor /proc/cpuinfo` && ascat.pl -c $CPU -rs Human -ra NCBI37 -pr WGS -pl ILLUMINA -sg ascat_SnpGcCorrections.tsv -q 20 -g L -o ascat_output"
+  ],
+  "arguments": [
+    {
+      "position": 1,
+      "separate": true,
+      "valueFrom": {
+        "engine": "#cwl-js-engine",
+        "script": "\"./\"",
+        "class": "Expression"
+      }
+    },
+    {
+      "position": 101,
+      "separate": true,
+      "valueFrom": {
+        "engine": "#cwl-js-engine",
+        "script": "\"&& ls -lR\"",
+        "class": "Expression"
+      }
+    }
+  ],
+  "stdout": "std.out"
+}
