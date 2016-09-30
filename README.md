@@ -1,13 +1,13 @@
-cgrRNA
-================
 
--   [Metadata Template](#metadata-template)
+Chats | [Public Gitter Chat](https://gitter.im/cgrlab/cgrRNA) | [teamcgc slack channel](https://teamcgc.slack.com/messages/cgr_rna/)
 
-This is the repository for the CGR's whole transcriptome analysis pipeline
+<hr>
+Workflow Graphs
+---------------
 
-[![Join the chat at https://gitter.im/cgrlab/cgrRNA](https://badges.gitter.im/cgrlab/cgrRNA.svg)](https://gitter.im/cgrlab/cgrRNA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+### 1. Alignment and Deduplication
 
-Chats | [teamcgc slack channel](https://teamcgc.slack.com/messages/cgr_rna/)
+<a href="images/star_alignment_and_deduplication.png" target="_blank"> <img width="1200" border="0" align="center" src="images/star_alignment_and_deduplication.png"/> </a>
 
 Metadata Template
 -----------------
