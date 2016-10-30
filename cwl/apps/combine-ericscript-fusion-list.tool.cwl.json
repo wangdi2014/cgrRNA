@@ -1,0 +1,270 @@
+{
+  "id": "https://api.sbgenomics.com/v2/apps/dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13/raw/",
+  "sbg:modifiedOn": 1477843401,
+  "inputs": [
+    {
+      "required": false,
+      "description": "table",
+      "label": "table",
+      "type": [
+        "null",
+        {
+          "items": "File",
+          "name": "table",
+          "type": "array"
+        }
+      ],
+      "streamable": false,
+      "id": "#table",
+      "inputBinding": {
+        "prefix": "--table",
+        "separate": true,
+        "position": 0,
+        "sbg:cmdInclude": true
+      },
+      "default": ""
+    }
+  ],
+  "sbg:cmdPreview": "Rscript combine_tables.R",
+  "sbg:latestRevision": 13,
+  "hints": [
+    {
+      "class": "DockerRequirement",
+      "dockerPull": "cgrlab/tidyverse:latest"
+    },
+    {
+      "value": 1,
+      "class": "sbg:CPURequirement"
+    },
+    {
+      "value": 1000,
+      "class": "sbg:MemRequirement"
+    }
+  ],
+  "stdin": "",
+  "sbg:createdOn": 1477784406,
+  "stdout": "",
+  "description": "",
+  "sbg:validationErrors": [],
+  "sbg:image_url": null,
+  "requirements": [
+    {
+      "fileDef": [
+        {
+          "filename": "get_args.R",
+          "fileContent": {
+            "engine": "#cwl-js-engine",
+            "script": "\nfor (i = 0; i < $job.inputs.table.length; i++) {\nif(i === 0) {\ntable_path = '\"' + $job.inputs.table[i].path\ncase_id = '\"' + $job.inputs.table[i].metadata.case_id\nsample_id = '\"' + $job.inputs.table[i].metadata.sample_id\nsample_type = '\"' + $job.inputs.table[i].metadata.sample_type\n}\nelse {\ntable_path = table_path + '\", \"' + $job.inputs.table[i].path\ncase_id = case_id + '\", \"' + $job.inputs.table[i].metadata.case_id\nsample_id = sample_id + '\", \"' + $job.inputs.table[i].metadata.sample_id\nsample_type = sample_type + '\", \"' + $job.inputs.table[i].metadata.sample_type\n}}\n\n'# get args \\n\\\nargs_table = data_frame(path = c('+table_path+'\"), \\\ncase_id = c('+case_id+'\"), \\\nsample_id = c('+sample_id+'\"), \\\nsample_type = c('+sample_type+'\"))'\n",
+            "class": "Expression"
+          }
+        },
+        {
+          "filename": "combine_tables.R",
+          "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr); require(xlsx);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup()\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nxlsx::write.xlsx(merged_table, \"EricScript_filtered_fusions_merged.xlsx\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
+        }
+      ],
+      "class": "CreateFileRequirement"
+    },
+    {
+      "id": "#cwl-js-engine",
+      "requirements": [
+        {
+          "class": "DockerRequirement",
+          "dockerPull": "rabix/js-engine"
+        }
+      ],
+      "class": "ExpressionEngineRequirement"
+    }
+  ],
+  "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13",
+  "temporaryFailCodes": [],
+  "label": "combine-EricScript-fusion-lists",
+  "sbg:createdBy": "dave",
+  "class": "CommandLineTool",
+  "sbg:project": "dave/rd168-ericscript-dev",
+  "sbg:sbgMaintained": false,
+  "sbg:revision": 13,
+  "baseCommand": [
+    "Rscript",
+    "combine_tables.R"
+  ],
+  "sbg:contributors": [
+    "dave"
+  ],
+  "successCodes": [],
+  "sbg:modifiedBy": "dave",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:revisionNotes": "Copy of dave/rd111-hpv-typing-plugin-dev-161023/combine-rds/12",
+      "sbg:revision": 0,
+      "sbg:modifiedOn": 1477784406,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 1,
+      "sbg:modifiedOn": 1477785871,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 2,
+      "sbg:modifiedOn": 1477786130,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 3,
+      "sbg:modifiedOn": 1477786222,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 4,
+      "sbg:modifiedOn": 1477786339,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 5,
+      "sbg:modifiedOn": 1477788230,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 6,
+      "sbg:modifiedOn": 1477789030,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 7,
+      "sbg:modifiedOn": 1477789196,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 8,
+      "sbg:modifiedOn": 1477789788,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "added case_id",
+      "sbg:revision": 9,
+      "sbg:modifiedOn": 1477797661,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "output csv and xlsx",
+      "sbg:revision": 10,
+      "sbg:modifiedOn": 1477833792,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "just csv",
+      "sbg:revision": 11,
+      "sbg:modifiedOn": 1477835066,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "put xlsx back in",
+      "sbg:revision": 12,
+      "sbg:modifiedOn": 1477841227,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "removed rds output",
+      "sbg:revision": 13,
+      "sbg:modifiedOn": 1477843401,
+      "sbg:modifiedBy": "dave"
+    }
+  ],
+  "arguments": [],
+  "sbg:revisionNotes": "removed rds output",
+  "outputs": [
+    {
+      "description": "merged_table",
+      "id": "#merged_csv",
+      "type": [
+        "null",
+        "File"
+      ],
+      "streamable": false,
+      "label": "merged_table",
+      "outputBinding": {
+        "glob": {
+          "engine": "#cwl-js-engine",
+          "script": "\"*.csv\"",
+          "class": "Expression"
+        },
+        "sbg:inheritMetadataFrom": "#table",
+        "sbg:metadata": {
+          "from_tool": "combine-EricScript-fusion-lists"
+        }
+      },
+      "default": ""
+    },
+    {
+      "outputBinding": {
+        "glob": {
+          "engine": "#cwl-js-engine",
+          "script": "\"*.xlsx\"",
+          "class": "Expression"
+        },
+        "sbg:inheritMetadataFrom": "#table"
+      },
+      "id": "#merged_xlsx",
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "outputBinding": {
+        "glob": {
+          "engine": "#cwl-js-engine",
+          "script": "\"*merged.json\"",
+          "class": "Expression"
+        },
+        "sbg:inheritMetadataFrom": "#table"
+      },
+      "id": "#merged_json",
+      "type": [
+        "null",
+        "File"
+      ]
+    }
+  ],
+  "sbg:job": {
+    "allocatedResources": {
+      "mem": 1000,
+      "cpu": 1
+    },
+    "inputs": {
+      "table": [
+        {
+          "path": "sampleA.tsv",
+          "size": 0,
+          "secondaryFiles": [],
+          "metadata": {
+            "sample_type": "Tumor",
+            "case_id": "Case_idA",
+            "sample_id": "SampleBlarA"
+          },
+          "class": "File"
+        },
+        {
+          "path": "sampleB.tsv",
+          "size": 0,
+          "secondaryFiles": [],
+          "metadata": {
+            "sample_type": "Normal",
+            "case_id": "Case_idB",
+            "sample_id": "sample_blarB"
+          },
+          "class": "File"
+        }
+      ]
+    }
+  }
+}
