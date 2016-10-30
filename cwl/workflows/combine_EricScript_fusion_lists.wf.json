@@ -4,8 +4,8 @@
     {
       "id": "#combine_EricScript_fusion_lists",
       "run": {
-        "id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/12",
-        "sbg:modifiedOn": 1477841227,
+        "id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13",
+        "sbg:modifiedOn": 1477843401,
         "inputs": [
           {
             "required": false,
@@ -15,17 +15,17 @@
               "null",
               {
                 "items": "File",
-                "name": "table",
-                "type": "array"
+                "type": "array",
+                "name": "table"
               }
             ],
             "streamable": false,
             "id": "#table",
             "inputBinding": {
+              "sbg:cmdInclude": true,
               "prefix": "--table",
               "separate": true,
-              "position": 0,
-              "sbg:cmdInclude": true
+              "position": 0
             },
             "default": ""
           }
@@ -45,7 +45,7 @@
             "class": "sbg:MemRequirement"
           }
         ],
-        "sbg:latestRevision": 12,
+        "sbg:latestRevision": 13,
         "stdin": "",
         "sbg:createdOn": 1477784406,
         "sbg:project": "dave/rd168-ericscript-dev",
@@ -65,23 +65,23 @@
               },
               {
                 "filename": "combine_tables.R",
-                "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr); require(xlsx);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup()\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nxlsx::write.xlsx(merged_table, \"EricScript_filtered_fusions_merged.xlsx\")\n\nsaveRDS(merged_table, \"EricScript_filtered_fusions_merged.rds\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
+                "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr); require(xlsx);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup()\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nxlsx::write.xlsx(merged_table, \"EricScript_filtered_fusions_merged.xlsx\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
               }
             ],
             "class": "CreateFileRequirement"
           },
           {
             "id": "#cwl-js-engine",
+            "class": "ExpressionEngineRequirement",
             "requirements": [
               {
                 "class": "DockerRequirement",
                 "dockerPull": "rabix/js-engine"
               }
-            ],
-            "class": "ExpressionEngineRequirement"
+            ]
           }
         ],
-        "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/12",
+        "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13",
         "sbg:validationErrors": [],
         "label": "combine-EricScript-fusion-lists",
         "class": "CommandLineTool",
@@ -108,21 +108,6 @@
             "outputBinding": {
               "glob": {
                 "engine": "#cwl-js-engine",
-                "script": "\"*.rds\"",
-                "class": "Expression"
-              },
-              "sbg:inheritMetadataFrom": "#table"
-            },
-            "id": "#merged_rds",
-            "type": [
-              "null",
-              "File"
-            ]
-          },
-          {
-            "outputBinding": {
-              "glob": {
-                "engine": "#cwl-js-engine",
                 "script": "\"*merged.json\"",
                 "class": "Expression"
               },
@@ -136,13 +121,13 @@
           },
           {
             "description": "merged_table",
-            "id": "#merged_csv",
+            "label": "merged_table",
             "type": [
               "null",
               "File"
             ],
             "streamable": false,
-            "label": "merged_table",
+            "id": "#merged_csv",
             "outputBinding": {
               "glob": {
                 "engine": "#cwl-js-engine",
@@ -244,11 +229,17 @@
             "sbg:revision": 12,
             "sbg:modifiedOn": 1477841227,
             "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": "removed rds output",
+            "sbg:revision": 13,
+            "sbg:modifiedOn": 1477843401,
+            "sbg:modifiedBy": "dave"
           }
         ],
         "arguments": [],
-        "sbg:revisionNotes": "put xlsx back in",
-        "sbg:revision": 12,
+        "sbg:revisionNotes": "removed rds output",
+        "sbg:revision": 13,
         "sbg:job": {
           "allocatedResources": {
             "mem": 1000,
@@ -297,9 +288,6 @@
           "id": "#combine_EricScript_fusion_lists.merged_xlsx"
         },
         {
-          "id": "#combine_EricScript_fusion_lists.merged_rds"
-        },
-        {
           "id": "#combine_EricScript_fusion_lists.merged_json"
         },
         {
@@ -344,22 +332,7 @@
       ]
     },
     {
-      "sbg:y": 219,
-      "id": "#merged_rds",
-      "type": [
-        "null",
-        "File"
-      ],
-      "required": false,
-      "label": "merged_rds",
-      "sbg:includeInPorts": true,
-      "sbg:x": 931,
-      "source": [
-        "#combine_EricScript_fusion_lists.merged_rds"
-      ]
-    },
-    {
-      "sbg:y": 506,
+      "sbg:y": 390,
       "id": "#merged_csv",
       "type": [
         "null",
@@ -368,13 +341,13 @@
       "required": false,
       "label": "merged_csv",
       "sbg:includeInPorts": true,
-      "sbg:x": 868,
+      "sbg:x": 899,
       "source": [
         "#combine_EricScript_fusion_lists.merged_csv"
       ]
     },
     {
-      "sbg:y": 360,
+      "sbg:y": 232,
       "id": "#merged_json",
       "type": [
         "null",
@@ -383,28 +356,28 @@
       "required": false,
       "label": "merged_json",
       "sbg:includeInPorts": true,
-      "sbg:x": 986,
+      "sbg:x": 1000,
       "source": [
         "#combine_EricScript_fusion_lists.merged_json"
       ]
     }
   ],
-  "sbg:modifiedOn": 1477841818,
+  "sbg:modifiedOn": 1477843461,
   "sbg:canvas_x": 0,
   "sbg:createdOn": 1477786365,
   "sbg:project": "dave/rd168-ericscript-dev",
   "sbg:image_url": null,
-  "sbg:id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/12",
+  "sbg:id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/14",
   "sbg:validationErrors": [],
   "sbg:createdBy": "dave",
   "sbg:sbgMaintained": false,
-  "sbg:revision": 12,
+  "sbg:revision": 14,
   "sbg:modifiedBy": "dave",
   "sbg:canvas_y": 0,
   "sbg:contributors": [
     "dave"
   ],
-  "sbg:latestRevision": 12,
+  "sbg:latestRevision": 14,
   "sbg:canvas_zoom": 1,
   "sbg:revisionsInfo": [
     {
@@ -484,10 +457,22 @@
       "sbg:revision": 12,
       "sbg:modifiedOn": 1477841818,
       "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "c4.large",
+      "sbg:revision": 13,
+      "sbg:modifiedOn": 1477842377,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "\"removed rds output\"",
+      "sbg:revision": 14,
+      "sbg:modifiedOn": 1477843461,
+      "sbg:modifiedBy": "dave"
     }
   ],
-  "sbg:revisionNotes": "put xlsx back in",
-  "id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/12",
+  "sbg:revisionNotes": "\"removed rds output\"",
+  "id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/14",
   "label": "combine_eric_script_filtered_fusions",
   "description": "",
   "hints": [
