@@ -1,0 +1,499 @@
+{
+  "class": "Workflow",
+  "steps": [
+    {
+      "id": "#combine_EricScript_fusion_lists",
+      "run": {
+        "id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/12",
+        "sbg:modifiedOn": 1477841227,
+        "inputs": [
+          {
+            "required": false,
+            "description": "table",
+            "label": "table",
+            "type": [
+              "null",
+              {
+                "items": "File",
+                "name": "table",
+                "type": "array"
+              }
+            ],
+            "streamable": false,
+            "id": "#table",
+            "inputBinding": {
+              "prefix": "--table",
+              "separate": true,
+              "position": 0,
+              "sbg:cmdInclude": true
+            },
+            "default": ""
+          }
+        ],
+        "sbg:cmdPreview": "Rscript combine_tables.R",
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "cgrlab/tidyverse:latest"
+          },
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          }
+        ],
+        "sbg:latestRevision": 12,
+        "stdin": "",
+        "sbg:createdOn": 1477784406,
+        "sbg:project": "dave/rd168-ericscript-dev",
+        "description": "",
+        "temporaryFailCodes": [],
+        "sbg:image_url": null,
+        "requirements": [
+          {
+            "fileDef": [
+              {
+                "filename": "get_args.R",
+                "fileContent": {
+                  "engine": "#cwl-js-engine",
+                  "script": "\nfor (i = 0; i < $job.inputs.table.length; i++) {\nif(i === 0) {\ntable_path = '\"' + $job.inputs.table[i].path\ncase_id = '\"' + $job.inputs.table[i].metadata.case_id\nsample_id = '\"' + $job.inputs.table[i].metadata.sample_id\nsample_type = '\"' + $job.inputs.table[i].metadata.sample_type\n}\nelse {\ntable_path = table_path + '\", \"' + $job.inputs.table[i].path\ncase_id = case_id + '\", \"' + $job.inputs.table[i].metadata.case_id\nsample_id = sample_id + '\", \"' + $job.inputs.table[i].metadata.sample_id\nsample_type = sample_type + '\", \"' + $job.inputs.table[i].metadata.sample_type\n}}\n\n'# get args \\n\\\nargs_table = data_frame(path = c('+table_path+'\"), \\\ncase_id = c('+case_id+'\"), \\\nsample_id = c('+sample_id+'\"), \\\nsample_type = c('+sample_type+'\"))'\n",
+                  "class": "Expression"
+                }
+              },
+              {
+                "filename": "combine_tables.R",
+                "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr); require(xlsx);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup()\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nxlsx::write.xlsx(merged_table, \"EricScript_filtered_fusions_merged.xlsx\")\n\nsaveRDS(merged_table, \"EricScript_filtered_fusions_merged.rds\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
+              }
+            ],
+            "class": "CreateFileRequirement"
+          },
+          {
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ],
+            "class": "ExpressionEngineRequirement"
+          }
+        ],
+        "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/12",
+        "sbg:validationErrors": [],
+        "label": "combine-EricScript-fusion-lists",
+        "class": "CommandLineTool",
+        "sbg:createdBy": "dave",
+        "stdout": "",
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "outputBinding": {
+              "glob": {
+                "engine": "#cwl-js-engine",
+                "script": "\"*.xlsx\"",
+                "class": "Expression"
+              },
+              "sbg:inheritMetadataFrom": "#table"
+            },
+            "id": "#merged_xlsx",
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "outputBinding": {
+              "glob": {
+                "engine": "#cwl-js-engine",
+                "script": "\"*.rds\"",
+                "class": "Expression"
+              },
+              "sbg:inheritMetadataFrom": "#table"
+            },
+            "id": "#merged_rds",
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "outputBinding": {
+              "glob": {
+                "engine": "#cwl-js-engine",
+                "script": "\"*merged.json\"",
+                "class": "Expression"
+              },
+              "sbg:inheritMetadataFrom": "#table"
+            },
+            "id": "#merged_json",
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "description": "merged_table",
+            "id": "#merged_csv",
+            "type": [
+              "null",
+              "File"
+            ],
+            "streamable": false,
+            "label": "merged_table",
+            "outputBinding": {
+              "glob": {
+                "engine": "#cwl-js-engine",
+                "script": "\"*.csv\"",
+                "class": "Expression"
+              },
+              "sbg:inheritMetadataFrom": "#table",
+              "sbg:metadata": {
+                "from_tool": "combine-EricScript-fusion-lists"
+              }
+            },
+            "default": ""
+          }
+        ],
+        "baseCommand": [
+          "Rscript",
+          "combine_tables.R"
+        ],
+        "sbg:contributors": [
+          "dave"
+        ],
+        "successCodes": [],
+        "sbg:modifiedBy": "dave",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:revisionNotes": "Copy of dave/rd111-hpv-typing-plugin-dev-161023/combine-rds/12",
+            "sbg:revision": 0,
+            "sbg:modifiedOn": 1477784406,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 1,
+            "sbg:modifiedOn": 1477785871,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 2,
+            "sbg:modifiedOn": 1477786130,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 3,
+            "sbg:modifiedOn": 1477786222,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 4,
+            "sbg:modifiedOn": 1477786339,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 5,
+            "sbg:modifiedOn": 1477788230,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 6,
+            "sbg:modifiedOn": 1477789030,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 7,
+            "sbg:modifiedOn": 1477789196,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": null,
+            "sbg:revision": 8,
+            "sbg:modifiedOn": 1477789788,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": "added case_id",
+            "sbg:revision": 9,
+            "sbg:modifiedOn": 1477797661,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": "output csv and xlsx",
+            "sbg:revision": 10,
+            "sbg:modifiedOn": 1477833792,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": "just csv",
+            "sbg:revision": 11,
+            "sbg:modifiedOn": 1477835066,
+            "sbg:modifiedBy": "dave"
+          },
+          {
+            "sbg:revisionNotes": "put xlsx back in",
+            "sbg:revision": 12,
+            "sbg:modifiedOn": 1477841227,
+            "sbg:modifiedBy": "dave"
+          }
+        ],
+        "arguments": [],
+        "sbg:revisionNotes": "put xlsx back in",
+        "sbg:revision": 12,
+        "sbg:job": {
+          "allocatedResources": {
+            "mem": 1000,
+            "cpu": 1
+          },
+          "inputs": {
+            "table": [
+              {
+                "path": "sampleA.tsv",
+                "size": 0,
+                "secondaryFiles": [],
+                "metadata": {
+                  "sample_type": "Tumor",
+                  "case_id": "Case_idA",
+                  "sample_id": "SampleBlarA"
+                },
+                "class": "File"
+              },
+              {
+                "path": "sampleB.tsv",
+                "size": 0,
+                "secondaryFiles": [],
+                "metadata": {
+                  "sample_type": "Normal",
+                  "case_id": "Case_idB",
+                  "sample_id": "sample_blarB"
+                },
+                "class": "File"
+              }
+            ]
+          }
+        },
+        "x": 572,
+        "y": 212.1999969482422
+      },
+      "inputs": [
+        {
+          "id": "#combine_EricScript_fusion_lists.table",
+          "source": [
+            "#table"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#combine_EricScript_fusion_lists.merged_xlsx"
+        },
+        {
+          "id": "#combine_EricScript_fusion_lists.merged_rds"
+        },
+        {
+          "id": "#combine_EricScript_fusion_lists.merged_json"
+        },
+        {
+          "id": "#combine_EricScript_fusion_lists.merged_csv"
+        }
+      ],
+      "sbg:x": 572,
+      "sbg:y": 212.1999969482422
+    }
+  ],
+  "requirements": [],
+  "inputs": [
+    {
+      "label": "table",
+      "type": [
+        "null",
+        {
+          "items": "File",
+          "type": "array",
+          "name": "table"
+        }
+      ],
+      "id": "#table",
+      "sbg:x": 188,
+      "sbg:y": 216
+    }
+  ],
+  "outputs": [
+    {
+      "sbg:y": 110,
+      "id": "#merged_xlsx",
+      "type": [
+        "null",
+        "File"
+      ],
+      "required": false,
+      "label": "merged_xlsx",
+      "sbg:includeInPorts": true,
+      "sbg:x": 833,
+      "source": [
+        "#combine_EricScript_fusion_lists.merged_xlsx"
+      ]
+    },
+    {
+      "sbg:y": 219,
+      "id": "#merged_rds",
+      "type": [
+        "null",
+        "File"
+      ],
+      "required": false,
+      "label": "merged_rds",
+      "sbg:includeInPorts": true,
+      "sbg:x": 931,
+      "source": [
+        "#combine_EricScript_fusion_lists.merged_rds"
+      ]
+    },
+    {
+      "sbg:y": 506,
+      "id": "#merged_csv",
+      "type": [
+        "null",
+        "File"
+      ],
+      "required": false,
+      "label": "merged_csv",
+      "sbg:includeInPorts": true,
+      "sbg:x": 868,
+      "source": [
+        "#combine_EricScript_fusion_lists.merged_csv"
+      ]
+    },
+    {
+      "sbg:y": 360,
+      "id": "#merged_json",
+      "type": [
+        "null",
+        "File"
+      ],
+      "required": false,
+      "label": "merged_json",
+      "sbg:includeInPorts": true,
+      "sbg:x": 986,
+      "source": [
+        "#combine_EricScript_fusion_lists.merged_json"
+      ]
+    }
+  ],
+  "sbg:modifiedOn": 1477841818,
+  "sbg:canvas_x": 0,
+  "sbg:createdOn": 1477786365,
+  "sbg:project": "dave/rd168-ericscript-dev",
+  "sbg:image_url": null,
+  "sbg:id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/12",
+  "sbg:validationErrors": [],
+  "sbg:createdBy": "dave",
+  "sbg:sbgMaintained": false,
+  "sbg:revision": 12,
+  "sbg:modifiedBy": "dave",
+  "sbg:canvas_y": 0,
+  "sbg:contributors": [
+    "dave"
+  ],
+  "sbg:latestRevision": 12,
+  "sbg:canvas_zoom": 1,
+  "sbg:revisionsInfo": [
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 0,
+      "sbg:modifiedOn": 1477786365,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 1,
+      "sbg:modifiedOn": 1477786413,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 2,
+      "sbg:modifiedOn": 1477788253,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 3,
+      "sbg:modifiedOn": 1477788449,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 4,
+      "sbg:modifiedOn": 1477789052,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 5,
+      "sbg:modifiedOn": 1477789213,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": null,
+      "sbg:revision": 6,
+      "sbg:modifiedOn": 1477789821,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "regular instance",
+      "sbg:revision": 7,
+      "sbg:modifiedOn": 1477790850,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "added case_id",
+      "sbg:revision": 8,
+      "sbg:modifiedOn": 1477797703,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "output csv xlsx",
+      "sbg:revision": 9,
+      "sbg:modifiedOn": 1477833831,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "just csv",
+      "sbg:revision": 10,
+      "sbg:modifiedOn": 1477835093,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "c4.large",
+      "sbg:revision": 11,
+      "sbg:modifiedOn": 1477841800,
+      "sbg:modifiedBy": "dave"
+    },
+    {
+      "sbg:revisionNotes": "put xlsx back in",
+      "sbg:revision": 12,
+      "sbg:modifiedOn": 1477841818,
+      "sbg:modifiedBy": "dave"
+    }
+  ],
+  "sbg:revisionNotes": "put xlsx back in",
+  "id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/12",
+  "label": "combine_eric_script_filtered_fusions",
+  "description": "",
+  "hints": [
+    {
+      "value": "c4.large",
+      "class": "sbg:AWSInstanceType"
+    }
+  ]
+}
