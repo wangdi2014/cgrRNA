@@ -1,12 +1,5 @@
-VarDict RNA
+VarDictJava RNA
 ================
-
-Workflow Graph
-==============
-
-<a href="temp_picture.png" target="_blank"> <img width="1200" border="0" align="center" src="temp_picture.png"/> </a>
-
-Variant caller with ability to call indels and snv from RNA-seq reads.
 
 base command
 ============
@@ -130,6 +123,10 @@ project$app_add("vardict_rna", tool)
 
 notes
 =====
+
+how to render this document
+
+    rmarkdown::render('scripts/variant_calling/vardict_workflow/VarDictJava/vardict_rna.Rmd', output_file = Readme.md)
 
 ``` r
 require(tidyverse)

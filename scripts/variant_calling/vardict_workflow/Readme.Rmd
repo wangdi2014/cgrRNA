@@ -1,0 +1,25 @@
+---
+title: "VarDict RNA Workflow"
+output:
+  github_document:
+    fig_width: 5
+    fig_height: 5
+    dev: jpeg
+---
+
+```{r include = FALSE}
+require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
+
+options(max.print = "99"); opts_knit$set(width = 99)
+opts_chunk$set(cache=FALSE, tidy=FALSE)
+
+source("~/cgrRNA/scratch/cgc_auth.R")
+
+```
+
+#Workflow Graph
+
+![workflow_graph.png](workflow_graph.png)
+
+
+Variant caller with ability to call indels and snv from RNA-seq reads.
