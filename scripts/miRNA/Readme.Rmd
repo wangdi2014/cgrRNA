@@ -1,5 +1,5 @@
 ---
-title: "cgrRNA Variant Calling Module"
+title: "cgrRNA miRNA Analysis Module"
 output:
   github_document:
     fig_width: 5
@@ -17,9 +17,5 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
-#VarDict for RNA
-
-![varict workflow](workflow_vardict/workflow_graph.png)
 
 
-Variant caller with ability to call indels and snv from RNA-seq reads.
