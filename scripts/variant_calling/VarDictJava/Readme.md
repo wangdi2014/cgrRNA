@@ -1,9 +1,15 @@
 VarDict RNA
 ================
 
+Workflow Graph
+==============
+
+<a href="temp_picture.png" target="_blank"> <img width="1200" border="0" align="center" src="temp_picture.png"/> </a>
+
 Variant caller with ability to call indels and snv from RNA-seq reads.
 
-### base command
+base command
+============
 
 ``` sh
 
@@ -17,9 +23,8 @@ VarDict -th 4 \
 -C -c 1 -S 2 -E 3 target_regions/10a.bed
 ```
 
-### i/o
-
-#### inputs
+Inputs
+======
 
 ``` r
 inputs = list(
@@ -53,7 +58,8 @@ input(id = "bed", label = "bed", description = "optional bed file to target", ty
 )
 ```
 
-#### arguments
+Arguments
+=========
 
 ``` r
 arguments = CCBList(
@@ -62,7 +68,8 @@ CommandLineBinding(position = 201, prefix = ">", valueFrom = list('{return $job.
 )
 ```
 
-#### outputs
+Outputs
+=======
 
 ``` r
 outputs = list(
@@ -82,15 +89,15 @@ script = '"*.vcf"'))
 )
 ```
 
-### portability
-
-#### docker
+Docker
+======
 
 `cgrlab/vardictjava:latest`
 
 <https://hub.docker.com/r/cgrlab/vardictjava/>
 
-#### tool definition
+Tool definition
+===============
 
 ``` r
 tool <- Tool(
@@ -107,19 +114,22 @@ arguments = arguments,
 outputs = outputs)
 ```
 
-#### cwl file
+CWL file
+========
 
 ``` r
 write(tool$toJSON(pretty = TRUE), "vardict_rna.cwl.json")
 ```
 
-#### push app to cloud platform
+push app to cloud platform
+==========================
 
 ``` r
 project$app_add("vardict_rna", tool)
 ```
 
-#### notes
+notes
+=====
 
 ``` r
 require(tidyverse)
