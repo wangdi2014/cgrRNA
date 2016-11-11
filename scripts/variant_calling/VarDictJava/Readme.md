@@ -1,27 +1,11 @@
----
-title: "VarDict RNA"
-output:
-  github_document:
-    fig_width: 5
-    fig_height: 5
-    dev: jpeg
----
-
-```{r include = FALSE}
-require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
-
-options(max.print = "99"); opts_knit$set(width = 99)
-opts_chunk$set(cache=FALSE, tidy=FALSE)
-
-source("~/cgrRNA/scratch/cgc_auth.R")
-
-```
+VarDict RNA
+================
 
 Variant caller with ability to call indels and snv from RNA-seq reads.
 
 ### base command
 
-```{sh base command, eval=FALSE}
+``` sh
 
 /opt/VarDictJava/build/install/VarDict/bin/VarDict \
 -th [number of threads]
@@ -31,15 +15,13 @@ VarDict -th 4 \
 -N {Samp}_spiked_UC3_RNA \ 
 -b "StarAligned_RDSQ_Recal_Final.bam|Core_DNA_Normal_Merged.bam" \ 
 -C -c 1 -S 2 -E 3 target_regions/10a.bed
-
 ```
 
-### i/o {.tabset}
+### i/o
 
-#### inputs 
+#### inputs
 
-```{r inputs}
-
+``` r
 inputs = list(
   
 input(id = "threads", label = "threads", description = "threads", type = "int", prefix = "-th"),
@@ -69,12 +51,11 @@ input(id = "lowest_freq_normal_sample", label = "lowest_freq_normal_sample", des
 input(id = "bed", label = "bed", description = "optional bed file to target", type = "File", separate=FALSE, position = 101)
   
 )
-
 ```
 
 #### arguments
 
-```{r arguments}
+``` r
 arguments = CCBList(
 CommandLineBinding(position = 0, prefix = "-N", valueFrom = list('$job.inputs.bam[0].metadata.sample_id')),
 CommandLineBinding(position = 201, prefix = ">", valueFrom = list('{return $job.inputs.bam[0].metadata.sample_id + "_vardict_variants.txt"}'))
@@ -83,8 +64,7 @@ CommandLineBinding(position = 201, prefix = ">", valueFrom = list('{return $job.
 
 #### outputs
 
-```{r output}
-
+``` r
 outputs = list(
 
 output(id = "variants_text", label = "variants_text", 
@@ -100,22 +80,19 @@ glob = Expression(engine = "#cwl-js-engine",
 script = '"*.vcf"'))
   
 )
-
-
 ```
 
-### portability {.tabset}
+### portability
 
-####docker
+#### docker
 
-``` cgrlab/vardictjava:latest ```
+`cgrlab/vardictjava:latest`
 
-https://hub.docker.com/r/cgrlab/vardictjava/
+<https://hub.docker.com/r/cgrlab/vardictjava/>
 
-####tool definition
+#### tool definition
 
-```{r 5 create tool object}
-
+``` r
 tool <- Tool(
 id = "vardict_rna", 
 label = "VarDict RNA",
@@ -128,24 +105,23 @@ inputs = inputs,
 arguments = arguments,
   
 outputs = outputs)
-
 ```
 
-####cwl file
+#### cwl file
 
-```{r eval=create_cwl=="yes"}
+``` r
 write(tool$toJSON(pretty = TRUE), "vardict_rna.cwl.json")
 ```
 
-####push app to cloud platform
+#### push app to cloud platform
 
-```{r eval=platform_push=="yes"}
+``` r
 project$app_add("vardict_rna", tool)
 ```
 
-####notes
+#### notes
 
-```{r eval=FALSE}
+``` r
 require(tidyverse)
 
 bed = read_tsv("~/hg19_StandardChr_FullLength_3column_BED.bed", col_names=c("chr","start","stop"))%>% 
@@ -187,7 +163,4 @@ return(.)
   
 }) %>% 
 mutate(stop_diff = new_stop - new_stop_pre)
-
-
 ```
-
