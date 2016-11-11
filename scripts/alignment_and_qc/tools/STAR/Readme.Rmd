@@ -1,5 +1,5 @@
 ---
-title: "cgrRNA Fusions Module"
+title: "STAR Alignment Tool"
 output:
   github_document:
     fig_width: 5
@@ -16,4 +16,6 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
+
+
 

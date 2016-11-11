@@ -1,5 +1,5 @@
 ---
-title: "cgrRNA Fusions Module"
+title: "STAR Alignment and Deduplication Workflow"
 output:
   github_document:
     fig_width: 5

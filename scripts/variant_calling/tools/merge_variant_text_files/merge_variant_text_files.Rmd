@@ -1,4 +1,14 @@
-## Merge Variant Text files {.tabset}
+---
+title: "VarDict Merge Variant Text files"
+output:
+  github_document:
+    fig_width: 5
+    fig_height: 5
+    dev: jpeg
+---
+
+
+## {.tabset}
 
 ```{r include = FALSE}
 require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
@@ -6,7 +16,7 @@ require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges);
 options(max.print = "99"); opts_knit$set(width = 99)
 opts_chunk$set(cache=FALSE, tidy=FALSE)
 
-source("../../sbg_auth.R")
+source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
