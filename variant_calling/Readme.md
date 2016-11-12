@@ -1,9 +1,9 @@
-cgrRNA Variant Calling Workflow(s)
+cgrRNA Variant Calling Module
 ================
 
 VarDict for RNA
 ===============
 
-![varict workflow](workflow_vardict/workflow_graph.png)
+![varict workflow](workflows/vardict/workflow_graph.png)
 
 Variant caller with ability to call indels and snv from RNA-seq reads.
