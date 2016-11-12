@@ -39,3 +39,8 @@ All files will be tab delimited.
 ## STAR-Fusion by itself
 
 ![](workflows/star_fusion/star_fusion_post_alignment.png)
+
+## fastq_decompress_and_merge
+
+![](workflows/fastq_decompress_and_merge/fastq_decompress_and_merge.png)
+

@@ -5,6 +5,7 @@ cgrRNA Fusions Module
 -   [EricScript](#ericscript)
 -   [STAR-Fusion with alignment](#star-fusion-with-alignment)
 -   [STAR-Fusion by itself](#star-fusion-by-itself)
+-   [fastq\_decompress\_and\_merge](#fastq_decompress_and_merge)
 
 File naming conventions
 -----------------------
@@ -29,3 +30,8 @@ STAR-Fusion by itself
 ---------------------
 
 ![](workflows/star_fusion/star_fusion_post_alignment.png)
+
+fastq\_decompress\_and\_merge
+-----------------------------
+
+![](workflows/fastq_decompress_and_merge/fastq_decompress_and_merge.png)
