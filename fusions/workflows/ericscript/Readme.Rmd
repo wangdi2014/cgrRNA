@@ -1,5 +1,5 @@
 ---
-title: "EricSCript RNA Fusion WF"
+title: "EricScript RNA Fusion WF"
 output:
   github_document:
     fig_width: 5
@@ -18,3 +18,4 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 ```
 
 
+![workflow_graph.png](workflow_graph.png)

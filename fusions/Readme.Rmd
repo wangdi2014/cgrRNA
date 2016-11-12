@@ -25,3 +25,8 @@ All fusion output files follow the same naming schema which is the concatenation
 e.g. SA01234_chimerascan_output.bedpe, SA01234_ericscript_output.txt
  
 All files will be tab delimited.
+
+## EricScript
+
+![workflow_graph.png](workflows/ericscript/workflow_graph.png)
+

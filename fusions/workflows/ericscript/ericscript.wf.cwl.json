@@ -1,0 +1,1039 @@
+{
+  "class": "Workflow",
+  "steps": [
+    {
+      "id": "#ericscript",
+      "run": {
+        "sbg:createdOn": 1477353970,
+        "stdout": "",
+        "sbg:createdBy": "dave",
+        "sbg:modifiedBy": "dave",
+        "sbg:sbgMaintained": false,
+        "baseCommand": [
+          "bash",
+          "eric_script.sh"
+        ],
+        "id": "dave/rd168-ericscript-dev/ericscript/16",
+        "sbg:modifiedOn": 1477439132,
+        "sbg:image_url": null,
+        "sbg:contributors": [
+          "dave"
+        ],
+        "class": "CommandLineTool",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:modifiedOn": 1477353970,
+            "sbg:revisionNotes": "Copy of mia.steinberg/ericscript/ericscript/3"
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:modifiedOn": 1477354919,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:modifiedOn": 1477356599,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:modifiedOn": 1477357388,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:modifiedOn": 1477357924,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:modifiedOn": 1477363744,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:modifiedOn": 1477363909,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:modifiedOn": 1477365388,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:modifiedOn": 1477383657,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 9,
+            "sbg:modifiedOn": 1477387463,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 10,
+            "sbg:modifiedOn": 1477387607,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 11,
+            "sbg:modifiedOn": 1477387954,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 12,
+            "sbg:modifiedOn": 1477390094,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 13,
+            "sbg:modifiedOn": 1477399724,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 14,
+            "sbg:modifiedOn": 1477399795,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 15,
+            "sbg:modifiedOn": 1477408492,
+            "sbg:revisionNotes": null
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 16,
+            "sbg:modifiedOn": 1477439132,
+            "sbg:revisionNotes": null
+          }
+        ],
+        "requirements": [
+          {
+            "id": "#cwl-js-engine",
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ]
+          },
+          {
+            "fileDef": [
+              {
+                "fileContent": {
+                  "script": "'#!/bin/bash \\n\\\ntar -xvf '+$job.inputs.ericscript_database_archive.path+' \\n\\\n/opt/EricScript/ericscript.pl -db ./ericscript_db_homosapiens_ensembl73 \\\n-o ./es_output \\\n-p '+$job.inputs.threads+' \\\n'+$job.inputs.fastq_pair[0].path+' '+$job.inputs.fastq_pair[1].path+' \\n\\\n# copy results to main dir and prepend sample_id \\n\\\ncp es_output/MyEric.results.total.tsv ./'+$job.inputs.fastq_pair[0].metadata.sample_id+'_es_total.tsv \\n\\\ncp es_output/MyEric.results.filtered.tsv ./'+$job.inputs.fastq_pair[0].metadata.sample_id+'_es_filtered.tsv \\n\\\ncp es_output/MyEric.Summary.RData ./'+$job.inputs.fastq_pair[0].metadata.sample_id+'_summary.RData \\\n\\\n'",
+                  "class": "Expression",
+                  "engine": "#cwl-js-engine"
+                },
+                "filename": "eric_script.sh"
+              }
+            ],
+            "class": "CreateFileRequirement"
+          }
+        ],
+        "description": "Usage:\n     ericscript.pl [arguments] <reads_1.fq(.gz)> <reads_2.fq(.gz)>\n \n            Optional arguments:\n            -h, --help                      print help message\n            -m, --man                       print complete documentation\n            -v, --verbose                   use verbose output\n            -name, --samplename <string>    what's the name of your sample?\n            -o, --outputfolder <string>     where the results will be stored\n            -db, --dbfolder <string>        where database is stored. Default is ERICSCRIPT_FOLDER/lib/\n            -minr, --minreads <int>         minimum reads to consider discordant alignments [3]\n            -p, --nthreads <int>            number of threads for the bwa aln process [4]\n            -ntrim <int>                    trim PE reads from 1st base to $ntrim. Default is no trimming. Set ntrim=0 to don't trim reads.\n            --MAPQ <int>                    minimum value of mapping quality to consider discordant reads. For MAPQ 0 use a negative value [20]\n            --remove                        remove all temporary files.\n            --demo                          Run a demonstration of EricScript on simulated reads.\n            --refid                         Genome reference identification. Run ericscript.pl --printdb to see available refid [homo_sapiens].\n            --bwa_aln                       Use BWA ALN instead of BWA MEM to search for discordant reads.\n\n            Subcommands:\n            --checkdb                       Check if your database is up-to-date, based on the latest Ensembl release.\n            --downdb                        Download, build database. refid parameter need to be specified.\n            --simulator                     Generate synthetic gene fusions with the same recipe of the ericscript's paper\n            --calcstats                     Calculate the statistics that we used in our paper to evaluate the performance of the algorithms.\n        \n            --------\n            arguments for databases subcommands (downdb, checkdb):\n\n                    -db, --dbfolder <string>        where database is stored. Default is ERICSCRIPT_FOLDER/lib/\n                    --refid                         Genome reference identification. Run ericscript.pl --printdb to see available refid [homo_sapiens].\n                    --printdb                       Print a list of available genomes and exit.\n                    --ensversion            Download data of a specific Ensembl version (>= 70). Default is the latest one.\n \n            -------\n            arguments for simulator:\n                    -o, --outputfolder <string>     where synthetic datasets will be stored [HOME/ericscript_simulator]\n                    -rl, --readlength <int>         length of synthetic reads [75]\n                    --refid                         Genome reference identification. Run ericscript.pl --printdb to see available refid [homo_sapiens].\n                    -v, --verbose                   use verbose output\n                    --insize                        parameter of wgsym. Outer distance between the two ends [200]\n                    --sd_insize                     parameter of wgsym. Standard deviation [50]\n                    --ngenefusion                   The number of synthetic gene fusions per dataset? [50]\n                    --min_cov                       Minimum coverage to simulate [1]\n                    --max_cov                       Maximum coverage to simulate [50]\n                    --nsims                         The number of synthetic datasets to simulate [10]\n                    --be                            Use --be to generate Broken Exons (BE) data [no]\n                    --ie                            Use --ie to generate Intact Exons (IE) data [yes]\n                    -db, --dbfolder                 where database is stored. Default is ERICSCRIPT_FOLDER/lib/ \n                    --background_1                  Fastq file (forward)  for generating background reads. \n                    --background_2                  Fastq file (reverse) for generating background reads. \n                    --nreads_background             The number of reads to extract from background data [200e3].\n\nOptions:  \n  \n    --help\n             print a brief usage message and detailed explanation of options.\n\n    --man\n             print the complete manual of the program.\n\n    --verbose\n             use verbose output.\n\n    --samplename\n             Choose a name for your sample. Default is \"MyEric\"\n\n    --outputfolder\n             Folder that will contain all the results of the analysis. Default is YOUR_HOME/SAMPLENAME\n\n    --dbfolder\n             Folder that contains transcriptome sequences and information of the downloaded species. Default is\n             ERICSCRIPT_FOLDER/lib\n\n    --minreads\n             Minimum reads to consider discordant alignments. Default is 3 reads with minimum MAPQ.\n\n    -ntrim\n             trim PE reads from 1st base to $ntrim. Trimmed reads will be used only for the first alignment (identification \n             of discordant reads). Setting ntrim to values lower than orginal read length allows EricScript to \n             increase its sensitivity, especially when the length of reads is 75nt or 100 nt. \n             Default is no trimming. Set ntrim=0 to don't trim reads.\n\n    --nthreads\n             Number of threads for the bwa aln process.\n\n    --MAPQ\n             minimum value of mapping quality to consider discordant reads. For MAPQ 0 use a negative value. Default is 20.\n\n    --remove\n             remove all temporary files. By default, all temporary files will be kept for \n             user inspection, but this will easily clutter the directory.\n\n    --checkdb\n             Check if your database is up-to-date, based on the latest Ensembl release.\n\n    --downdb\n             Download, build database. refid parameter need to be specified.\n\n    --refid\n             Genome reference identification. Run ericscript.pl --printdb to see available refid.[homo_sapiens]\n\n    --ensversion\n             Download data of a specific version of Ensembl. Default is downloading the latest version of Ensembl.\n             Minimum supported version is 70.\n\n    --printdb\n             Print a list of available genomes and exit.\n\n    --demo\n             Run a demonstration of EricScript on simulated reads.",
+        "outputs": [
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#total_table",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#fastq_pair",
+              "glob": {
+                "script": "\"*es_total.tsv\"",
+                "class": "Expression",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          },
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#summary_RData",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#fastq_pair",
+              "glob": {
+                "script": "\"*summary.RData\"",
+                "class": "Expression",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          },
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#filtered_table",
+            "outputBinding": {
+              "glob": {
+                "script": "\"*es_filtered.tsv\"",
+                "class": "Expression",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          },
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "name": "ericscript_output",
+                "items": "File"
+              }
+            ],
+            "id": "#ericscript_output",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#fastq_pair",
+              "glob": {
+                "script": "\"es_output/out/*\"",
+                "class": "Expression",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          }
+        ],
+        "sbg:latestRevision": 16,
+        "sbg:cmdPreview": "bash eric_script.sh",
+        "sbg:validationErrors": [],
+        "y": 345.20001220703125,
+        "successCodes": [],
+        "label": "ericscript",
+        "sbg:revision": 16,
+        "inputs": [
+          {
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#threads",
+            "inputBinding": {
+              "separate": true,
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "--threads"
+            }
+          },
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "name": "fastq_pair",
+                "items": "File"
+              }
+            ],
+            "id": "#fastq_pair",
+            "inputBinding": {
+              "prefix": "--fastq_pair",
+              "separate": true,
+              "position": 2,
+              "sbg:cmdInclude": true,
+              "itemSeparator": ","
+            },
+            "required": false,
+            "sbg:fileTypes": "fastq",
+            "label": "fastq_pair"
+          },
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#ericscript_database_archive",
+            "inputBinding": {
+              "separate": true,
+              "position": 1,
+              "sbg:cmdInclude": true,
+              "prefix": "--ericscript_database_archive"
+            },
+            "required": false,
+            "label": "ericsript_database_archive"
+          }
+        ],
+        "stdin": "",
+        "sbg:project": "dave/rd168-ericscript-dev",
+        "sbg:id": "dave/rd168-ericscript-dev/ericscript/16",
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "dockerImageId": "",
+            "dockerPull": "cgrlab/ericscript:latest",
+            "class": "DockerRequirement"
+          }
+        ],
+        "arguments": [],
+        "temporaryFailCodes": [],
+        "x": 886,
+        "sbg:job": {
+          "allocatedResources": {
+            "mem": 1000,
+            "cpu": 1
+          },
+          "inputs": {
+            "fastq_pair": [
+              {
+                "secondaryFiles": [],
+                "path": "/path/to/fastq_pair-1.ext",
+                "size": 0,
+                "class": "File",
+                "metadata": {
+                  "sample_id": "SampleA"
+                }
+              },
+              {
+                "secondaryFiles": [],
+                "path": "/path/to/fastq_pair-2.ext",
+                "size": 0,
+                "class": "File"
+              }
+            ],
+            "ericscript_database_archive": {
+              "secondaryFiles": [],
+              "path": "/path/to/ericscript_database_archive.ext",
+              "size": 0,
+              "class": "File"
+            },
+            "threads": 5
+          }
+        }
+      },
+      "inputs": [
+        {
+          "id": "#ericscript.threads",
+          "source": [
+            "#threads"
+          ]
+        },
+        {
+          "id": "#ericscript.fastq_pair",
+          "source": [
+            "#fastq_pair"
+          ]
+        },
+        {
+          "id": "#ericscript.ericscript_database_archive",
+          "source": [
+            "#ericscript_database_archive"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#ericscript.total_table"
+        },
+        {
+          "id": "#ericscript.summary_RData"
+        },
+        {
+          "id": "#ericscript.filtered_table"
+        },
+        {
+          "id": "#ericscript.ericscript_output"
+        }
+      ],
+      "sbg:x": 886,
+      "sbg:y": 345.20001220703125
+    },
+    {
+      "id": "#add_sample_id_multiple_files",
+      "run": {
+        "sbg:createdOn": 1475264985,
+        "steps": [
+          {
+            "outputs": [
+              {
+                "id": "#SBG_Flatten.flat"
+              }
+            ],
+            "id": "#SBG_Flatten",
+            "run": {
+              "sbg:toolkit": "SBGTools",
+              "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1",
+              "sbg:createdBy": "dave",
+              "baseCommand": [
+                "python",
+                "/opt/sbg-flatten.py"
+              ],
+              "sbg:sbgMaintained": false,
+              "sbg:modifiedBy": "dave",
+              "sbg:createdOn": 1470418538,
+              "sbg:modifiedOn": 1470418538,
+              "sbg:copyOf": "admin/sbg-public-data/sbg-flatten/1",
+              "y": 282.7471618652344,
+              "sbg:contributors": [
+                "dave"
+              ],
+              "class": "CommandLineTool",
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:modifiedOn": 1470418538,
+                  "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1"
+                }
+              ],
+              "sbg:toolkitVersion": "1.0",
+              "description": "SBG Flatten is used only with SBG Group Input app for purposes of providing grouped inputs. All SBG Group Input outputs should be passed to the \"Nested\" SBG Flatten input in order to produce the output with all grouped files as one list.",
+              "requirements": [],
+              "sbg:toolAuthor": "Ana Damljanovic/ Seven Bridges Genomics",
+              "sbg:categories": [
+                "Other"
+              ],
+              "sbg:image_url": null,
+              "sbg:latestRevision": 0,
+              "stdout": "",
+              "sbg:cmdPreview": "python /opt/sbg-flatten.py",
+              "id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "sbg:update": "admin/sbg-public-data/sbg-flatten/2",
+              "sbg:validationErrors": [],
+              "stdin": "",
+              "successCodes": [],
+              "label": "SBG Flatten",
+              "sbg:revision": 0,
+              "inputs": [
+                {
+                  "sbg:category": "Input files",
+                  "type": [
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#nested",
+                  "description": "Files from all SBG Group Input outputs should be provided.",
+                  "required": true,
+                  "label": "Nested"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#flat",
+                  "description": "All grouped files as one list.",
+                  "outputBinding": {
+                    "sbg:metadata": {}
+                  },
+                  "label": "All grouped files"
+                }
+              ],
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:license": "Apache License 2.0",
+              "sbg:id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "hints": [
+                {
+                  "dockerImageId": "c0e1d93b3d76",
+                  "dockerPull": "images.sbgenomics.com/ana_d/sbg-flatten:1.0",
+                  "class": "DockerRequirement"
+                },
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                }
+              ],
+              "sbg:updateRevisionNotes": "Changed to be able to flatten irregular list of lists.",
+              "arguments": [],
+              "temporaryFailCodes": [],
+              "x": 1105,
+              "sbg:job": {
+                "allocatedResources": {
+                  "mem": 1000,
+                  "cpu": 1
+                },
+                "inputs": {
+                  "nested": "nested"
+                }
+              }
+            },
+            "sbg:x": 1105,
+            "sbg:y": 282.7471618652344,
+            "inputs": [
+              {
+                "source": [
+                  "#add_sample_id.new_filename"
+                ],
+                "id": "#SBG_Flatten.nested"
+              }
+            ]
+          },
+          {
+            "outputs": [
+              {
+                "id": "#add_sample_id.new_filename"
+              }
+            ],
+            "id": "#add_sample_id",
+            "scatter": "#add_sample_id.file",
+            "run": {
+              "sbg:createdOn": 1475263594,
+              "sbg:revisionNotes": "fix tidy",
+              "sbg:createdBy": "dave",
+              "baseCommand": [
+                "cp",
+                ""
+              ],
+              "sbg:sbgMaintained": false,
+              "sbg:modifiedBy": "dave",
+              "id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "sbg:modifiedOn": 1475348265,
+              "sbg:image_url": null,
+              "sbg:contributors": [
+                "dave"
+              ],
+              "class": "CommandLineTool",
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:modifiedOn": 1475263594,
+                  "sbg:revisionNotes": null
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 1,
+                  "sbg:modifiedOn": 1475264185,
+                  "sbg:revisionNotes": null
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 2,
+                  "sbg:modifiedOn": 1475326655,
+                  "sbg:revisionNotes": "output is not array"
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 3,
+                  "sbg:modifiedOn": 1475344769,
+                  "sbg:revisionNotes": "tidy up middle of new filename"
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 4,
+                  "sbg:modifiedOn": 1475348265,
+                  "sbg:revisionNotes": "fix tidy"
+                }
+              ],
+              "requirements": [
+                {
+                  "id": "#cwl-js-engine",
+                  "class": "ExpressionEngineRequirement",
+                  "requirements": [
+                    {
+                      "dockerPull": "rabix/js-engine",
+                      "class": "DockerRequirement"
+                    }
+                  ]
+                }
+              ],
+              "sbg:cmdPreview": "cp   sample01_undefined",
+              "stdout": "",
+              "sbg:latestRevision": 4,
+              "description": "",
+              "stdin": "",
+              "sbg:validationErrors": [],
+              "y": 292.65625,
+              "successCodes": [],
+              "label": "add sample_id",
+              "sbg:revision": 4,
+              "inputs": [
+                {
+                  "type": [
+                    "null",
+                    "File"
+                  ],
+                  "id": "#file",
+                  "inputBinding": {
+                    "separate": true,
+                    "sbg:cmdInclude": true,
+                    "position": 1
+                  },
+                  "required": false
+                }
+              ],
+              "outputs": [
+                {
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "name": "new_filename",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#new_filename",
+                  "outputBinding": {
+                    "sbg:inheritMetadataFrom": "#file",
+                    "glob": {
+                      "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                      "class": "Expression",
+                      "engine": "#cwl-js-engine"
+                    }
+                  }
+                }
+              ],
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "hints": [
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                },
+                {
+                  "dockerImageId": "",
+                  "dockerPull": "cgrlab/tidyverse:latest",
+                  "class": "DockerRequirement"
+                }
+              ],
+              "arguments": [
+                {
+                  "separate": true,
+                  "valueFrom": {
+                    "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                    "class": "Expression",
+                    "engine": "#cwl-js-engine"
+                  },
+                  "position": 2
+                }
+              ],
+              "temporaryFailCodes": [],
+              "x": 920,
+              "sbg:job": {
+                "allocatedResources": {
+                  "mem": 1000,
+                  "cpu": 1
+                },
+                "inputs": {
+                  "file": {
+                    "secondaryFiles": [],
+                    "path": "/path/to/_1_file.ext",
+                    "size": 0,
+                    "class": "File",
+                    "metadata": {
+                      "name": "_10000_chi_mera_scan01.bedpe",
+                      "sample_id": "sample01"
+                    }
+                  }
+                }
+              }
+            },
+            "sbg:x": 920,
+            "sbg:y": 292.65625,
+            "inputs": [
+              {
+                "source": [
+                  "#file"
+                ],
+                "id": "#add_sample_id.file"
+              }
+            ]
+          }
+        ],
+        "sbg:canvas_x": -266,
+        "sbg:createdBy": "dave",
+        "sbg:sbgMaintained": false,
+        "sbg:modifiedBy": "dave",
+        "id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "sbg:modifiedOn": 1477444682,
+        "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/add-sample-id-multiple-files/2.png",
+        "sbg:contributors": [
+          "dave"
+        ],
+        "class": "Workflow",
+        "requirements": [],
+        "sbg:latestRevision": 2,
+        "description": "",
+        "sbg:validationErrors": [],
+        "sbg:canvas_y": -83,
+        "label": "add sample_id multiple files",
+        "sbg:revision": 2,
+        "inputs": [
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#file",
+            "sbg:includeInPorts": true,
+            "sbg:x": 476,
+            "sbg:y": 258.9971618652344,
+            "label": "file",
+            "required": false
+          }
+        ],
+        "outputs": [
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#flat",
+            "source": [
+              "#SBG_Flatten.flat"
+            ],
+            "sbg:x": 1402,
+            "sbg:includeInPorts": true,
+            "label": "new_filenames",
+            "sbg:y": 277.9886474609375,
+            "required": false
+          }
+        ],
+        "sbg:project": "dave/cgrrna",
+        "sbg:canvas_zoom": 1,
+        "sbg:id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "hints": [],
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:modifiedOn": 1475264985,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/1"
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:modifiedOn": 1476279501,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/6"
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:modifiedOn": 1477444682,
+            "sbg:revisionNotes": null
+          }
+        ],
+        "x": 1092,
+        "y": 513.2000122070312
+      },
+      "inputs": [
+        {
+          "id": "#add_sample_id_multiple_files.file",
+          "source": [
+            "#ericscript.ericscript_output"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#add_sample_id_multiple_files.flat"
+        }
+      ],
+      "sbg:x": 1092,
+      "sbg:y": 513.2000122070312
+    }
+  ],
+  "requirements": [],
+  "inputs": [
+    {
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "name": "fastq_pair",
+          "items": "File"
+        }
+      ],
+      "id": "#fastq_pair",
+      "sbg:fileTypes": "fastq",
+      "batchType": [
+        "metadata.sample_id"
+      ],
+      "sbg:x": 603,
+      "sbg:y": 212,
+      "label": "fastq_pair"
+    },
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#ericscript_database_archive",
+      "sbg:x": 552,
+      "sbg:y": 430,
+      "label": "ericscript_database_archive"
+    },
+    {
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#threads"
+    }
+  ],
+  "outputs": [
+    {
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "name": "ericscript_output",
+          "items": "File"
+        }
+      ],
+      "id": "#ericscript_output",
+      "sbg:x": 1290,
+      "sbg:includeInPorts": true,
+      "label": "ericscript_output",
+      "sbg:y": 590,
+      "required": false,
+      "source": [
+        "#add_sample_id_multiple_files.flat"
+      ]
+    },
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#total_table",
+      "sbg:x": 1184,
+      "sbg:includeInPorts": true,
+      "label": "total_table",
+      "sbg:y": 131,
+      "required": false,
+      "source": [
+        "#ericscript.total_table"
+      ]
+    },
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#summary_RData",
+      "sbg:x": 1288,
+      "sbg:includeInPorts": true,
+      "label": "summary_RData",
+      "sbg:y": 275,
+      "required": false,
+      "source": [
+        "#ericscript.summary_RData"
+      ]
+    },
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#filtered_table",
+      "sbg:x": 1273,
+      "sbg:includeInPorts": true,
+      "label": "filtered_table",
+      "sbg:y": 420,
+      "required": false,
+      "source": [
+        "#ericscript.filtered_table"
+      ]
+    }
+  ],
+  "sbg:batchBy": {
+    "type": "criteria",
+    "criteria": [
+      "metadata.sample_id"
+    ]
+  },
+  "sbg:createdOn": 1477353967,
+  "sbg:canvas_zoom": 1,
+  "sbg:revisionNotes": "r3.8xlarge (1400GB EBS, 32vCPUs, 244GB RAM)\n\nadded sample id to generic output files",
+  "sbg:createdBy": "dave",
+  "sbg:sbgMaintained": false,
+  "sbg:modifiedBy": "dave",
+  "sbg:modifiedOn": 1477445751,
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/rd168-ericscript-dev/ericscript-wf/20.png",
+  "sbg:contributors": [
+    "dave"
+  ],
+  "sbg:canvas_y": -56,
+  "sbg:canvas_x": -257,
+  "sbg:latestRevision": 20,
+  "sbg:validationErrors": [],
+  "sbg:revision": 20,
+  "sbg:project": "dave/rd168-ericscript-dev",
+  "sbg:id": "dave/rd168-ericscript-dev/ericscript-wf/20",
+  "sbg:batchInput": "#fastq_pair",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477353967,
+      "sbg:revision": 0,
+      "sbg:revisionNotes": "Copy of mia.steinberg/ericscript/ericscript-wf/3"
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477354674,
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477355023,
+      "sbg:revision": 2,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477357976,
+      "sbg:revision": 3,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477364005,
+      "sbg:revision": 4,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477365415,
+      "sbg:revision": 5,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477383258,
+      "sbg:revision": 6,
+      "sbg:revisionNotes": "c3.4xlarge"
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477384996,
+      "sbg:revision": 7,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477387983,
+      "sbg:revision": 8,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477388097,
+      "sbg:revision": 9,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477390114,
+      "sbg:revision": 10,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477390702,
+      "sbg:revision": 11,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477399861,
+      "sbg:revision": 12,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477399906,
+      "sbg:revision": 13,
+      "sbg:revisionNotes": "c3.4xlarge \nadded more outputs"
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477408561,
+      "sbg:revision": 14,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477408665,
+      "sbg:revision": 15,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477408699,
+      "sbg:revision": 16,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477411941,
+      "sbg:revision": 17,
+      "sbg:revisionNotes": "r3.8xlarge 1.4TB storage"
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477439197,
+      "sbg:revision": 18,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477440225,
+      "sbg:revision": 19,
+      "sbg:revisionNotes": "r3.8xlarge"
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:modifiedOn": 1477445751,
+      "sbg:revision": 20,
+      "sbg:revisionNotes": "r3.8xlarge (1400GB EBS, 32vCPUs, 244GB RAM)\n\nadded sample id to generic output files"
+    }
+  ],
+  "id": "dave/rd168-ericscript-dev/ericscript-wf/20",
+  "label": "ericscript-wf",
+  "description": "",
+  "hints": [
+    {
+      "value": "r3.8xlarge.ebs15",
+      "class": "sbg:AWSInstanceType"
+    }
+  ]
+}
