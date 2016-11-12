@@ -17,3 +17,11 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
+
+## File naming conventions
+
+All fusion output files follow the same naming schema which is the concatenation of the Sample ID, Fusion tool name, and then file extension.
+ 
+e.g. SA01234_chimerascan_output.bedpe, SA01234_ericscript_output.txt
+ 
+All files will be tab delimited.
