@@ -2,6 +2,8 @@
 title: "cgrRNA Fusions Module"
 output:
   github_document:
+    toc: true
+    toc_depth: 2
     fig_width: 5
     fig_height: 5
     dev: jpeg
@@ -30,3 +32,10 @@ All files will be tab delimited.
 
 ![workflow_graph.png](workflows/ericscript/workflow_graph.png)
 
+## STAR-Fusion with alignment
+
+![](workflows/star_fusion/star_fusion_with_alignment.png)
+
+## STAR-Fusion by itself
+
+![](workflows/star_fusion/star_fusion_post_alignment.png)

@@ -1,6 +1,11 @@
 cgrRNA Fusions Module
 ================
 
+-   [File naming conventions](#file-naming-conventions)
+-   [EricScript](#ericscript)
+-   [STAR-Fusion with alignment](#star-fusion-with-alignment)
+-   [STAR-Fusion by itself](#star-fusion-by-itself)
+
 File naming conventions
 -----------------------
 
@@ -14,3 +19,13 @@ EricScript
 ----------
 
 ![workflow\_graph.png](workflows/ericscript/workflow_graph.png)
+
+STAR-Fusion with alignment
+--------------------------
+
+![](workflows/star_fusion/star_fusion_with_alignment.png)
+
+STAR-Fusion by itself
+---------------------
+
+![](workflows/star_fusion/star_fusion_post_alignment.png)
