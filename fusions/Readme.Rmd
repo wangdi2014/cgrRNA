@@ -3,6 +3,7 @@ title: "cgrRNA Fusions Module"
 output:
   github_document:
     toc: true
+    toc_depth: 2
     fig_width: 5
     fig_height: 5
     dev: jpeg
@@ -20,6 +21,7 @@ is_child = TRUE
 
 ```
 
+# Data harmonization
 
 ## File naming conventions
 
@@ -29,17 +31,52 @@ e.g. SA01234_chimerascan_output.bedpe, SA01234_ericscript_output.txt
  
 All files will be tab delimited.
 
-## EricScript
+# Fusion Finders
 
-![workflow_graph.png](workflows/ericscript/workflow_graph.png)
+## 1. Chimerascan
 
-# STAR Fusion
+```{r child = '~/cgrRNA/fusions/workflows/chimerascan/Readme.Rmd'}
+```
+
+## 2. EricScript
+
+```{r child = '~/cgrRNA/fusions/workflows/ericscript/Readme.Rmd'}
+```
+
+## 3. Mapsplice
+
+```{r child = '~/cgrRNA/fusions/workflows/mapslice/Readme.Rmd'}
+```
+
+## 4. Fusion Catcher
+
+```{r child = '~/cgrRNA/fusions/workflows/fusion_catcher/Readme.Rmd'}
+```
+
+## 5. STAR Fusion
 
 ```{r child = '~/cgrRNA/fusions/workflows/star_fusion/Readme.Rmd'}
 ```
 
+# Summary and Utility Apps
 
-# fastq_decompress_and_merge
+## Multi-Fusion Tool Output Collector
 
-![](workflows/fastq_decompress_and_merge/fastq_decompress_and_merge.png)
+```{r child = '~/cgrRNA/fusions/workflows/multi_fusion_tool_output_collector/Readme.Rmd'}
+```
+
+## Fusion Archive Creator
+
+```{r child = '~/cgrRNA/fusions/workflows/fusion_archive_creator/Readme.Rmd'}
+```
+
+## Fastq Decompress and Merge
+
+```{r child = '~/cgrRNA/fusions/workflows/fastq_decompress_and_merge/Readme.Rmd'}
+```
+
+## Combine EricScript Fusion Lists
+
+```{r child = '~/cgrRNA/fusions/workflows/combine_EricScript_fusion_lists/Readme.Rmd'}
+```
 
