@@ -1,0 +1,1684 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png",
+  "sbg:canvas_y": -48,
+  "sbg:id": "dave/cgrrna/mapsplice2-1/1",
+  "requirements": [],
+  "sbg:canvas_x": -340,
+  "hints": [
+    {
+      "value": "cr1.8xlarge",
+      "class": "sbg:AWSInstanceType"
+    }
+  ],
+  "sbg:createdBy": "dave",
+  "label": "MapSplice2",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": "Copy of dave/rd168-mapsplice2-dev/mapsplice2-1/14",
+      "sbg:modifiedOn": 1479062418
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479062458
+    }
+  ],
+  "sbg:sbgMaintained": false,
+  "sbg:canvas_zoom": 1,
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 1,
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/mapsplice2-1/1/raw/",
+  "sbg:modifiedOn": 1479062458,
+  "sbg:latestRevision": 1,
+  "sbg:createdOn": 1479062418,
+  "sbg:batchBy": {
+    "type": "criteria",
+    "criteria": [
+      "metadata.sample_id"
+    ]
+  },
+  "inputs": [
+    {
+      "label": "gene_gtf",
+      "sbg:y": 355.9971618652344,
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#gene_gtf",
+      "sbg:x": 543
+    },
+    {
+      "label": "fastq_pair",
+      "batchType": [
+        "metadata.sample_id"
+      ],
+      "sbg:y": 508.9971923828125,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File",
+          "name": "fastq_pair"
+        }
+      ],
+      "id": "#fastq_pair",
+      "sbg:x": 679
+    },
+    {
+      "label": "regerence_fasta",
+      "sbg:y": 124,
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#tar_file",
+      "sbg:x": 449
+    },
+    {
+      "sbg:stageInput": null,
+      "label": "number of threads",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#threads",
+      "sbg:toolDefaultValue": "1"
+    }
+  ],
+  "description": "",
+  "sbg:batchInput": "#fastq_pair",
+  "class": "Workflow",
+  "outputs": [
+    {
+      "sbg:includeInPorts": true,
+      "label": "MapSplice2_outputs",
+      "sbg:y": 152,
+      "required": false,
+      "source": [
+        "#add_sample_id_multiple_files.flat"
+      ],
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#flat",
+      "sbg:x": 1378
+    },
+    {
+      "sbg:includeInPorts": true,
+      "label": "MapSplice2_log_files",
+      "sbg:y": 440,
+      "required": false,
+      "source": [
+        "#add_sample_id_multiple_files_1.flat"
+      ],
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#flat_1",
+      "sbg:x": 1368
+    }
+  ],
+  "steps": [
+    {
+      "sbg:y": 173.1999969482422,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/add-sample-id-multiple-files/2.png",
+        "sbg:canvas_y": -83,
+        "sbg:id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "x": 1156,
+        "requirements": [],
+        "sbg:canvas_x": -266,
+        "sbg:createdBy": "dave",
+        "label": "add sample_id multiple files",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/1",
+            "sbg:modifiedOn": 1475264985
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/6",
+            "sbg:modifiedOn": 1476279501
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477444682
+          }
+        ],
+        "sbg:sbgMaintained": false,
+        "sbg:canvas_zoom": 1,
+        "sbg:project": "dave/cgrrna",
+        "sbg:revision": 2,
+        "sbg:validationErrors": [],
+        "steps": [
+          {
+            "sbg:y": 282.7471618652344,
+            "run": {
+              "sbg:modifiedBy": "dave",
+              "sbg:image_url": null,
+              "sbg:license": "Apache License 2.0",
+              "sbg:copyOf": "admin/sbg-public-data/sbg-flatten/1",
+              "sbg:id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "x": 1105,
+              "requirements": [],
+              "hints": [
+                {
+                  "dockerImageId": "c0e1d93b3d76",
+                  "dockerPull": "images.sbgenomics.com/ana_d/sbg-flatten:1.0",
+                  "class": "DockerRequirement"
+                },
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:toolAuthor": "Ana Damljanovic/ Seven Bridges Genomics",
+              "sbg:createdBy": "dave",
+              "arguments": [],
+              "label": "SBG Flatten",
+              "stdout": "",
+              "class": "CommandLineTool",
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:categories": [
+                "Other"
+              ],
+              "id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "outputs": [
+                {
+                  "outputBinding": {
+                    "sbg:metadata": {}
+                  },
+                  "label": "All grouped files",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#flat",
+                  "description": "All grouped files as one list."
+                }
+              ],
+              "sbg:revision": 0,
+              "sbg:toolkitVersion": "1.0",
+              "sbg:job": {
+                "inputs": {
+                  "nested": "nested"
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "sbg:latestRevision": 0,
+              "sbg:createdOn": 1470418538,
+              "sbg:modifiedOn": 1470418538,
+              "inputs": [
+                {
+                  "label": "Nested",
+                  "required": true,
+                  "sbg:category": "Input files",
+                  "type": [
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#nested",
+                  "description": "Files from all SBG Group Input outputs should be provided."
+                }
+              ],
+              "description": "SBG Flatten is used only with SBG Group Input app for purposes of providing grouped inputs. All SBG Group Input outputs should be passed to the \"Nested\" SBG Flatten input in order to produce the output with all grouped files as one list.",
+              "sbg:updateRevisionNotes": "Changed to be able to flatten irregular list of lists.",
+              "sbg:sbgMaintained": false,
+              "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1",
+              "y": 282.7471618652344,
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1",
+                  "sbg:modifiedOn": 1470418538
+                }
+              ],
+              "sbg:update": "admin/sbg-public-data/sbg-flatten/2",
+              "baseCommand": [
+                "python",
+                "/opt/sbg-flatten.py"
+              ],
+              "temporaryFailCodes": [],
+              "sbg:cmdPreview": "python /opt/sbg-flatten.py",
+              "sbg:contributors": [
+                "dave"
+              ],
+              "sbg:toolkit": "SBGTools"
+            },
+            "outputs": [
+              {
+                "id": "#SBG_Flatten.flat"
+              }
+            ],
+            "id": "#SBG_Flatten",
+            "inputs": [
+              {
+                "source": [
+                  "#add_sample_id.new_filename"
+                ],
+                "id": "#SBG_Flatten.nested"
+              }
+            ],
+            "sbg:x": 1105
+          },
+          {
+            "scatter": "#add_sample_id.file",
+            "sbg:y": 292.65625,
+            "run": {
+              "sbg:modifiedBy": "dave",
+              "sbg:image_url": null,
+              "sbg:id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "x": 920,
+              "requirements": [
+                {
+                  "class": "ExpressionEngineRequirement",
+                  "requirements": [
+                    {
+                      "dockerPull": "rabix/js-engine",
+                      "class": "DockerRequirement"
+                    }
+                  ],
+                  "id": "#cwl-js-engine"
+                }
+              ],
+              "hints": [
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                },
+                {
+                  "dockerImageId": "",
+                  "dockerPull": "cgrlab/tidyverse:latest",
+                  "class": "DockerRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:createdBy": "dave",
+              "arguments": [
+                {
+                  "separate": true,
+                  "position": 2,
+                  "valueFrom": {
+                    "class": "Expression",
+                    "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                    "engine": "#cwl-js-engine"
+                  }
+                }
+              ],
+              "label": "add sample_id",
+              "baseCommand": [
+                "cp",
+                ""
+              ],
+              "stdout": "",
+              "class": "CommandLineTool",
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:revision": 4,
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "sbg:job": {
+                "inputs": {
+                  "file": {
+                    "class": "File",
+                    "secondaryFiles": [],
+                    "size": 0,
+                    "metadata": {
+                      "sample_id": "sample01",
+                      "name": "_10000_chi_mera_scan01.bedpe"
+                    },
+                    "path": "/path/to/_1_file.ext"
+                  }
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "sbg:latestRevision": 4,
+              "sbg:createdOn": 1475263594,
+              "sbg:modifiedOn": 1475348265,
+              "inputs": [
+                {
+                  "inputBinding": {
+                    "separate": true,
+                    "position": 1,
+                    "sbg:cmdInclude": true
+                  },
+                  "type": [
+                    "null",
+                    "File"
+                  ],
+                  "id": "#file",
+                  "required": false
+                }
+              ],
+              "description": "",
+              "sbg:sbgMaintained": false,
+              "sbg:revisionNotes": "fix tidy",
+              "y": 292.65625,
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1475263594
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 1,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1475264185
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 2,
+                  "sbg:revisionNotes": "output is not array",
+                  "sbg:modifiedOn": 1475326655
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 3,
+                  "sbg:revisionNotes": "tidy up middle of new filename",
+                  "sbg:modifiedOn": 1475344769
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 4,
+                  "sbg:revisionNotes": "fix tidy",
+                  "sbg:modifiedOn": 1475348265
+                }
+              ],
+              "temporaryFailCodes": [],
+              "outputs": [
+                {
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File",
+                      "name": "new_filename"
+                    }
+                  ],
+                  "id": "#new_filename",
+                  "outputBinding": {
+                    "sbg:inheritMetadataFrom": "#file",
+                    "glob": {
+                      "class": "Expression",
+                      "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                      "engine": "#cwl-js-engine"
+                    }
+                  }
+                }
+              ],
+              "sbg:cmdPreview": "cp   sample01_undefined",
+              "sbg:contributors": [
+                "dave"
+              ]
+            },
+            "outputs": [
+              {
+                "id": "#add_sample_id.new_filename"
+              }
+            ],
+            "id": "#add_sample_id",
+            "inputs": [
+              {
+                "source": [
+                  "#file"
+                ],
+                "id": "#add_sample_id.file"
+              }
+            ],
+            "sbg:x": 920
+          }
+        ],
+        "id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "sbg:modifiedOn": 1477444682,
+        "sbg:latestRevision": 2,
+        "sbg:createdOn": 1475264985,
+        "inputs": [
+          {
+            "sbg:includeInPorts": true,
+            "label": "file",
+            "required": false,
+            "sbg:y": 258.9971618652344,
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#file",
+            "sbg:x": 476
+          }
+        ],
+        "description": "",
+        "class": "Workflow",
+        "y": 173.1999969482422,
+        "outputs": [
+          {
+            "sbg:includeInPorts": true,
+            "label": "new_filenames",
+            "sbg:y": 277.9886474609375,
+            "required": false,
+            "source": [
+              "#SBG_Flatten.flat"
+            ],
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#flat",
+            "sbg:x": 1402
+          }
+        ],
+        "hints": [],
+        "sbg:contributors": [
+          "dave"
+        ]
+      },
+      "outputs": [
+        {
+          "id": "#add_sample_id_multiple_files.flat"
+        }
+      ],
+      "id": "#add_sample_id_multiple_files",
+      "inputs": [
+        {
+          "source": [
+            "#MapSplice2.MapSplice2_outputs"
+          ],
+          "id": "#add_sample_id_multiple_files.file"
+        }
+      ],
+      "sbg:x": 1156
+    },
+    {
+      "sbg:y": 430.20001220703125,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/add-sample-id-multiple-files/2.png",
+        "sbg:canvas_y": -83,
+        "sbg:id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "x": 1136,
+        "requirements": [],
+        "sbg:canvas_x": -266,
+        "sbg:createdBy": "dave",
+        "label": "add sample_id multiple files",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/1",
+            "sbg:modifiedOn": 1475264985
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": "Copy of sarah/rd168-chern-newtests/add-sample-id-multiple-files/6",
+            "sbg:modifiedOn": 1476279501
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477444682
+          }
+        ],
+        "sbg:sbgMaintained": false,
+        "sbg:canvas_zoom": 1,
+        "sbg:project": "dave/cgrrna",
+        "sbg:revision": 2,
+        "sbg:validationErrors": [],
+        "steps": [
+          {
+            "sbg:y": 282.7471618652344,
+            "run": {
+              "sbg:modifiedBy": "dave",
+              "sbg:image_url": null,
+              "sbg:license": "Apache License 2.0",
+              "sbg:copyOf": "admin/sbg-public-data/sbg-flatten/1",
+              "sbg:id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "x": 1105,
+              "requirements": [],
+              "hints": [
+                {
+                  "dockerImageId": "c0e1d93b3d76",
+                  "dockerPull": "images.sbgenomics.com/ana_d/sbg-flatten:1.0",
+                  "class": "DockerRequirement"
+                },
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:toolAuthor": "Ana Damljanovic/ Seven Bridges Genomics",
+              "sbg:createdBy": "dave",
+              "arguments": [],
+              "label": "SBG Flatten",
+              "stdout": "",
+              "class": "CommandLineTool",
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:categories": [
+                "Other"
+              ],
+              "id": "sarah/rd168-chern-newtests/sbg-flatten/0",
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "outputs": [
+                {
+                  "outputBinding": {
+                    "sbg:metadata": {}
+                  },
+                  "label": "All grouped files",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#flat",
+                  "description": "All grouped files as one list."
+                }
+              ],
+              "sbg:revision": 0,
+              "sbg:toolkitVersion": "1.0",
+              "sbg:job": {
+                "inputs": {
+                  "nested": "nested"
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "sbg:latestRevision": 0,
+              "sbg:createdOn": 1470418538,
+              "sbg:modifiedOn": 1470418538,
+              "inputs": [
+                {
+                  "label": "Nested",
+                  "required": true,
+                  "sbg:category": "Input files",
+                  "type": [
+                    {
+                      "type": "array",
+                      "items": "File"
+                    }
+                  ],
+                  "id": "#nested",
+                  "description": "Files from all SBG Group Input outputs should be provided."
+                }
+              ],
+              "description": "SBG Flatten is used only with SBG Group Input app for purposes of providing grouped inputs. All SBG Group Input outputs should be passed to the \"Nested\" SBG Flatten input in order to produce the output with all grouped files as one list.",
+              "sbg:updateRevisionNotes": "Changed to be able to flatten irregular list of lists.",
+              "sbg:sbgMaintained": false,
+              "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1",
+              "y": 282.7471618652344,
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-flatten/1",
+                  "sbg:modifiedOn": 1470418538
+                }
+              ],
+              "sbg:update": "admin/sbg-public-data/sbg-flatten/2",
+              "baseCommand": [
+                "python",
+                "/opt/sbg-flatten.py"
+              ],
+              "temporaryFailCodes": [],
+              "sbg:cmdPreview": "python /opt/sbg-flatten.py",
+              "sbg:contributors": [
+                "dave"
+              ],
+              "sbg:toolkit": "SBGTools"
+            },
+            "outputs": [
+              {
+                "id": "#SBG_Flatten.flat"
+              }
+            ],
+            "id": "#SBG_Flatten",
+            "inputs": [
+              {
+                "source": [
+                  "#add_sample_id.new_filename"
+                ],
+                "id": "#SBG_Flatten.nested"
+              }
+            ],
+            "sbg:x": 1105
+          },
+          {
+            "scatter": "#add_sample_id.file",
+            "sbg:y": 292.65625,
+            "run": {
+              "sbg:modifiedBy": "dave",
+              "sbg:image_url": null,
+              "sbg:id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "x": 920,
+              "requirements": [
+                {
+                  "class": "ExpressionEngineRequirement",
+                  "requirements": [
+                    {
+                      "dockerPull": "rabix/js-engine",
+                      "class": "DockerRequirement"
+                    }
+                  ],
+                  "id": "#cwl-js-engine"
+                }
+              ],
+              "hints": [
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                },
+                {
+                  "dockerImageId": "",
+                  "dockerPull": "cgrlab/tidyverse:latest",
+                  "class": "DockerRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:createdBy": "dave",
+              "arguments": [
+                {
+                  "separate": true,
+                  "position": 2,
+                  "valueFrom": {
+                    "class": "Expression",
+                    "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                    "engine": "#cwl-js-engine"
+                  }
+                }
+              ],
+              "label": "add sample_id",
+              "baseCommand": [
+                "cp",
+                ""
+              ],
+              "stdout": "",
+              "class": "CommandLineTool",
+              "sbg:project": "sarah/rd168-chern-newtests",
+              "sbg:revision": 4,
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "id": "sarah/rd168-chern-newtests/add-sample-id/4",
+              "sbg:job": {
+                "inputs": {
+                  "file": {
+                    "class": "File",
+                    "secondaryFiles": [],
+                    "size": 0,
+                    "metadata": {
+                      "sample_id": "sample01",
+                      "name": "_10000_chi_mera_scan01.bedpe"
+                    },
+                    "path": "/path/to/_1_file.ext"
+                  }
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "sbg:latestRevision": 4,
+              "sbg:createdOn": 1475263594,
+              "sbg:modifiedOn": 1475348265,
+              "inputs": [
+                {
+                  "inputBinding": {
+                    "separate": true,
+                    "position": 1,
+                    "sbg:cmdInclude": true
+                  },
+                  "type": [
+                    "null",
+                    "File"
+                  ],
+                  "id": "#file",
+                  "required": false
+                }
+              ],
+              "description": "",
+              "sbg:sbgMaintained": false,
+              "sbg:revisionNotes": "fix tidy",
+              "y": 292.65625,
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1475263594
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 1,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1475264185
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 2,
+                  "sbg:revisionNotes": "output is not array",
+                  "sbg:modifiedOn": 1475326655
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 3,
+                  "sbg:revisionNotes": "tidy up middle of new filename",
+                  "sbg:modifiedOn": 1475344769
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 4,
+                  "sbg:revisionNotes": "fix tidy",
+                  "sbg:modifiedOn": 1475348265
+                }
+              ],
+              "temporaryFailCodes": [],
+              "outputs": [
+                {
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File",
+                      "name": "new_filename"
+                    }
+                  ],
+                  "id": "#new_filename",
+                  "outputBinding": {
+                    "sbg:inheritMetadataFrom": "#file",
+                    "glob": {
+                      "class": "Expression",
+                      "script": "{\n  \nvar name = $job.inputs.file.name.split(\"_\")\nvar temp = \"\"\n \nif (name[0] == \"\") {\n\nfor (i = 2; i < $job.inputs.file.name.split(\"_\").length; i++) { \n\nif (i > 2) {temp = temp + \"_\"}\n  \ntemp = temp + name[i]}\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + temp}  \n \nif (name[0] != \"\") {\n\nreturn $job.inputs.file.metadata.sample_id + \"_\" + $job.inputs.file.name}  \n  \n}\n\n",
+                      "engine": "#cwl-js-engine"
+                    }
+                  }
+                }
+              ],
+              "sbg:cmdPreview": "cp   sample01_undefined",
+              "sbg:contributors": [
+                "dave"
+              ]
+            },
+            "outputs": [
+              {
+                "id": "#add_sample_id.new_filename"
+              }
+            ],
+            "id": "#add_sample_id",
+            "inputs": [
+              {
+                "source": [
+                  "#file"
+                ],
+                "id": "#add_sample_id.file"
+              }
+            ],
+            "sbg:x": 920
+          }
+        ],
+        "id": "dave/cgrrna/add-sample-id-multiple-files/2",
+        "sbg:modifiedOn": 1477444682,
+        "sbg:latestRevision": 2,
+        "sbg:createdOn": 1475264985,
+        "inputs": [
+          {
+            "sbg:includeInPorts": true,
+            "label": "file",
+            "required": false,
+            "sbg:y": 258.9971618652344,
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#file",
+            "sbg:x": 476
+          }
+        ],
+        "description": "",
+        "class": "Workflow",
+        "y": 430.20001220703125,
+        "outputs": [
+          {
+            "sbg:includeInPorts": true,
+            "label": "new_filenames",
+            "sbg:y": 277.9886474609375,
+            "required": false,
+            "source": [
+              "#SBG_Flatten.flat"
+            ],
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#flat",
+            "sbg:x": 1402
+          }
+        ],
+        "hints": [],
+        "sbg:contributors": [
+          "dave"
+        ]
+      },
+      "outputs": [
+        {
+          "id": "#add_sample_id_multiple_files_1.flat"
+        }
+      ],
+      "id": "#add_sample_id_multiple_files_1",
+      "inputs": [
+        {
+          "source": [
+            "#MapSplice2.MapSplice2_log_files"
+          ],
+          "id": "#add_sample_id_multiple_files_1.file"
+        }
+      ],
+      "sbg:x": 1136
+    },
+    {
+      "sbg:y": 319.65625,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "stdin": "",
+        "sbg:id": "dave/rd168-mapsplice2-dev/mapsplice2/9",
+        "x": 923,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          }
+        ],
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "dockerImageId": "",
+            "dockerPull": "cgrlab/mapsplice2:latest",
+            "class": "DockerRequirement"
+          }
+        ],
+        "sbg:image_url": null,
+        "sbg:createdBy": "dave",
+        "arguments": [],
+        "label": "MapSplice2",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477388848
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477389540
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477401687
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477426217
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477426229
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477426393
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477426618
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477430104
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477442360
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 9,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477447034
+          }
+        ],
+        "stdout": "",
+        "sbg:sbgMaintained": false,
+        "sbg:project": "dave/rd168-mapsplice2-dev",
+        "id": "dave/rd168-mapsplice2-dev/mapsplice2/9",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "outputs": [
+          {
+            "label": "MapSplice2_outputs",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "MapSplice2_outputs"
+              }
+            ],
+            "id": "#MapSplice2_outputs",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#fastq_pair",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.txt\"",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          },
+          {
+            "label": "MapSplice2_log_files",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "MapSplice2_log_files"
+              }
+            ],
+            "id": "#MapSplice2_log_files",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#fastq_pair",
+              "glob": {
+                "class": "Expression",
+                "script": "\"logs/*\"",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          }
+        ],
+        "sbg:revision": 9,
+        "sbg:modifiedOn": 1477447034,
+        "sbg:latestRevision": 9,
+        "sbg:createdOn": 1477388848,
+        "sbg:job": {
+          "inputs": {
+            "threads": 8,
+            "reference_segment": [
+              "reference_segment-string-value-1",
+              "reference_segment-string-value-2"
+            ],
+            "fastq_pair": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "paired_end": "2"
+                },
+                "path": "/path/to/fastq_pair-1.ext"
+              },
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "paired_end": "1"
+                },
+                "path": "/path/to/fastq_pair-2.ext"
+              }
+            ],
+            "gene_gtf": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "/path/to/gene_gtf.ext"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "inputs": [
+          {
+            "sbg:stageInput": null,
+            "label": "number of threads",
+            "inputBinding": {
+              "separate": true,
+              "prefix": "--threads",
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#threads",
+            "sbg:toolDefaultValue": "1"
+          },
+          {
+            "label": "reference segment",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "reference_segment"
+              }
+            ],
+            "id": "#reference_segment",
+            "required": false,
+            "sbg:stageInput": "link"
+          },
+          {
+            "inputBinding": {
+              "separate": true,
+              "prefix": "--gene-gtf",
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#gene_gtf",
+            "required": false
+          },
+          {
+            "inputBinding": {
+              "valueFrom": {
+                "class": "Expression",
+                "script": "\nfunction check_file(file) {\nif(file.metadata.paired_end == 1){return $self[0].path}else{return $self[1].path}}\n\nvar read_1 = check_file($self[0])\nvar read_2 = check_file($self[1])\n\n'-1 ' + read_1 + ' -2 ' + read_2",
+                "engine": "#cwl-js-engine"
+              },
+              "position": 1,
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "itemSeparator": null
+            },
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "fastq_pair"
+              }
+            ],
+            "id": "#fastq_pair",
+            "required": false
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "y": 319.65625,
+        "temporaryFailCodes": [],
+        "baseCommand": [
+          "python",
+          "/opt/MapSplice2/mapsplice.py",
+          "-o",
+          "./",
+          "-c",
+          "./"
+        ],
+        "sbg:cmdPreview": "python /opt/MapSplice2/mapsplice.py -o ./ -c ./",
+        "sbg:contributors": [
+          "dave"
+        ]
+      },
+      "outputs": [
+        {
+          "id": "#MapSplice2.MapSplice2_outputs"
+        },
+        {
+          "id": "#MapSplice2.MapSplice2_log_files"
+        }
+      ],
+      "id": "#MapSplice2",
+      "inputs": [
+        {
+          "source": [
+            "#threads"
+          ],
+          "id": "#MapSplice2.threads"
+        },
+        {
+          "source": [
+            "#split_ref_by_chr.extracted_files"
+          ],
+          "id": "#MapSplice2.reference_segment"
+        },
+        {
+          "source": [
+            "#gene_gtf"
+          ],
+          "id": "#MapSplice2.gene_gtf"
+        },
+        {
+          "source": [
+            "#fastq_pair"
+          ],
+          "id": "#MapSplice2.fastq_pair"
+        }
+      ],
+      "sbg:x": 923
+    },
+    {
+      "sbg:y": 171.1999969482422,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "sbg:image_url": "https://brood.sbgenomics.com/static/dave/rd168-mapsplice2-dev/split-ref-by-chr/2.png",
+        "sbg:canvas_y": 0,
+        "sbg:id": "dave/rd168-mapsplice2-dev/split-ref-by-chr/2",
+        "x": 649,
+        "requirements": [],
+        "sbg:canvas_x": 0,
+        "sbg:createdBy": "dave",
+        "label": "split_ref_by_chr",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477336576
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477336627
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477445008
+          }
+        ],
+        "sbg:sbgMaintained": false,
+        "sbg:canvas_zoom": 1,
+        "sbg:project": "dave/rd168-mapsplice2-dev",
+        "sbg:revision": 2,
+        "sbg:validationErrors": [],
+        "steps": [
+          {
+            "sbg:y": 180.1999969482422,
+            "run": {
+              "sbg:modifiedBy": "sevenbridges",
+              "sbg:image_url": null,
+              "sbg:license": "Apache License 2.0",
+              "sbg:id": "admin/sbg-public-data/sbg-splitfasta/1",
+              "x": 478,
+              "requirements": [
+                {
+                  "class": "ExpressionEngineRequirement",
+                  "requirements": [
+                    {
+                      "dockerPull": "rabix/js-engine",
+                      "class": "DockerRequirement"
+                    }
+                  ],
+                  "id": "#cwl-js-engine"
+                }
+              ],
+              "hints": [
+                {
+                  "dockerImageId": "addea1453ca1",
+                  "dockerPull": "images.sbgenomics.com/arsenijae/sbg-splitfasta:1.0",
+                  "class": "DockerRequirement"
+                },
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:toolAuthor": "Vladan Arsenijevic, Seven Bridges Genomics, <vladan.arsenijevic@sbgenomics.com>",
+              "sbg:createdBy": "sevenbridges",
+              "arguments": [],
+              "label": "SBG SplitFasta",
+              "stdout": "",
+              "sbg:sbgMaintained": false,
+              "sbg:project": "admin/sbg-public-data",
+              "sbg:categories": [
+                "FASTA-Processing"
+              ],
+              "id": "admin/sbg-public-data/sbg-splitfasta/1",
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "outputs": [
+                {
+                  "outputBinding": {
+                    "sbg:metadata": {
+                      "file_format": "ARCHIVE"
+                    },
+                    "glob": {
+                      "class": "Expression",
+                      "script": "{\nreturn \"*_chrs.tar.gz\"\n}",
+                      "engine": "#cwl-js-engine"
+                    }
+                  },
+                  "label": "Compressed fastas",
+                  "type": [
+                    "null",
+                    "File"
+                  ],
+                  "id": "#fastas",
+                  "description": "Compressed fastas per chromosome."
+                }
+              ],
+              "sbg:revision": 1,
+              "sbg:toolkitVersion": "1.0",
+              "sbg:modifiedOn": 1453798786,
+              "sbg:latestRevision": 1,
+              "sbg:createdOn": 1453798785,
+              "sbg:job": {
+                "inputs": {
+                  "fasta_file": {
+                    "path": "tmp/ucsc.hg19.fasta"
+                  }
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "inputs": [
+                {
+                  "label": "Fasta file",
+                  "required": true,
+                  "inputBinding": {
+                    "separate": true,
+                    "sbg:cmdInclude": true
+                  },
+                  "sbg:category": "",
+                  "type": [
+                    "File"
+                  ],
+                  "id": "#fasta_file",
+                  "sbg:fileTypes": "FASTA",
+                  "description": "Fasta file to be split."
+                }
+              ],
+              "description": "SBG-SplitFasta is a tool that splits input FASTA file per chromosome. The output is given as a compressed .tar.gz file.",
+              "class": "CommandLineTool",
+              "y": 180.1999969482422,
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "sevenbridges",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1453798785
+                },
+                {
+                  "sbg:modifiedBy": "sevenbridges",
+                  "sbg:revision": 1,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1453798786
+                }
+              ],
+              "temporaryFailCodes": [],
+              "baseCommand": [
+                "python2.7",
+                "/opt/sbg_splitfasta.py"
+              ],
+              "sbg:cmdPreview": "python2.7 /opt/sbg_splitfasta.py  tmp/ucsc.hg19.fasta tmp/ucsc.hg19.fasta",
+              "sbg:contributors": [
+                "sevenbridges"
+              ],
+              "sbg:toolkit": "SBGTools"
+            },
+            "outputs": [
+              {
+                "id": "#SBG_SplitFasta.fastas"
+              }
+            ],
+            "id": "#SBG_SplitFasta",
+            "inputs": [
+              {
+                "source": [
+                  "#fasta_file"
+                ],
+                "id": "#SBG_SplitFasta.fasta_file"
+              }
+            ],
+            "sbg:x": 478
+          },
+          {
+            "sbg:y": 191.1999969482422,
+            "run": {
+              "sbg:modifiedBy": "dave",
+              "sbg:image_url": null,
+              "sbg:id": "dave/rd168-mapsplice2-dev/untar/3",
+              "temporaryFailCodes": [],
+              "hints": [
+                {
+                  "dockerPull": "images.sbgenomics.com/markop/sbg-decompressor:1.0",
+                  "class": "DockerRequirement"
+                },
+                {
+                  "value": 1,
+                  "class": "sbg:CPURequirement"
+                },
+                {
+                  "value": 1000,
+                  "class": "sbg:MemRequirement"
+                }
+              ],
+              "stdin": "",
+              "sbg:createdBy": "dave",
+              "arguments": [
+                {
+                  "position": 2,
+                  "separate": true,
+                  "prefix": "-C",
+                  "valueFrom": {
+                    "class": "Expression",
+                    "script": "\"extracted\"",
+                    "engine": "#cwl-js-engine"
+                  }
+                }
+              ],
+              "label": "tar_extract",
+              "sbg:revisionsInfo": [
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 0,
+                  "sbg:revisionNotes": "Copy of dave/rd168-ericscript-dev/untar/4",
+                  "sbg:modifiedOn": 1477383531
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 1,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1477383715
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 2,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1477383754
+                },
+                {
+                  "sbg:modifiedBy": "dave",
+                  "sbg:revision": 3,
+                  "sbg:revisionNotes": null,
+                  "sbg:modifiedOn": 1477386684
+                }
+              ],
+              "stdout": "std.out",
+              "sbg:sbgMaintained": false,
+              "sbg:project": "dave/rd168-mapsplice2-dev",
+              "id": "https://api.sbgenomics.com/v2/apps/dave/rd168-mapsplice2-dev/untar/3/raw/",
+              "successCodes": [],
+              "sbg:validationErrors": [],
+              "outputs": [
+                {
+                  "label": "extracted_files",
+                  "streamable": false,
+                  "outputBinding": {
+                    "sbg:metadata": {
+                      "org": "cgp"
+                    },
+                    "sbg:inheritMetadataFrom": "#tar_file",
+                    "glob": {
+                      "class": "Expression",
+                      "script": "\"extracted/*\"",
+                      "engine": "#cwl-js-engine"
+                    }
+                  },
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "File",
+                      "name": "extracted_files"
+                    }
+                  ],
+                  "id": "#extracted_files",
+                  "default": "",
+                  "description": "extracted_files"
+                }
+              ],
+              "sbg:revision": 3,
+              "sbg:modifiedOn": 1477386684,
+              "sbg:latestRevision": 3,
+              "sbg:createdOn": 1477383531,
+              "sbg:job": {
+                "inputs": {
+                  "tar_file": {
+                    "class": "File",
+                    "secondaryFiles": [],
+                    "size": 0,
+                    "path": "input.tar"
+                  }
+                },
+                "allocatedResources": {
+                  "cpu": 1,
+                  "mem": 1000
+                }
+              },
+              "inputs": [
+                {
+                  "label": "tar_file",
+                  "streamable": false,
+                  "required": false,
+                  "inputBinding": {
+                    "separate": true,
+                    "position": 1,
+                    "sbg:cmdInclude": true
+                  },
+                  "type": [
+                    "null",
+                    "File"
+                  ],
+                  "id": "#tar_file",
+                  "default": "",
+                  "description": "tar_file"
+                }
+              ],
+              "description": "",
+              "class": "CommandLineTool",
+              "requirements": [
+                {
+                  "class": "ExpressionEngineRequirement",
+                  "requirements": [
+                    {
+                      "dockerPull": "rabix/js-engine",
+                      "class": "DockerRequirement"
+                    }
+                  ],
+                  "id": "#cwl-js-engine"
+                }
+              ],
+              "baseCommand": [
+                "mkdir",
+                "extracted",
+                "&&",
+                "tar",
+                "-zxvf"
+              ],
+              "sbg:cmdPreview": "mkdir extracted && tar -zxvf -C extracted > std.out",
+              "sbg:contributors": [
+                "dave"
+              ]
+            },
+            "outputs": [
+              {
+                "id": "#tar_extract.extracted_files"
+              }
+            ],
+            "id": "#tar_extract",
+            "inputs": [
+              {
+                "source": [
+                  "#SBG_SplitFasta.fastas"
+                ],
+                "id": "#tar_extract.tar_file"
+              }
+            ],
+            "sbg:x": 736
+          }
+        ],
+        "id": "dave/rd168-mapsplice2-dev/split-ref-by-chr/2",
+        "sbg:modifiedOn": 1477445008,
+        "sbg:latestRevision": 2,
+        "sbg:createdOn": 1477336576,
+        "inputs": [
+          {
+            "label": "fasta_file",
+            "required": true,
+            "sbg:y": 203,
+            "type": [
+              "File"
+            ],
+            "id": "#fasta_file",
+            "sbg:fileTypes": "FASTA",
+            "sbg:x": 192
+          }
+        ],
+        "description": "",
+        "class": "Workflow",
+        "y": 171.1999969482422,
+        "outputs": [
+          {
+            "sbg:includeInPorts": true,
+            "sbg:y": 204,
+            "source": [
+              "#tar_extract.extracted_files"
+            ],
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "extracted_files"
+              }
+            ],
+            "id": "#extracted_files",
+            "label": "extracted_files",
+            "sbg:x": 1018
+          }
+        ],
+        "hints": [],
+        "sbg:contributors": [
+          "dave"
+        ]
+      },
+      "outputs": [
+        {
+          "id": "#split_ref_by_chr.extracted_files"
+        }
+      ],
+      "id": "#split_ref_by_chr",
+      "inputs": [
+        {
+          "source": [
+            "#tar_file"
+          ],
+          "id": "#split_ref_by_chr.fasta_file"
+        }
+      ],
+      "sbg:x": 649
+    }
+  ],
+  "sbg:contributors": [
+    "dave"
+  ]
+}

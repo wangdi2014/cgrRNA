@@ -33,7 +33,7 @@ Fusion Finders
 1. Chimerascan
 --------------
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png"/> </a>
 
 2. EricScript
 -------------
@@ -42,6 +42,8 @@ Fusion Finders
 
 3. Mapsplice
 ------------
+
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png"/> </a>
 
 4. Fusion Catcher
 -----------------
@@ -91,7 +93,7 @@ Fusion Archive Creator
 Fastq Decompress and Merge
 --------------------------
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png"/> </a>
 
 Combine EricScript Fusion Lists
 -------------------------------
