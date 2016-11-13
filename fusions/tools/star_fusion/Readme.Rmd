@@ -1,5 +1,5 @@
 ---
-title: "Combine Eric Script Fusion List Tool"
+title: "STAR Fusion Tool"
 output:
   github_document:
     fig_width: 5
@@ -17,6 +17,8 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
-Docker image is `cgrlab/tidyverse`
 
+Docker image auto-builds at `cgrlab/star-fusion`
 
+STAR-Fusion 0.8.0
+https://hub.docker.com/r/cgrlab/star-fusion/
