@@ -2,12 +2,11 @@
 title: "Chimerascan Tool"
 output:
   github_document:
+    toc: true
     fig_width: 5
     fig_height: 5
     dev: jpeg
 ---
-
-## {.tabset}
 
 ```{r include = FALSE}
 require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
@@ -19,7 +18,7 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
-Utility to create a maf from json that is compatible with hotspot3d
+# Description
 
 ### base command
 
@@ -36,9 +35,18 @@ python /opt/chimerascan/chimerascan/chimerascan_run.py --quals illumina --librar
 
 ```
 
-### i/o {.tabset}
+## Container
 
-#### inputs
+The docker conatiner is
+
+``` cgrlab/chimerascan:latest ```
+
+https://hub.docker.com/r/cgrlab/chimerascan/
+
+
+# Ports
+
+## Inputs
 
 ```{r inputs}
 
@@ -52,7 +60,7 @@ input(id = "index", label = "index", description = "chimerascan index", type = "
 
 ```
 
-#### arguments
+## Arguments
 
 ```{r arguments}
 arguments = CCBList(
@@ -61,7 +69,7 @@ CommandLineBinding(position = 101, valueFrom = list('"&& ls -lR"'))
 )
 ```
 
-#### outputs
+## Outputs
 
 ```{r output}
 
@@ -77,17 +85,7 @@ glob = '"std.out"')
 
 ```
 
-### portability {.tabset}
-
-####docker
-
-The docker conatiner is
-
-``` cgrlab/chimerascan:latest ```
-
-https://hub.docker.com/r/cgrlab/chimerascan/
-
-####tool definition
+# Tool Definition
 
 ```{r 5 create tool object}
 
@@ -108,13 +106,13 @@ outputs = outputs)
 
 ```
 
-####cwl file
+# cwl file
 
 ```{r eval=create_cwl=="yes"}
-write(tool$toJSON(pretty = TRUE), "../apps/chimerascan_run.json")
+write(tool$toJSON(pretty = TRUE), "cwl.json")
 ```
 
-####push app to cloud platform
+# Push app to cloud platform
 
 ```{r eval=platform_push=="yes"}
 project$app_add("chimerascan_run", tool)

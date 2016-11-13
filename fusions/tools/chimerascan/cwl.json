@@ -1,94 +1,124 @@
 {
-  "sbg:id": "chimerascan_run",
-  "id": "#chimerascan_run",
-  "inputs": [
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": null,
+  "sbg:id": "dave/cgrrna/chimerascan_run/1",
+  "requirements": [],
+  "hints": [
     {
-      "type": [
-        "null",
-        {
-          "items": "File",
-          "type": "array"
-        }
-      ],
-      "label": "reads",
-      "description": "paired end reads",
-      "streamable": false,
-      "default": "",
-      "id": "#reads",
-      "required": false
+      "dockerPull": "cgrlab/chimerascan:latest",
+      "class": "DockerRequirement"
     },
     {
+      "value": 1,
+      "class": "sbg:CPURequirement"
+    },
+    {
+      "value": 1000,
+      "class": "sbg:MemRequirement"
+    }
+  ],
+  "baseCommand": [
+    "python /opt/chimerascan/chimaeracan/chimera_scan_run.py"
+  ],
+  "sbg:createdBy": "dave",
+  "arguments": [
+    {
+      "separate": true,
+      "position": 1,
+      "valueFrom": {
+        "class": "Expression",
+        "script": "\"./\"",
+        "engine": "#cwl-js-engine"
+      }
+    },
+    {
+      "separate": true,
+      "position": 101,
+      "valueFrom": {
+        "class": "Expression",
+        "script": "\"&& ls -lR\"",
+        "engine": "#cwl-js-engine"
+      }
+    }
+  ],
+  "label": "Chimerascan Run",
+  "stdout": "std.out",
+  "sbg:sbgMaintained": false,
+  "sbg:project": "dave/cgrrna",
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/chimerascan_run/1/raw/",
+  "sbg:validationErrors": [],
+  "sbg:revision": 1,
+  "sbg:modifiedOn": 1476542041,
+  "sbg:latestRevision": 1,
+  "sbg:createdOn": 1474817938,
+  "inputs": [
+    {
+      "label": "reads",
+      "streamable": false,
+      "required": false,
       "type": [
         "null",
         {
-          "items": "File",
-          "type": "array"
+          "type": "array",
+          "items": "File"
         }
       ],
-      "label": "index",
-      "description": "chimerascan index",
-      "streamable": false,
+      "id": "#reads",
       "default": "",
+      "description": "paired end reads"
+    },
+    {
+      "label": "index",
+      "streamable": false,
+      "required": false,
+      "description": "chimerascan index",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
       "id": "#index",
-      "sbg:stageInput": "link",
-      "required": false
+      "default": "",
+      "sbg:stageInput": "link"
+    }
+  ],
+  "class": "CommandLineTool",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1474817938
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476542041
     }
   ],
   "outputs": [
     {
-      "type": ["null", "File"],
       "label": "std_out",
-      "description": "standard output",
       "streamable": false,
-      "default": "",
-      "id": "#std_out",
       "outputBinding": {
-        "glob": "\"std.out\"",
         "sbg:metadata": {
           "from_tool": "chimerascan_run"
-        }
-      }
+        },
+        "glob": "\"std.out\""
+      },
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#std_out",
+      "default": "",
+      "description": "standard output"
     }
   ],
-  "requirements": [],
-  "hints": [
-    {
-      "class": "DockerRequirement",
-      "dockerPull": "cgrlab/chimerascan:latest"
-    },
-    {
-      "class": "sbg:CPURequirement",
-      "value": 1
-    },
-    {
-      "class": "sbg:MemRequirement",
-      "value": 1000
-    }
-  ],
-  "label": "Chimerascan Run",
-  "class": "CommandLineTool",
-  "baseCommand": [
-    "CPU=`grep -c ^processor /proc/cpuinfo` && ascat.pl -c $CPU -rs Human -ra NCBI37 -pr WGS -pl ILLUMINA -sg ascat_SnpGcCorrections.tsv -q 20 -g L -o ascat_output"
-  ],
-  "arguments": [
-    {
-      "position": 1,
-      "separate": true,
-      "valueFrom": {
-        "engine": "#cwl-js-engine",
-        "script": "\"./\"",
-        "class": "Expression"
-      }
-    },
-    {
-      "position": 101,
-      "separate": true,
-      "valueFrom": {
-        "engine": "#cwl-js-engine",
-        "script": "\"&& ls -lR\"",
-        "class": "Expression"
-      }
-    }
-  ],
-  "stdout": "std.out"
+  "sbg:contributors": [
+    "dave"
+  ]
 }

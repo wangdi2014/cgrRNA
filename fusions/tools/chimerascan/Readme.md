@@ -1,7 +1,19 @@
 Chimerascan Tool
 ================
 
-Utility to create a maf from json that is compatible with hotspot3d
+-   [Description](#description)
+    -   [base command](#base-command)
+    -   [Container](#container)
+-   [Ports](#ports)
+    -   [Inputs](#inputs)
+    -   [Arguments](#arguments)
+    -   [Outputs](#outputs)
+-   [Tool Definition](#tool-definition)
+-   [cwl file](#cwl-file)
+-   [Push app to cloud platform](#push-app-to-cloud-platform)
+
+Description
+===========
 
 ### base command
 
@@ -16,9 +28,20 @@ reads1.fastq reads2.fastq  chimeras_out \
 python /opt/chimerascan/chimerascan/chimerascan_run.py --quals illumina --library-type fr-firststrand ./ --filter-false-pos /sbgenomics/Projects/11eb1a82-1bf7-4df7-b8d3-dd53e1567bd5/_1_hg19_bodymap_false_positive_chimeras.txt --bowtie-path /opt/bowtie-1.1.2 /sbgenomics/Projects/11eb1a82-1bf7-4df7-b8d3-dd53e1567bd5/SC080539_AACAACCA_L00R1_001.fastq /sbgenomics/Projects/11eb1a82-1bf7-4df7-b8d3-dd53e1567bd5/SC080539_AACAACCA_L00R2_001.fastq chimeras_out --processors 8
 ```
 
-### i/o
+Container
+---------
 
-#### inputs
+The docker conatiner is
+
+`cgrlab/chimerascan:latest`
+
+<https://hub.docker.com/r/cgrlab/chimerascan/>
+
+Ports
+=====
+
+Inputs
+------
 
 ``` r
 inputs = list(
@@ -30,7 +53,8 @@ input(id = "index", label = "index", description = "chimerascan index", type = "
 )
 ```
 
-#### arguments
+Arguments
+---------
 
 ``` r
 arguments = CCBList(
@@ -39,7 +63,8 @@ CommandLineBinding(position = 101, valueFrom = list('"&& ls -lR"'))
 )
 ```
 
-#### outputs
+Outputs
+-------
 
 ``` r
 outputs = list(
@@ -52,17 +77,8 @@ glob = '"std.out"')
 )
 ```
 
-### portability
-
-#### docker
-
-The docker conatiner is
-
-`cgrlab/chimerascan:latest`
-
-<https://hub.docker.com/r/cgrlab/chimerascan/>
-
-#### tool definition
+Tool Definition
+===============
 
 ``` r
 tool <- Tool(
@@ -81,13 +97,15 @@ arguments = arguments,
 outputs = outputs)
 ```
 
-#### cwl file
+cwl file
+========
 
 ``` r
-write(tool$toJSON(pretty = TRUE), "../apps/chimerascan_run.json")
+write(tool$toJSON(pretty = TRUE), "cwl.json")
 ```
 
-#### push app to cloud platform
+Push app to cloud platform
+==========================
 
 ``` r
 project$app_add("chimerascan_run", tool)
