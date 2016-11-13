@@ -31,3 +31,7 @@ The GRch37 version can also be found in the cgrRNA SBG project (restricted acces
 GRCh37\_gencode\_v19\_CTAT\_lib\_July272016.tar.gz
 
 <https://igor.sbgenomics.com/u/dave/cgrrna/files/5827c8c1e4b0a15a0466c1ba/>
+
+GRCh37\_gencode\_v19\_CTAT\_lib.tar.gz
+
+<https://igor.sbgenomics.com/u/dave/cgrrna/files/5827db26e4b0a15a0466c1c6/>

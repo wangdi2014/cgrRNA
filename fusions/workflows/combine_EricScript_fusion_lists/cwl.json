@@ -1,40 +1,144 @@
 {
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png",
+  "sbg:canvas_y": 65,
+  "sbg:id": "dave/cgrrna/combine-eric-script-filtered-fusions/1",
+  "requirements": [
+    {
+      "class": "sbg:Metadata"
+    }
+  ],
+  "sbg:canvas_x": -85,
+  "hints": [
+    {
+      "value": "c4.large",
+      "class": "sbg:AWSInstanceType"
+    }
+  ],
+  "sbg:canvas_zoom": 1,
+  "label": "combine_eric_script_filtered_fusions",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": "Copy of dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/29",
+      "sbg:modifiedOn": 1479010531
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479055855
+    }
+  ],
+  "sbg:sbgMaintained": false,
+  "sbg:createdBy": "dave",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 1,
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/combine-eric-script-filtered-fusions/1/raw/",
+  "sbg:modifiedOn": 1479055855,
+  "sbg:latestRevision": 1,
+  "sbg:createdOn": 1479010531,
+  "inputs": [
+    {
+      "label": "table",
+      "sbg:y": 235,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File",
+          "name": "table"
+        }
+      ],
+      "id": "#table",
+      "sbg:x": 176
+    },
+    {
+      "type": [
+        "null",
+        "string"
+      ],
+      "id": "#case_id"
+    },
+    {
+      "label": "token",
+      "type": [
+        "string"
+      ],
+      "id": "#token",
+      "description": "SolveBio API token"
+    },
+    {
+      "label": "dataset",
+      "type": [
+        "string"
+      ],
+      "id": "#dataset",
+      "description": "Name of the SolveBio dataset to append to or create. Should follow the formatting {Depository}/{Version}/{Dataset}."
+    }
+  ],
+  "description": "",
   "class": "Workflow",
+  "outputs": [
+    {
+      "sbg:includeInPorts": true,
+      "label": "push_to_SolveBio_summary_out",
+      "sbg:y": 132,
+      "required": false,
+      "source": [
+        "#push_to_solvebio.summary_out"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#summary_out",
+      "sbg:x": 1115
+    }
+  ],
   "steps": [
     {
-      "id": "#combine_EricScript_fusion_lists",
+      "sbg:y": 218.1999969482422,
       "run": {
-        "id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13",
-        "sbg:modifiedOn": 1477843401,
-        "inputs": [
+        "sbg:modifiedBy": "dave",
+        "stdin": "",
+        "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/16",
+        "x": 517,
+        "requirements": [
           {
-            "required": false,
-            "description": "table",
-            "label": "table",
-            "type": [
-              "null",
+            "class": "CreateFileRequirement",
+            "fileDef": [
               {
-                "items": "File",
-                "type": "array",
-                "name": "table"
+                "filename": "get_args.R",
+                "fileContent": {
+                  "class": "Expression",
+                  "script": "\nfor (i = 0; i < $job.inputs.table.length; i++) {\nif(i === 0) {\ntable_path = '\"' + $job.inputs.table[i].path\nfilename = '\"' + $job.inputs.table[i].path.split(\"/\").reverse()[0]\ncase_id = '\"' + $job.inputs.table[i].metadata.case_id\nsample_id = '\"' + $job.inputs.table[i].metadata.sample_id\nsample_type = '\"' + $job.inputs.table[i].metadata.sample_type\n}\nelse {\ntable_path = table_path + '\", \"' + $job.inputs.table[i].path\nfilename = filename + '\", \"' + $job.inputs.table[i].path.split(\"/\").reverse()[0]\ncase_id = case_id + '\", \"' + $job.inputs.table[i].metadata.case_id\nsample_id = sample_id + '\", \"' + $job.inputs.table[i].metadata.sample_id\nsample_type = sample_type + '\", \"' + $job.inputs.table[i].metadata.sample_type\n}}\n\n'# get args \\n\\\nargs_table = data_frame(path = c('+table_path+'\"), \\\nfilename = c('+filename+'\"), \\\ncase_id = c('+case_id+'\"), \\\nsample_id = c('+sample_id+'\"), \\\nsample_type = c('+sample_type+'\"))'\n",
+                  "engine": "#cwl-js-engine"
+                }
+              },
+              {
+                "filename": "combine_tables.R",
+                "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, filename, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup() %>%\nselect(-path)\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
+              }
+            ]
+          },
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
               }
             ],
-            "streamable": false,
-            "id": "#table",
-            "inputBinding": {
-              "sbg:cmdInclude": true,
-              "prefix": "--table",
-              "separate": true,
-              "position": 0
-            },
-            "default": ""
+            "id": "#cwl-js-engine"
           }
         ],
-        "sbg:cmdPreview": "Rscript combine_tables.R",
         "hints": [
           {
-            "class": "DockerRequirement",
-            "dockerPull": "cgrlab/tidyverse:latest"
+            "dockerPull": "cgrlab/tidyverse:latest",
+            "class": "DockerRequirement"
           },
           {
             "value": 1,
@@ -45,248 +149,253 @@
             "class": "sbg:MemRequirement"
           }
         ],
-        "sbg:latestRevision": 13,
-        "stdin": "",
-        "sbg:createdOn": 1477784406,
-        "sbg:project": "dave/rd168-ericscript-dev",
-        "description": "",
-        "temporaryFailCodes": [],
         "sbg:image_url": null,
-        "requirements": [
+        "sbg:createdBy": "dave",
+        "arguments": [],
+        "label": "combine-EricScript-fusion-lists",
+        "sbg:revisionsInfo": [
           {
-            "fileDef": [
-              {
-                "filename": "get_args.R",
-                "fileContent": {
-                  "engine": "#cwl-js-engine",
-                  "script": "\nfor (i = 0; i < $job.inputs.table.length; i++) {\nif(i === 0) {\ntable_path = '\"' + $job.inputs.table[i].path\ncase_id = '\"' + $job.inputs.table[i].metadata.case_id\nsample_id = '\"' + $job.inputs.table[i].metadata.sample_id\nsample_type = '\"' + $job.inputs.table[i].metadata.sample_type\n}\nelse {\ntable_path = table_path + '\", \"' + $job.inputs.table[i].path\ncase_id = case_id + '\", \"' + $job.inputs.table[i].metadata.case_id\nsample_id = sample_id + '\", \"' + $job.inputs.table[i].metadata.sample_id\nsample_type = sample_type + '\", \"' + $job.inputs.table[i].metadata.sample_type\n}}\n\n'# get args \\n\\\nargs_table = data_frame(path = c('+table_path+'\"), \\\ncase_id = c('+case_id+'\"), \\\nsample_id = c('+sample_id+'\"), \\\nsample_type = c('+sample_type+'\"))'\n",
-                  "class": "Expression"
-                }
-              },
-              {
-                "filename": "combine_tables.R",
-                "fileContent": "require(jsonlite); require(purrr); require(dplyr); require(tidyr); require(stringr); require(readr); require(xlsx);\n\nsource(\"get_args.R\")\n\nmerged_table = args_table %>% \ngroup_by(path, case_id, sample_id, sample_type) %>% \ndo({\ntemp = read_tsv(.$path)\nreturn(temp)\n}) %>% \nungroup()\n\nwrite_csv(merged_table, \"EricScript_filtered_fusions_merged.csv\")\n\nxlsx::write.xlsx(merged_table, \"EricScript_filtered_fusions_merged.xlsx\")\n\nstream_out(merged_table, file(\"EricScript_filtered_fusions_merged.json\"))"
-              }
-            ],
-            "class": "CreateFileRequirement"
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": "Copy of dave/rd111-hpv-typing-plugin-dev-161023/combine-rds/12",
+            "sbg:modifiedOn": 1477784406
           },
           {
-            "id": "#cwl-js-engine",
-            "class": "ExpressionEngineRequirement",
-            "requirements": [
-              {
-                "class": "DockerRequirement",
-                "dockerPull": "rabix/js-engine"
-              }
-            ]
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477785871
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477786130
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477786222
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477786339
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477788230
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477789030
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477789196
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477789788
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 9,
+            "sbg:revisionNotes": "added case_id",
+            "sbg:modifiedOn": 1477797661
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 10,
+            "sbg:revisionNotes": "output csv and xlsx",
+            "sbg:modifiedOn": 1477833792
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 11,
+            "sbg:revisionNotes": "just csv",
+            "sbg:modifiedOn": 1477835066
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 12,
+            "sbg:revisionNotes": "put xlsx back in",
+            "sbg:modifiedOn": 1477841227
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 13,
+            "sbg:revisionNotes": "removed rds output",
+            "sbg:modifiedOn": 1477843401
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 14,
+            "sbg:revisionNotes": "removed xlsx creation and output",
+            "sbg:modifiedOn": 1477849817
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 15,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477851693
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 16,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477871675
           }
         ],
-        "sbg:id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/13",
-        "sbg:validationErrors": [],
-        "label": "combine-EricScript-fusion-lists",
-        "class": "CommandLineTool",
-        "sbg:createdBy": "dave",
         "stdout": "",
         "sbg:sbgMaintained": false,
+        "sbg:project": "dave/rd168-ericscript-dev",
+        "id": "dave/rd168-ericscript-dev/combine-ericscript-fusion-list/16",
+        "successCodes": [],
+        "sbg:validationErrors": [],
         "outputs": [
           {
-            "outputBinding": {
-              "glob": {
-                "engine": "#cwl-js-engine",
-                "script": "\"*.xlsx\"",
-                "class": "Expression"
-              },
-              "sbg:inheritMetadataFrom": "#table"
-            },
-            "id": "#merged_xlsx",
-            "type": [
-              "null",
-              "File"
-            ]
-          },
-          {
-            "outputBinding": {
-              "glob": {
-                "engine": "#cwl-js-engine",
-                "script": "\"*merged.json\"",
-                "class": "Expression"
-              },
-              "sbg:inheritMetadataFrom": "#table"
-            },
-            "id": "#merged_json",
-            "type": [
-              "null",
-              "File"
-            ]
-          },
-          {
-            "description": "merged_table",
-            "label": "merged_table",
             "type": [
               "null",
               "File"
             ],
-            "streamable": false,
-            "id": "#merged_csv",
+            "id": "#merged_json",
             "outputBinding": {
-              "glob": {
-                "engine": "#cwl-js-engine",
-                "script": "\"*.csv\"",
-                "class": "Expression"
+              "sbg:metadata": {
+                "case_id": {
+                  "class": "Expression",
+                  "script": "$job.inputs.case_id",
+                  "engine": "#cwl-js-engine"
+                }
               },
               "sbg:inheritMetadataFrom": "#table",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*merged.json\"",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          },
+          {
+            "label": "merged_table",
+            "streamable": false,
+            "outputBinding": {
               "sbg:metadata": {
-                "from_tool": "combine-EricScript-fusion-lists"
+                "from_tool": "combine-EricScript-fusion-lists",
+                "case_id": {
+                  "class": "Expression",
+                  "script": "$job.inputs.case_id",
+                  "engine": "#cwl-js-engine"
+                }
+              },
+              "sbg:inheritMetadataFrom": "#table",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.csv\"",
+                "engine": "#cwl-js-engine"
               }
             },
-            "default": ""
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#merged_csv",
+            "default": "",
+            "description": "merged_table"
           }
         ],
+        "sbg:revision": 16,
+        "sbg:modifiedOn": 1477871675,
+        "sbg:latestRevision": 16,
+        "sbg:createdOn": 1477784406,
+        "sbg:job": {
+          "inputs": {
+            "case_id": "case_id-string-value",
+            "table": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "SampleBlarA",
+                  "case_id": "Case_idA",
+                  "sample_type": "Tumor"
+                },
+                "path": "path/to/sampleA.tsv"
+              },
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "sample_blarB",
+                  "case_id": "Case_idB",
+                  "sample_type": "Normal"
+                },
+                "path": "path/to/sampleB.tsv"
+              }
+            ]
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "inputs": [
+          {
+            "label": "table",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "prefix": "--table",
+              "separate": true,
+              "position": 0,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File",
+                "name": "table"
+              }
+            ],
+            "id": "#table",
+            "default": "",
+            "description": "table"
+          },
+          {
+            "type": [
+              "null",
+              "string"
+            ],
+            "id": "#case_id"
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "y": 218.1999969482422,
+        "temporaryFailCodes": [],
         "baseCommand": [
           "Rscript",
           "combine_tables.R"
         ],
+        "sbg:cmdPreview": "Rscript combine_tables.R",
         "sbg:contributors": [
           "dave"
-        ],
-        "successCodes": [],
-        "sbg:modifiedBy": "dave",
-        "sbg:revisionsInfo": [
-          {
-            "sbg:revisionNotes": "Copy of dave/rd111-hpv-typing-plugin-dev-161023/combine-rds/12",
-            "sbg:revision": 0,
-            "sbg:modifiedOn": 1477784406,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 1,
-            "sbg:modifiedOn": 1477785871,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 2,
-            "sbg:modifiedOn": 1477786130,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 3,
-            "sbg:modifiedOn": 1477786222,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 4,
-            "sbg:modifiedOn": 1477786339,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 5,
-            "sbg:modifiedOn": 1477788230,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 6,
-            "sbg:modifiedOn": 1477789030,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 7,
-            "sbg:modifiedOn": 1477789196,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": null,
-            "sbg:revision": 8,
-            "sbg:modifiedOn": 1477789788,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": "added case_id",
-            "sbg:revision": 9,
-            "sbg:modifiedOn": 1477797661,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": "output csv and xlsx",
-            "sbg:revision": 10,
-            "sbg:modifiedOn": 1477833792,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": "just csv",
-            "sbg:revision": 11,
-            "sbg:modifiedOn": 1477835066,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": "put xlsx back in",
-            "sbg:revision": 12,
-            "sbg:modifiedOn": 1477841227,
-            "sbg:modifiedBy": "dave"
-          },
-          {
-            "sbg:revisionNotes": "removed rds output",
-            "sbg:revision": 13,
-            "sbg:modifiedOn": 1477843401,
-            "sbg:modifiedBy": "dave"
-          }
-        ],
-        "arguments": [],
-        "sbg:revisionNotes": "removed rds output",
-        "sbg:revision": 13,
-        "sbg:job": {
-          "allocatedResources": {
-            "mem": 1000,
-            "cpu": 1
-          },
-          "inputs": {
-            "table": [
-              {
-                "path": "sampleA.tsv",
-                "size": 0,
-                "secondaryFiles": [],
-                "metadata": {
-                  "sample_type": "Tumor",
-                  "case_id": "Case_idA",
-                  "sample_id": "SampleBlarA"
-                },
-                "class": "File"
-              },
-              {
-                "path": "sampleB.tsv",
-                "size": 0,
-                "secondaryFiles": [],
-                "metadata": {
-                  "sample_type": "Normal",
-                  "case_id": "Case_idB",
-                  "sample_id": "sample_blarB"
-                },
-                "class": "File"
-              }
-            ]
-          }
-        },
-        "x": 572,
-        "y": 212.1999969482422
+        ]
       },
-      "inputs": [
-        {
-          "id": "#combine_EricScript_fusion_lists.table",
-          "source": [
-            "#table"
-          ]
-        }
-      ],
       "outputs": [
-        {
-          "id": "#combine_EricScript_fusion_lists.merged_xlsx"
-        },
         {
           "id": "#combine_EricScript_fusion_lists.merged_json"
         },
@@ -294,191 +403,359 @@
           "id": "#combine_EricScript_fusion_lists.merged_csv"
         }
       ],
-      "sbg:x": 572,
-      "sbg:y": 212.1999969482422
-    }
-  ],
-  "requirements": [],
-  "inputs": [
-    {
-      "label": "table",
-      "type": [
-        "null",
+      "id": "#combine_EricScript_fusion_lists",
+      "inputs": [
         {
-          "items": "File",
-          "type": "array",
-          "name": "table"
+          "source": [
+            "#table"
+          ],
+          "id": "#combine_EricScript_fusion_lists.table"
+        },
+        {
+          "source": [
+            "#case_id"
+          ],
+          "id": "#combine_EricScript_fusion_lists.case_id"
         }
       ],
-      "id": "#table",
-      "sbg:x": 188,
-      "sbg:y": 216
-    }
-  ],
-  "outputs": [
-    {
-      "sbg:y": 110,
-      "id": "#merged_xlsx",
-      "type": [
-        "null",
-        "File"
-      ],
-      "required": false,
-      "label": "merged_xlsx",
-      "sbg:includeInPorts": true,
-      "sbg:x": 833,
-      "source": [
-        "#combine_EricScript_fusion_lists.merged_xlsx"
-      ]
+      "sbg:x": 517
     },
     {
-      "sbg:y": 390,
-      "id": "#merged_csv",
-      "type": [
-        "null",
-        "File"
+      "sbg:y": 177.20001220703125,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "sbg:image_url": null,
+        "sbg:id": "dave/rd168-ericscript-dev/solvebio-push/9",
+        "x": 833,
+        "requirements": [
+          {
+            "class": "CreateFileRequirement",
+            "fileDef": [
+              {
+                "filename": "push_to_solve_main.py",
+                "fileContent": "# import\nimport solvebio\n\n#get args\nfrom push_to_solve import *  \n\n# Log in to SolveBio API\nsolvebio.login(api_key = args_api_key)\n\n# Use default template ID\ntemplate_id = solvebio.DatasetTemplate.all().objects()[0]\n\n# is_genomic=True\n\n# Get/create the SolveBio dataset\n\ndataset = solvebio.Dataset.get_or_create_by_full_name(full_name = args_full_name,\ngenome_build = args_genome_build,\nentity_type ='variant',\nfields=template_id.fields)\n\nmanifest = solvebio.Manifest()\nmanifest.add_file(path = args_file_path)\n\nimp = solvebio.DatasetImport.create(dataset_id=dataset.id,\nmanifest = manifest.manifest,\ngenome_build = args_genome_build,\nauto_approve= args_auto_approve)\n\nimport_url = 'https://my.solvebio.com/jobs/imports/{0}'.format(imp.id)\ndataset_url = 'https://my.solvebio.com/data/{0}'.format(dataset.full_name)\n\nprint(import_url)\nprint(dataset_url)"
+              },
+              {
+                "filename": "push_to_solve.py",
+                "fileContent": {
+                  "class": "Expression",
+                  "script": "'# get args \\n\\\nargs_api_key = \"'+$job.inputs.token+'\" \\n\\\nargs_full_name = \"'+$job.inputs.dataset+'/'+$job.inputs.genomic_data.metadata.case_id+'\" \\n\\\nargs_genome_build = \"'+$job.inputs.genome_ref+'\" \\n\\\nargs_file_path = \"'+$job.inputs.genomic_data.path+'\" \\n\\\nargs_run_mode = \"'+$job.inputs.run_mode+'\" \\n\\\nargs_auto_approve = \"'+$job.inputs.auto_approve+'\" \\n\\\n\\n\\\nif args_run_mode == \"push\": \\n\\\n    import push_to_solve_main'\n\n\n",
+                  "engine": "#cwl-js-engine"
+                }
+              }
+            ]
+          },
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          }
+        ],
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "dockerImageId": "",
+            "dockerPull": "cgrlab/solvebio-python:latest",
+            "class": "DockerRequirement"
+          }
+        ],
+        "baseCommand": [
+          "python",
+          "push_to_solve.py"
+        ],
+        "sbg:toolAuthor": "Jack DiGiovanna / Seven Bridges",
+        "sbg:createdBy": "dave",
+        "arguments": [],
+        "label": "push_to_solvebio",
+        "stdout": "solveBio_push_std.out",
+        "sbg:sbgMaintained": false,
+        "stdin": "",
+        "sbg:project": "dave/rd168-ericscript-dev",
+        "sbg:categories": [
+          "integrations"
+        ],
+        "id": "dave/rd168-ericscript-dev/solvebio-push/9",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "sbg:revision": 9,
+        "sbg:job": {
+          "inputs": {
+            "auto_approve": "True",
+            "run_mode": "push",
+            "token": "a7c0886ae07cd3aa5ff9d8778cbfb11378bff60f",
+            "genome_ref": "GRCh37",
+            "dataset": "sbgenomics:temp/0.0.1",
+            "genomic_data": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "metadata": {
+                "case_id": "SampleA_case_id"
+              },
+              "path": "/path/to/exomes_A.vcf"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "sbg:latestRevision": 9,
+        "sbg:createdOn": 1477789430,
+        "sbg:modifiedOn": 1477873753,
+        "inputs": [
+          {
+            "label": "token",
+            "inputBinding": {
+              "prefix": "--secret_api_token",
+              "separate": true,
+              "position": 1,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "string"
+            ],
+            "id": "#token",
+            "description": "SolveBio API token"
+          },
+          {
+            "inputBinding": {
+              "prefix": "--run_mode",
+              "separate": true,
+              "position": 0,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              {
+                "type": "enum",
+                "name": "run_mode",
+                "symbols": [
+                  "push",
+                  "skip"
+                ]
+              }
+            ],
+            "id": "#run_mode",
+            "description": "Should the app push to solve"
+          },
+          {
+            "label": "genomic_entity_file",
+            "required": true,
+            "inputBinding": {
+              "position": 0,
+              "separate": true,
+              "prefix": "--genomic_data",
+              "sbg:cmdInclude": true,
+              "itemSeparator": " "
+            },
+            "type": [
+              "File"
+            ],
+            "id": "#genomic_data",
+            "description": "file to push to SolveBio"
+          },
+          {
+            "label": "genome_ref",
+            "description": "Genome reference used for variant calling",
+            "inputBinding": {
+              "prefix": "--genome_reference",
+              "separate": true,
+              "position": 3,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              {
+                "type": "enum",
+                "name": "genome_ref",
+                "symbols": [
+                  "GRCh37",
+                  "GRCh38"
+                ]
+              }
+            ],
+            "id": "#genome_ref",
+            "sbg:toolDefaultValue": "GRCh37"
+          },
+          {
+            "label": "dataset",
+            "inputBinding": {
+              "prefix": "--depository_name",
+              "separate": true,
+              "position": 2,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "string"
+            ],
+            "id": "#dataset",
+            "description": "Name of the SolveBio dataset to append to or create. Should follow the formatting {Depository}/{Version}/{Dataset}."
+          },
+          {
+            "label": "auto_approve",
+            "description": "Automatically approve the VCF upload to SolveBio",
+            "inputBinding": {
+              "prefix": "--auto_approve",
+              "separate": true,
+              "position": 4,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              {
+                "type": "enum",
+                "name": "auto_approve",
+                "symbols": [
+                  "False",
+                  "True"
+                ]
+              }
+            ],
+            "id": "#auto_approve",
+            "sbg:toolDefaultValue": "True"
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "sbg:contributors": [
+          "dave"
+        ],
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477789430
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477789454
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477853843
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": "added get_args.py",
+            "sbg:modifiedOn": 1477860763
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477860910
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477861073
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477863444
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477863499
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": "importing vars to main script",
+            "sbg:modifiedOn": 1477873010
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 9,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1477873753
+          }
+        ],
+        "temporaryFailCodes": [],
+        "outputs": [
+          {
+            "label": "summary_out",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#genomic_data",
+              "glob": "*std.out"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#summary_out",
+            "sbg:fileTypes": "TXT",
+            "description": "Brief output file listing the \"dataset\" and \"job\" URLs on SolveBio"
+          }
+        ],
+        "sbg:cmdPreview": "python push_to_solve.py --genomic_data /path/to/exomes_A.vcf --secret_api_token a7c0886ae07cd3aa5ff9d8778cbfb11378bff60f --depository_name sbgenomics:temp/0.0.1 --genome_reference GRCh37 > solveBio_push_std.out",
+        "y": 177.20001220703125
+      },
+      "outputs": [
+        {
+          "id": "#push_to_solvebio.summary_out"
+        }
       ],
-      "required": false,
-      "label": "merged_csv",
-      "sbg:includeInPorts": true,
-      "sbg:x": 899,
-      "source": [
-        "#combine_EricScript_fusion_lists.merged_csv"
-      ]
-    },
-    {
-      "sbg:y": 232,
-      "id": "#merged_json",
-      "type": [
-        "null",
-        "File"
+      "id": "#push_to_solvebio",
+      "inputs": [
+        {
+          "source": [
+            "#token"
+          ],
+          "id": "#push_to_solvebio.token"
+        },
+        {
+          "id": "#push_to_solvebio.run_mode",
+          "default": "skip"
+        },
+        {
+          "source": [
+            "#combine_EricScript_fusion_lists.merged_json"
+          ],
+          "id": "#push_to_solvebio.genomic_data"
+        },
+        {
+          "id": "#push_to_solvebio.genome_ref",
+          "default": "GRCh37"
+        },
+        {
+          "source": [
+            "#dataset"
+          ],
+          "id": "#push_to_solvebio.dataset"
+        },
+        {
+          "id": "#push_to_solvebio.auto_approve",
+          "default": "True"
+        }
       ],
-      "required": false,
-      "label": "merged_json",
-      "sbg:includeInPorts": true,
-      "sbg:x": 1000,
-      "source": [
-        "#combine_EricScript_fusion_lists.merged_json"
-      ]
+      "sbg:x": 833
     }
   ],
-  "sbg:modifiedOn": 1477843461,
-  "sbg:canvas_x": 0,
-  "sbg:createdOn": 1477786365,
-  "sbg:project": "dave/rd168-ericscript-dev",
-  "sbg:image_url": null,
-  "sbg:id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/14",
-  "sbg:validationErrors": [],
-  "sbg:createdBy": "dave",
-  "sbg:sbgMaintained": false,
-  "sbg:revision": 14,
-  "sbg:modifiedBy": "dave",
-  "sbg:canvas_y": 0,
   "sbg:contributors": [
     "dave"
-  ],
-  "sbg:latestRevision": 14,
-  "sbg:canvas_zoom": 1,
-  "sbg:revisionsInfo": [
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 0,
-      "sbg:modifiedOn": 1477786365,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 1,
-      "sbg:modifiedOn": 1477786413,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 2,
-      "sbg:modifiedOn": 1477788253,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 3,
-      "sbg:modifiedOn": 1477788449,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 4,
-      "sbg:modifiedOn": 1477789052,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 5,
-      "sbg:modifiedOn": 1477789213,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": null,
-      "sbg:revision": 6,
-      "sbg:modifiedOn": 1477789821,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "regular instance",
-      "sbg:revision": 7,
-      "sbg:modifiedOn": 1477790850,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "added case_id",
-      "sbg:revision": 8,
-      "sbg:modifiedOn": 1477797703,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "output csv xlsx",
-      "sbg:revision": 9,
-      "sbg:modifiedOn": 1477833831,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "just csv",
-      "sbg:revision": 10,
-      "sbg:modifiedOn": 1477835093,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "c4.large",
-      "sbg:revision": 11,
-      "sbg:modifiedOn": 1477841800,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "put xlsx back in",
-      "sbg:revision": 12,
-      "sbg:modifiedOn": 1477841818,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "c4.large",
-      "sbg:revision": 13,
-      "sbg:modifiedOn": 1477842377,
-      "sbg:modifiedBy": "dave"
-    },
-    {
-      "sbg:revisionNotes": "\"removed rds output\"",
-      "sbg:revision": 14,
-      "sbg:modifiedOn": 1477843461,
-      "sbg:modifiedBy": "dave"
-    }
-  ],
-  "sbg:revisionNotes": "\"removed rds output\"",
-  "id": "dave/rd168-ericscript-dev/combine-eric-script-filtered-fusions/14",
-  "label": "combine_eric_script_filtered_fusions",
-  "description": "",
-  "hints": [
-    {
-      "value": "c4.large",
-      "class": "sbg:AWSInstanceType"
-    }
   ]
 }

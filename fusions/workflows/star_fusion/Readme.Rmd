@@ -45,4 +45,6 @@ GRCh37_gencode_v19_CTAT_lib_July272016.tar.gz
 
 https://igor.sbgenomics.com/u/dave/cgrrna/files/5827c8c1e4b0a15a0466c1ba/
 
+GRCh37_gencode_v19_CTAT_lib.tar.gz
 
+https://igor.sbgenomics.com/u/dave/cgrrna/files/5827db26e4b0a15a0466c1c6/

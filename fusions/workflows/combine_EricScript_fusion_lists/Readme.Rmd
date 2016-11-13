@@ -1,5 +1,5 @@
 ---
-title: "Ericscript Fusion Tool"
+title: "Combine EricScript Fusions Lists WF"
 output:
   github_document:
     fig_width: 5
@@ -16,8 +16,6 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
-
-
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png" target="_blank">
 <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png"/>
