@@ -1,5 +1,5 @@
 ---
-title: "cgrRNA Pandas Fusion Collector WF"
+title: "Multi Fusion Tool Output Collector"
 output:
   github_document:
     fig_width: 5
@@ -18,3 +18,7 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 ```
 
 
+Docker image auto-builds at `cgrlab/numpy`
+
+STAR-Fusion 0.8.0
+https://hub.docker.com/r/cgrlab/star-fusion/

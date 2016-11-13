@@ -3,7 +3,6 @@ title: "cgrRNA Fusions Module"
 output:
   github_document:
     toc: true
-    toc_depth: 2
     fig_width: 5
     fig_height: 5
     dev: jpeg
@@ -16,6 +15,8 @@ options(max.print = "99"); opts_knit$set(width = 99)
 opts_chunk$set(cache=FALSE, tidy=FALSE)
 
 source("~/cgrRNA/scratch/cgc_auth.R")
+
+is_child = TRUE
 
 ```
 
@@ -32,15 +33,13 @@ All files will be tab delimited.
 
 ![workflow_graph.png](workflows/ericscript/workflow_graph.png)
 
-## STAR-Fusion with alignment
+# STAR Fusion
 
-![](workflows/star_fusion/star_fusion_with_alignment.png)
+```{r child = '~/cgrRNA/fusions/workflows/star_fusion/Readme.Rmd'}
+```
 
-## STAR-Fusion by itself
 
-![](workflows/star_fusion/star_fusion_post_alignment.png)
-
-## fastq_decompress_and_merge
+# fastq_decompress_and_merge
 
 ![](workflows/fastq_decompress_and_merge/fastq_decompress_and_merge.png)
 

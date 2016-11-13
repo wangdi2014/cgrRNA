@@ -2,6 +2,7 @@
 title: "STAR-Fusion WF"
 output:
   github_document:
+    toc: true
     fig_width: 5
     fig_height: 5
     dev: jpeg
@@ -15,18 +16,33 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 
 source("~/cgrRNA/scratch/cgc_auth.R")
 
+if(!exists("is_child")){is_child = FALSE}
+
 ```
 
-## STAR-Fusion with alignment
+## Workflow Graphs
 
-![](star_fusion_with_alignment.png)
+### STAR-Fusion with alignment
+
+`r if(is_child){"![](workflows/star_fusion/star_fusion_with_alignment.png)"} else {"![](star_fusion_with_alignment.png)"}`
 
 Example of a workflow withing a wofklow.
 
 
-## STAR-Fusion by itself
+### STAR-Fusion Only
 
-![](star_fusion_post_alignment.png)
+`r if(is_child){"![](workflows/star_fusion/star_fusion_post_alignment.png)"} else {"![](star_fusion_post_alignment.png)"}`
 
+## CTAT Database
+
+Download the CTAT database from
+
+https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/
+
+The GRch37 version can also be found in the cgrRNA SBG project (restricted access)
+
+GRCh37_gencode_v19_CTAT_lib_July272016.tar.gz
+
+https://igor.sbgenomics.com/u/dave/cgrrna/files/5827c8c1e4b0a15a0466c1ba/
 
 
