@@ -2,7 +2,7 @@
 
 #cgrRNA
 
-This project represents the current work in pre-release and actively developed comprehensive RNA-seq analysis pipeline used at Cancer Genomics Research Laboratory.  The goal is to document the tools and workflows that our analysts currently use, make them portable and share with the community.
+This project represents the current documentation on the actively developed comprehensive RNA-seq analysis pipeline used at Cancer Genomics Research Laboratory.  The goal is to desribe the tools and workflows that our analysts currently use, make them portable and share with the community.
 
 Modules Included
 
