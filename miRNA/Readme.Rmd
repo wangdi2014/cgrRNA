@@ -17,5 +17,7 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
+# Alignment and QC for miRNA Analysis
 
-
+```{r child = '~/cgrRNA/miRNA/workflows/miRNA_analysis/Readme.Rmd'}
+```
