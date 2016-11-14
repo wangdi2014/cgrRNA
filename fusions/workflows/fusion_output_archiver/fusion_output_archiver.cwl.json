@@ -1,0 +1,363 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png",
+  "sbg:canvas_y": 0,
+  "sbg:id": "dave/cgrrna/fusion-output-archiver-wf/5",
+  "requirements": [],
+  "steps": [
+    {
+      "sbg:y": 237.1999969482422,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "stdin": "",
+        "sbg:id": "dave/cgrrna/fusion-output-archiver/8",
+        "x": 567,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          },
+          {
+            "class": "CreateFileRequirement",
+            "fileDef": [
+              {
+                "filename": "archive_files.sh",
+                "fileContent": {
+                  "class": "Expression",
+                  "script": "var sample_sub_dir = $job.inputs.fusion_finder_output_files.map(function(elem){\n \nreturn 'mkdir -p '+elem.metadata.sample_id+'\\n\\\ncp '+elem.path+ ' '+elem.metadata.sample_id+'\\n\\\n'}).join(\"\")\n\n\n\n'#!/bin/bash \\n\\\n\\n\\\nmkdir '+$job.inputs.fusion_tool_name+' \\n\\\ncd '+$job.inputs.fusion_tool_name+' \\n\\\n'+sample_sub_dir+' \\n\\\ncd ../ \\n\\\ntar -cvzf '+$job.inputs.fusion_tool_name+'.tar.gz '+$job.inputs.fusion_tool_name",
+                  "engine": "#cwl-js-engine"
+                }
+              }
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "dockerImageId": "",
+            "dockerPull": "cgrlab/tidyverse:latest",
+            "class": "DockerRequirement"
+          }
+        ],
+        "sbg:image_url": null,
+        "sbg:createdBy": "dave",
+        "arguments": [],
+        "label": "fusion_output_archiver",
+        "stdout": "std.out",
+        "sbg:sbgMaintained": false,
+        "sbg:project": "dave/cgrrna",
+        "id": "dave/cgrrna/fusion-output-archiver/8",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "outputs": [
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#std_out",
+            "outputBinding": {
+              "glob": "std.out"
+            }
+          },
+          {
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#fusion_archive",
+            "outputBinding": {
+              "sbg:metadata": {
+                "from_tool": {
+                  "class": "Expression",
+                  "script": "\"fusion_output_archiver\"",
+                  "engine": "#cwl-js-engine"
+                }
+              },
+              "sbg:inheritMetadataFrom": "#fusion_finder_output_files",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.tar.gz\"",
+                "engine": "#cwl-js-engine"
+              }
+            }
+          }
+        ],
+        "sbg:revision": 8,
+        "sbg:modifiedOn": 1479090366,
+        "sbg:latestRevision": 8,
+        "sbg:createdOn": 1479086912,
+        "sbg:job": {
+          "inputs": {
+            "fusion_finder_output_files": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "SC01234"
+                },
+                "path": "/path/to/SC10234.ericScript.tsv"
+              },
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "SC54321"
+                },
+                "path": "/path/to/SC54321.ericScript.tsv"
+              }
+            ],
+            "fusion_tool_name": "EricScript"
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "inputs": [
+          {
+            "type": [
+              "null",
+              "string"
+            ],
+            "id": "#fusion_tool_name"
+          },
+          {
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#fusion_finder_output_files",
+            "required": false
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "y": 237.1999969482422,
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479086912
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479087711
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479087770
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479088081
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479088576
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479089392
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479089562
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479089659
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479090366
+          }
+        ],
+        "temporaryFailCodes": [],
+        "baseCommand": [
+          "bash",
+          "archive_files.sh"
+        ],
+        "sbg:cmdPreview": "bash archive_files.sh  > std.out",
+        "sbg:contributors": [
+          "dave"
+        ]
+      },
+      "outputs": [
+        {
+          "id": "#fusion_output_archiver.std_out"
+        },
+        {
+          "id": "#fusion_output_archiver.fusion_archive"
+        }
+      ],
+      "id": "#fusion_output_archiver",
+      "inputs": [
+        {
+          "source": [
+            "#fusion_tool_name"
+          ],
+          "id": "#fusion_output_archiver.fusion_tool_name"
+        },
+        {
+          "source": [
+            "#fusion_finder_output_files"
+          ],
+          "id": "#fusion_output_archiver.fusion_finder_output_files"
+        }
+      ],
+      "sbg:x": 567
+    }
+  ],
+  "hints": [
+    {
+      "value": "c4.large",
+      "class": "sbg:AWSInstanceType"
+    }
+  ],
+  "sbg:canvas_zoom": 1,
+  "label": "fusion_output_archiver-wf",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479088112
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479088161
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 2,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479089690
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 3,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479090374
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 4,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479090391
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 5,
+      "sbg:revisionNotes": "c4.large",
+      "sbg:modifiedOn": 1479090620
+    }
+  ],
+  "sbg:sbgMaintained": false,
+  "sbg:createdBy": "dave",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 5,
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/fusion-output-archiver-wf/5/raw/",
+  "sbg:modifiedOn": 1479090620,
+  "sbg:latestRevision": 5,
+  "sbg:createdOn": 1479088112,
+  "inputs": [
+    {
+      "label": "fusion_finder_output_files",
+      "sbg:y": 237,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#fusion_finder_output_files",
+      "sbg:x": 192
+    },
+    {
+      "type": [
+        "null",
+        "string"
+      ],
+      "id": "#fusion_tool_name"
+    }
+  ],
+  "description": "",
+  "class": "Workflow",
+  "sbg:revisionNotes": "c4.large",
+  "outputs": [
+    {
+      "sbg:includeInPorts": true,
+      "label": "std_out",
+      "sbg:y": 107,
+      "required": false,
+      "source": [
+        "#fusion_output_archiver.std_out"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#std_out",
+      "sbg:x": 866
+    },
+    {
+      "sbg:includeInPorts": true,
+      "label": "fusion_archive",
+      "sbg:y": 333,
+      "required": false,
+      "source": [
+        "#fusion_output_archiver.fusion_archive"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#fusion_archive",
+      "sbg:x": 931
+    }
+  ],
+  "sbg:canvas_x": 0,
+  "sbg:contributors": [
+    "dave"
+  ]
+}

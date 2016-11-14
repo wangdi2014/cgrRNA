@@ -1,0 +1,208 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": null,
+  "sbg:id": "dave/cgrrna/fusion-output-archiver/8",
+  "requirements": [
+    {
+      "class": "ExpressionEngineRequirement",
+      "requirements": [
+        {
+          "dockerPull": "rabix/js-engine",
+          "class": "DockerRequirement"
+        }
+      ],
+      "id": "#cwl-js-engine"
+    },
+    {
+      "class": "CreateFileRequirement",
+      "fileDef": [
+        {
+          "filename": "archive_files.sh",
+          "fileContent": {
+            "class": "Expression",
+            "script": "var sample_sub_dir = $job.inputs.fusion_finder_output_files.map(function(elem){\n \nreturn 'mkdir -p '+elem.metadata.sample_id+'\\n\\\ncp '+elem.path+ ' '+elem.metadata.sample_id+'\\n\\\n'}).join(\"\")\n\n\n\n'#!/bin/bash \\n\\\n\\n\\\nmkdir '+$job.inputs.fusion_tool_name+' \\n\\\ncd '+$job.inputs.fusion_tool_name+' \\n\\\n'+sample_sub_dir+' \\n\\\ncd ../ \\n\\\ntar -cvzf '+$job.inputs.fusion_tool_name+'.tar.gz '+$job.inputs.fusion_tool_name",
+            "engine": "#cwl-js-engine"
+          }
+        }
+      ]
+    }
+  ],
+  "hints": [
+    {
+      "value": 1,
+      "class": "sbg:CPURequirement"
+    },
+    {
+      "value": 1000,
+      "class": "sbg:MemRequirement"
+    },
+    {
+      "dockerImageId": "",
+      "dockerPull": "cgrlab/tidyverse:latest",
+      "class": "DockerRequirement"
+    }
+  ],
+  "stdin": "",
+  "sbg:createdBy": "dave",
+  "arguments": [],
+  "label": "fusion_output_archiver",
+  "stdout": "std.out",
+  "class": "CommandLineTool",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 8,
+  "successCodes": [],
+  "sbg:validationErrors": [],
+  "outputs": [
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#fusion_archive",
+      "outputBinding": {
+        "sbg:metadata": {
+          "from_tool": {
+            "class": "Expression",
+            "script": "\"fusion_output_archiver\"",
+            "engine": "#cwl-js-engine"
+          }
+        },
+        "sbg:inheritMetadataFrom": "#fusion_finder_output_files",
+        "glob": {
+          "class": "Expression",
+          "script": "\"*.tar.gz\"",
+          "engine": "#cwl-js-engine"
+        }
+      }
+    },
+    {
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#std_out",
+      "outputBinding": {
+        "glob": "std.out"
+      }
+    }
+  ],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/fusion-output-archiver/8/raw/",
+  "sbg:modifiedOn": 1479090366,
+  "sbg:latestRevision": 8,
+  "sbg:createdOn": 1479086912,
+  "sbg:job": {
+    "inputs": {
+      "fusion_finder_output_files": [
+        {
+          "class": "File",
+          "secondaryFiles": [],
+          "size": 0,
+          "metadata": {
+            "sample_id": "SC01234"
+          },
+          "path": "/path/to/SC10234.ericScript.tsv"
+        },
+        {
+          "class": "File",
+          "secondaryFiles": [],
+          "size": 0,
+          "metadata": {
+            "sample_id": "SC54321"
+          },
+          "path": "/path/to/SC54321.ericScript.tsv"
+        }
+      ],
+      "fusion_tool_name": "EricScript"
+    },
+    "allocatedResources": {
+      "cpu": 1,
+      "mem": 1000
+    }
+  },
+  "inputs": [
+    {
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#fusion_finder_output_files"
+    },
+    {
+      "type": [
+        "null",
+        "string"
+      ],
+      "id": "#fusion_tool_name"
+    }
+  ],
+  "description": "",
+  "sbg:sbgMaintained": false,
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479086912
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479087711
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 2,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479087770
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 3,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479088081
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 4,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479088576
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 5,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479089392
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 6,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479089562
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 7,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479089659
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 8,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479090366
+    }
+  ],
+  "temporaryFailCodes": [],
+  "baseCommand": [
+    "bash",
+    "archive_files.sh"
+  ],
+  "sbg:cmdPreview": "bash archive_files.sh  > std.out",
+  "sbg:contributors": [
+    "dave"
+  ]
+}

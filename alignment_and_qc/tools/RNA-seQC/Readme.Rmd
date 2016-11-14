@@ -1,5 +1,5 @@
 ---
-title: "STAR Alignment and Deduplication Workflow"
+title: "RNA-SeQC Tool"
 output:
   github_document:
     fig_width: 5
@@ -17,4 +17,6 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
-![STAR Alignment and Dedup Workflow](star_alignment_and_deduplication.png)
+
+
+

@@ -63,9 +63,9 @@ All files will be tab delimited.
 ```{r child = '~/cgrRNA/fusions/workflows/multi_fusion_tool_output_collector/Readme.Rmd'}
 ```
 
-## Fusion Archive Creator
+## Fusion Output Archiver
 
-```{r child = '~/cgrRNA/fusions/workflows/fusion_archive_creator/Readme.Rmd'}
+```{r child = '~/cgrRNA/fusions/workflows/fusion_output_archiver/Readme.Rmd'}
 ```
 
 ## Fastq Decompress and Merge

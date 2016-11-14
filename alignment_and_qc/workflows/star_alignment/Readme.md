@@ -1,8 +1,5 @@
-cgrRNA Alignment and QC Module
-================
-
 STAR Alignment Workflows
-------------------------
+================
 
 <https://igor.sbgenomics.com/u/dave/cgrrna/apps/#dave/cgrrna/star-rna-seq-alignment-with-dedup/>
 

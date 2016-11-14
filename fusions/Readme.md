@@ -11,7 +11,7 @@ cgrRNA Fusions Module
     -   [5. STAR Fusion](#star-fusion)
 -   [Summary and Utility Apps](#summary-and-utility-apps)
     -   [Multi-Fusion Tool Output Collector](#multi-fusion-tool-output-collector)
-    -   [Fusion Archive Creator](#fusion-archive-creator)
+    -   [Fusion Output Archiver](#fusion-output-archiver)
     -   [Fastq Decompress and Merge](#fastq-decompress-and-merge)
     -   [Combine EricScript Fusion Lists](#combine-ericscript-fusion-lists)
 
@@ -55,13 +55,13 @@ Fusion Finders
 
 #### STAR-Fusion with alignment
 
-![](workflows/star_fusion/star_fusion_with_alignment.png)
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/> </a>
 
 Example of a workflow withing a wofklow.
 
 #### STAR-Fusion Only
 
-![](workflows/star_fusion/star_fusion_post_alignment.png)
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/> </a>
 
 ### CTAT Database
 
@@ -87,8 +87,12 @@ Multi-Fusion Tool Output Collector
 
 Written with Pandas and other python libraries.
 
-Fusion Archive Creator
+Fusion Output Archiver
 ----------------------
+
+<https://igor.sbgenomics.com/u/dave/cgrrna/apps/#dave/cgrrna/fusion-output-archiver-wf>
+
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png"/> </a>
 
 Fastq Decompress and Merge
 --------------------------

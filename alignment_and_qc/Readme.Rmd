@@ -17,8 +17,7 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
-## STAR Alignment and Deduplication Workflow
+## STAR Alignment Workflows
 
-![STAR Alignment and Dedup Workflow](workflows/STAR_alignment_and_deduplication_wf/star_alignment_and_deduplication.png)
-
-
+```{r child = '~/cgrRNA/alignment_and_qc/workflows/star_alignment/Readme.Rmd'}
+```

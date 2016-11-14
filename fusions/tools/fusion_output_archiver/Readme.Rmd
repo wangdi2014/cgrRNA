@@ -25,3 +25,5 @@ this tool will be run on a set of fusion outputs..once for every fusion tool. So
 It will contain a directory structure like so
 
 [Fusion tool name]/[sample_id]/[fusion outputs]
+
+https://igor.sbgenomics.com/u/dave/cgrrna/apps/#dave/cgrrna/fusion-output-archiver
