@@ -1,0 +1,31 @@
+---
+title: "cgrRNA miRNA wf"
+output:
+  github_document:
+    fig_width: 5
+    fig_height: 5
+    dev: jpeg
+---
+
+```{r include = FALSE}
+require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
+
+options(max.print = "99"); opts_knit$set(width = 99)
+opts_chunk$set(cache=FALSE, tidy=FALSE)
+
+source("~/cgrRNA/scratch/cgc_auth.R")
+
+```
+
+
+This workflow uses cutadapt to remove adapters and trim low quality bases. The trimmed fastq is sent to 
+1) FASTQC for sequence QC reports. 
+2) STAR for general alignment information. 
+3) miRDeep2 for mapping and miRNA identification and prediction.
+
+To use, copy the miRNA Analysis WF app and all the files in this project to a new project.
+
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png" target="_blank">
+<img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png"/>
+</a>
+
