@@ -17,8 +17,6 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 
 source("~/cgrRNA/scratch/cgc_auth.R")
 
-is_child = TRUE
-
 ```
 
 # Data harmonization

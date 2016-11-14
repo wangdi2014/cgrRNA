@@ -19,7 +19,5 @@ source("~/cgrRNA/scratch/cgc_auth.R")
 
 #VarDict for RNA
 
-![varict workflow](workflows/vardict/workflow_graph.png)
-
-
-Variant caller with ability to call indels and snv from RNA-seq reads.
+```{r child = '~/cgrRNA/variant_calling/workflows/vardict/Readme.Rmd'}
+```

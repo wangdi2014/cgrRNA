@@ -16,8 +16,6 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 
 source("~/cgrRNA/scratch/cgc_auth.R")
 
-if(!exists("is_child")){is_child = FALSE}
-
 ```
 
 ### Workflow Graphs
