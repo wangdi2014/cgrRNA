@@ -1,0 +1,701 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png",
+  "sbg:canvas_y": 0,
+  "sbg:id": "dave/cgrrna/star-fusion/5",
+  "requirements": [],
+  "steps": [
+    {
+      "sbg:y": 270.20001220703125,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "sbg:image_url": null,
+        "sbg:license": "GNU General Public License v3.0 only",
+        "sbg:id": "dave/cgrrna/star-fusion-2-5-1-b/3",
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          }
+        ],
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "dockerImageId": "",
+            "dockerPull": "images.sbgenomics.com/ana_d/star-fusion:2.5.1b",
+            "class": "DockerRequirement"
+          },
+          {
+            "value": "c3.8xlarge",
+            "class": "sbg:AWSInstanceType"
+          }
+        ],
+        "stdin": "",
+        "sbg:toolAuthor": "Brian Haas (Broad Institute), Alex Dobin(CSHL)",
+        "sbg:createdBy": "dave",
+        "arguments": [
+          {
+            "position": 7,
+            "separate": true,
+            "prefix": "--tmpdir",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "'/tmp'",
+              "engine": "#cwl-js-engine"
+            }
+          },
+          {
+            "position": 8,
+            "separate": true,
+            "prefix": "--verbose_level",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "2",
+              "engine": "#cwl-js-engine"
+            }
+          },
+          {
+            "position": 100,
+            "separate": true,
+            "prefix": "",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "{\n junc = $job.inputs.chimeric_junction.path.split(\"/\")\n name = junc[junc.length-1]\n ifchim = name.endsWith(\".Chimeric.out.junction\")\n if (ifchim) {\n   base = name.slice(0, -(\".Chimeric.out.junction\".length))\n }\n else {\n   base = name\n }\n  tar = \"&& tar -vcf \" + base + \".fusion_output.tar.gz \" + \"fusion_output \"\n  if ($job.inputs.no_filter) {\n    mv = \"&& mv \" + \"fusion_output/star-fusion.fusion_candidates.preliminary \" + \"fusion_output/\" + base + \".star-fusion.fusion_candidates.preliminary\"\n  } else {\n    mv = \"&& mv \" + \"fusion_output/star-fusion.fusion_candidates.final \" + \"fusion_output/\" + base + \".star-fusion.fusion_candidates.final\"\n  }\n  return tar + mv\n}\n\n  ",
+              "engine": "#cwl-js-engine"
+            }
+          },
+          {
+            "position": 10,
+            "separate": true,
+            "prefix": "--output_dir",
+            "valueFrom": "fusion_output"
+          }
+        ],
+        "label": "STAR-Fusion",
+        "stdout": "",
+        "class": "CommandLineTool",
+        "sbg:project": "dave/cgrrna",
+        "sbg:categories": [
+          "RNA"
+        ],
+        "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/star-fusion-2-5-1-b/3/raw/",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "outputs": [
+          {
+            "label": "STAR-Fusion output",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#chimeric_junction",
+              "glob": "*fusion_output.tar.gz"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#output_dir_eval",
+            "sbg:fileTypes": ".TAR",
+            "description": "Archive containing STAR Fusion files."
+          },
+          {
+            "label": "Fusion candidates",
+            "outputBinding": {
+              "sbg:inheritMetadataFrom": "#chimeric_junction",
+              "glob": "fusion_output/*fusion_candidates.*"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#fusion_candidates",
+            "sbg:fileTypes": "TXT",
+            "description": "Fusion candidates obtained by STAR Fusion analysis."
+          }
+        ],
+        "sbg:revision": 3,
+        "sbg:toolkitVersion": "2.5.1b",
+        "sbg:job": {
+          "inputs": {
+            "e_value": 2.2888441749382764,
+            "aggregate_novel_junction_dist": 8,
+            "genome_lib_dir": {
+              "class": "File",
+              "secondaryFiles": [
+                {
+                  "path": ""
+                },
+                {
+                  "path": ""
+                }
+              ],
+              "size": 0,
+              "path": "/path/to/GRCh37_gencode_v19_CTAT_lib_July272016.tar.gz"
+            },
+            "min_alt_pct_junction": 4.175176437711343,
+            "no_filter": true,
+            "min_junction_reads": 1,
+            "min_novel_junction_support": 8,
+            "max_promiscuity": 4,
+            "min_sum_frags": 2,
+            "chimeric_junction": {
+              "class": "File",
+              "secondaryFiles": [
+                {
+                  "path": ""
+                }
+              ],
+              "size": 0,
+              "path": "/path/to/sample1.Chimeric.out.junction"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "sbg:links": [
+          {
+            "label": "STAR Homepage",
+            "id": "https://github.com/alexdobin/STAR"
+          },
+          {
+            "label": "STAR Fusion Source Code",
+            "id": "https://github.com/STAR-Fusion/STAR-Fusion"
+          },
+          {
+            "label": "STAR Fusion Download",
+            "id": "https://github.com/STAR-Fusion/STAR-Fusion/archive/v0.7.0.tar.gz"
+          },
+          {
+            "label": "STAR Fusion Publications",
+            "id": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4175590/"
+          },
+          {
+            "label": "STAR Fusion Documentation",
+            "id": "https://github.com/STAR-Fusion/STAR-Fusion/wiki"
+          }
+        ],
+        "sbg:createdOn": 1478952347,
+        "sbg:modifiedOn": 1479006453,
+        "inputs": [
+          {
+            "label": "Min junction reads",
+            "inputBinding": {
+              "position": 1,
+              "separate": true,
+              "prefix": "--min_junction_reads",
+              "sbg:cmdInclude": true
+            },
+            "description": "Minimum number of junction-spanning reads required.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#min_junction_reads",
+            "sbg:toolDefaultValue": "1"
+          },
+          {
+            "label": "Min supporting fragments",
+            "inputBinding": {
+              "position": 2,
+              "separate": true,
+              "prefix": "--min_sum_frags",
+              "sbg:cmdInclude": true
+            },
+            "description": "Minimum fusion support = (# junction_reads + # spanning_frags).",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#min_sum_frags",
+            "sbg:toolDefaultValue": "2"
+          },
+          {
+            "label": "Max promiscuity",
+            "inputBinding": {
+              "position": 3,
+              "separate": true,
+              "prefix": "--max_promiscuity",
+              "sbg:cmdInclude": true
+            },
+            "description": "Maximum number of partners allowed for a given fusion.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#max_promiscuity",
+            "sbg:toolDefaultValue": "3"
+          },
+          {
+            "label": "Min novel junction support",
+            "inputBinding": {
+              "position": 4,
+              "separate": true,
+              "prefix": "--min_novel_junction_support",
+              "sbg:cmdInclude": true
+            },
+            "description": "Minimum of 3 junction reads required if breakpoint lacks involvement of only reference junctions.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#min_novel_junction_support",
+            "sbg:toolDefaultValue": "3"
+          },
+          {
+            "label": "Min alt pct junction",
+            "inputBinding": {
+              "position": 5,
+              "separate": true,
+              "prefix": "--min_alt_pct_junction",
+              "sbg:cmdInclude": true
+            },
+            "description": "Percent of the dominant isoform junction support.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "float"
+            ],
+            "id": "#min_alt_pct_junction",
+            "sbg:toolDefaultValue": "10"
+          },
+          {
+            "label": "Aggregate novel junction dist",
+            "inputBinding": {
+              "position": 6,
+              "separate": true,
+              "prefix": "--aggregate_novel_junction_dist",
+              "sbg:cmdInclude": true
+            },
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#aggregate_novel_junction_dist",
+            "description": "Non-ref junctions within value are merged into single calls."
+          },
+          {
+            "label": "E-value",
+            "inputBinding": {
+              "position": 7,
+              "separate": true,
+              "prefix": "-E",
+              "sbg:cmdInclude": true
+            },
+            "description": "E-value threshold for blast searches.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "float"
+            ],
+            "id": "#e_value",
+            "sbg:toolDefaultValue": "0.001"
+          },
+          {
+            "label": "No filter",
+            "inputBinding": {
+              "position": 9,
+              "separate": true,
+              "prefix": "--no_filter",
+              "sbg:cmdInclude": true
+            },
+            "description": "Do not filter predictions.",
+            "sbg:category": "Options",
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "id": "#no_filter",
+            "sbg:toolDefaultValue": "False"
+          },
+          {
+            "sbg:stageInput": "copy",
+            "label": "Chimeric junction file",
+            "sbg:fileTypes": "JUNCTION",
+            "inputBinding": {
+              "position": -1,
+              "secondaryFiles": [
+                ""
+              ],
+              "separate": true,
+              "prefix": "--chimeric_junction",
+              "sbg:cmdInclude": true
+            },
+            "sbg:category": "Input files",
+            "type": [
+              "File"
+            ],
+            "id": "#chimeric_junction",
+            "sbg:altPrefix": "-J",
+            "description": "Chimeric output from STAR aligner that contains chimeric junctions."
+          },
+          {
+            "label": "Genome lib directory",
+            "inputBinding": {
+              "secondaryFiles": [
+                "",
+                ""
+              ],
+              "separate": true,
+              "prefix": "--genome_lib_dir",
+              "valueFrom": {
+                "class": "Expression",
+                "script": "$job.inputs.genome_lib_dir.path.split(\"/\").reverse()[0].split(\".\")[0]",
+                "engine": "#cwl-js-engine"
+              },
+              "sbg:cmdInclude": true
+            },
+            "sbg:category": "Input files",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#genome_lib_dir",
+            "sbg:fileTypes": "TAR.GZ",
+            "description": "A tar compressed directory containing genome lib."
+          }
+        ],
+        "description": "STAR-Fusion, next to being a component of STAR 2.5, is also a component of the Trinity Cancer Transcriptome Analysis Toolkit (CTAT). STAR-Fusion uses the STAR aligner to identify candidate fusion transcripts supported by Illumina reads. STAR-Fusion further processes the output generated by the STAR aligner to map junction reads and spanning reads to a reference annotation set.\nA reference genome and corresponding protein-coding gene annotation set, including blast-matching gene pairs must be provided to STAR-Fusion.\n\n###Common issues###\n1. Make sure to set the 'chimSegmentMin' option in the STAR tool to a desired minimum chimeric segment length in order to get the proper input files for the STAR Fusion tool.",
+        "sbg:sbgMaintained": false,
+        "sbg:revisionNotes": "added genome_lib_dir name from input tar file",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": "Copy of admin/sbg-public-data/star-fusion-2-5-1-b/5",
+            "sbg:modifiedOn": 1478952347
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": "changed to tar -xvf because genome is not compressed",
+            "sbg:modifiedOn": 1478995119
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1479002830
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": "added genome_lib_dir name from input tar file",
+            "sbg:modifiedOn": 1479006453
+          }
+        ],
+        "sbg:latestRevision": 3,
+        "baseCommand": [
+          {
+            "class": "Expression",
+            "script": "{\n  out = $job.inputs.genome_lib_dir.path\n  return \"tar -xvzf \" +out + \"  -C .\"}\n  ",
+            "engine": "#cwl-js-engine"
+          },
+          "&&",
+          "/opt/STAR-Fusion_v0.7.0_FULL/STAR-Fusion"
+        ],
+        "temporaryFailCodes": [],
+        "sbg:cmdPreview": "tar -xvzf /path/to/GRCh37_gencode_v19_CTAT_lib_July272016.tar.gz  -C . && /opt/STAR-Fusion_v0.7.0_FULL/STAR-Fusion --chimeric_junction /path/to/sample1.Chimeric.out.junction --tmpdir /tmp --verbose_level 2 --output_dir fusion_output  && tar -vcf sample1.fusion_output.tar.gz fusion_output && mv fusion_output/star-fusion.fusion_candidates.preliminary fusion_output/sample1.star-fusion.fusion_candidates.preliminary",
+        "sbg:contributors": [
+          "dave"
+        ],
+        "sbg:toolkit": "STAR"
+      },
+      "outputs": [
+        {
+          "id": "#STAR_Fusion.output_dir_eval"
+        },
+        {
+          "id": "#STAR_Fusion.fusion_candidates"
+        }
+      ],
+      "id": "#STAR_Fusion",
+      "inputs": [
+        {
+          "source": [
+            "#min_junction_reads"
+          ],
+          "id": "#STAR_Fusion.min_junction_reads"
+        },
+        {
+          "source": [
+            "#min_sum_frags"
+          ],
+          "id": "#STAR_Fusion.min_sum_frags"
+        },
+        {
+          "source": [
+            "#max_promiscuity"
+          ],
+          "id": "#STAR_Fusion.max_promiscuity"
+        },
+        {
+          "source": [
+            "#min_novel_junction_support"
+          ],
+          "id": "#STAR_Fusion.min_novel_junction_support"
+        },
+        {
+          "source": [
+            "#min_alt_pct_junction"
+          ],
+          "id": "#STAR_Fusion.min_alt_pct_junction"
+        },
+        {
+          "source": [
+            "#aggregate_novel_junction_dist"
+          ],
+          "id": "#STAR_Fusion.aggregate_novel_junction_dist"
+        },
+        {
+          "source": [
+            "#e_value"
+          ],
+          "id": "#STAR_Fusion.e_value"
+        },
+        {
+          "source": [
+            "#no_filter"
+          ],
+          "id": "#STAR_Fusion.no_filter"
+        },
+        {
+          "source": [
+            "#chimeric_junction"
+          ],
+          "id": "#STAR_Fusion.chimeric_junction"
+        },
+        {
+          "source": [
+            "#genome_lib_dir"
+          ],
+          "id": "#STAR_Fusion.genome_lib_dir"
+        }
+      ],
+      "sbg:x": 621
+    }
+  ],
+  "hints": [],
+  "sbg:canvas_zoom": 1,
+  "label": "STAR-Fusion",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1478953671
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1478953927
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 2,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1478995152
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 3,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1478995245
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 4,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1479002883
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 5,
+      "sbg:revisionNotes": "\"added genome_lib_dir name from input tar file\"",
+      "sbg:modifiedOn": 1479006484
+    }
+  ],
+  "sbg:sbgMaintained": false,
+  "sbg:createdBy": "dave",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 5,
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/star-fusion/5/raw/",
+  "sbg:modifiedOn": 1479006484,
+  "sbg:latestRevision": 5,
+  "sbg:createdOn": 1478953671,
+  "inputs": [
+    {
+      "label": "chimeric_junction",
+      "secondaryFiles": [
+        ""
+      ],
+      "sbg:y": 381,
+      "type": [
+        "File"
+      ],
+      "id": "#chimeric_junction",
+      "sbg:fileTypes": "JUNCTION",
+      "sbg:x": 336
+    },
+    {
+      "label": "genome_lib_dir",
+      "secondaryFiles": [
+        "",
+        ""
+      ],
+      "sbg:y": 99,
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#genome_lib_dir",
+      "sbg:fileTypes": "TAR.GZ",
+      "sbg:x": 287
+    },
+    {
+      "label": "Min junction reads",
+      "description": "Minimum number of junction-spanning reads required.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#min_junction_reads",
+      "sbg:toolDefaultValue": "1"
+    },
+    {
+      "label": "Min supporting fragments",
+      "description": "Minimum fusion support = (# junction_reads + # spanning_frags).",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#min_sum_frags",
+      "sbg:toolDefaultValue": "2"
+    },
+    {
+      "label": "Max promiscuity",
+      "description": "Maximum number of partners allowed for a given fusion.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#max_promiscuity",
+      "sbg:toolDefaultValue": "3"
+    },
+    {
+      "label": "Min novel junction support",
+      "description": "Minimum of 3 junction reads required if breakpoint lacks involvement of only reference junctions.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#min_novel_junction_support",
+      "sbg:toolDefaultValue": "3"
+    },
+    {
+      "label": "Min alt pct junction",
+      "description": "Percent of the dominant isoform junction support.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "float"
+      ],
+      "id": "#min_alt_pct_junction",
+      "sbg:toolDefaultValue": "10"
+    },
+    {
+      "label": "Aggregate novel junction dist",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#aggregate_novel_junction_dist",
+      "description": "Non-ref junctions within value are merged into single calls."
+    },
+    {
+      "label": "E-value",
+      "description": "E-value threshold for blast searches.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "float"
+      ],
+      "id": "#e_value",
+      "sbg:toolDefaultValue": "0.001"
+    },
+    {
+      "label": "No filter",
+      "description": "Do not filter predictions.",
+      "sbg:category": "Options",
+      "type": [
+        "null",
+        "boolean"
+      ],
+      "id": "#no_filter",
+      "sbg:toolDefaultValue": "False"
+    }
+  ],
+  "description": "",
+  "class": "Workflow",
+  "sbg:revisionNotes": "\"added genome_lib_dir name from input tar file\"",
+  "outputs": [
+    {
+      "sbg:includeInPorts": true,
+      "label": "output_dir_eval",
+      "sbg:y": 121,
+      "required": false,
+      "source": [
+        "#STAR_Fusion.output_dir_eval"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#output_dir_eval",
+      "sbg:x": 961
+    },
+    {
+      "sbg:includeInPorts": true,
+      "label": "fusion_candidates",
+      "sbg:y": 440,
+      "required": false,
+      "source": [
+        "#STAR_Fusion.fusion_candidates"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#fusion_candidates",
+      "sbg:x": 1027
+    }
+  ],
+  "sbg:canvas_x": 0,
+  "sbg:contributors": [
+    "dave"
+  ]
+}

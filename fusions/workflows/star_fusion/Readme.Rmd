@@ -24,14 +24,18 @@ if(!exists("is_child")){is_child = FALSE}
 
 #### STAR-Fusion with alignment
 
-`r if(is_child){"![](workflows/star_fusion/star_fusion_with_alignment.png)"} else {"![](star_fusion_with_alignment.png)"}`
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank">
+<img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/>
+</a>
 
 Example of a workflow withing a wofklow.
 
 
 #### STAR-Fusion Only
 
-`r if(is_child){"![](workflows/star_fusion/star_fusion_post_alignment.png)"} else {"![](star_fusion_post_alignment.png)"}`
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank">
+<img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/>
+</a>
 
 ### CTAT Database
 

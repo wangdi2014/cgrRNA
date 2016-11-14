@@ -2,25 +2,21 @@ STAR-Fusion WF
 ================
 
 -   [Workflow Graphs](#workflow-graphs)
-    -   [STAR-Fusion with alignment](#star-fusion-with-alignment)
-    -   [STAR-Fusion Only](#star-fusion-only)
 -   [CTAT Database](#ctat-database)
 
-Workflow Graphs
----------------
+### Workflow Graphs
 
-### STAR-Fusion with alignment
+#### STAR-Fusion with alignment
 
-![](star_fusion_with_alignment.png)
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/> </a>
 
 Example of a workflow withing a wofklow.
 
-### STAR-Fusion Only
+#### STAR-Fusion Only
 
-![](star_fusion_post_alignment.png)
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/> </a>
 
-CTAT Database
--------------
+### CTAT Database
 
 Download the CTAT database from
 
