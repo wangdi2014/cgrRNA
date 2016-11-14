@@ -1,0 +1,1310 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": "https://brood.sbgenomics.com/static/dave/cgrrna/vardict-rna/38.png",
+  "sbg:canvas_y": -74,
+  "sbg:id": "dave/cgrrna/vardict-rna/38",
+  "requirements": [],
+  "sbg:canvas_x": -60,
+  "hints": [
+    {
+      "value": "m4.10xlarge",
+      "class": "sbg:AWSInstanceType"
+    }
+  ],
+  "sbg:canvas_zoom": 1,
+  "label": "VarDict_RNA",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475699988
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475700018
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 2,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475700218
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 3,
+      "sbg:revisionNotes": "made bam a single input...need to change to array later or add second input",
+      "sbg:modifiedOn": 1475700548
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 4,
+      "sbg:revisionNotes": "filter_reads_hexical set to 0 for this pipeline because we filter out duplicates from the bams already",
+      "sbg:modifiedOn": 1475700870
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 5,
+      "sbg:revisionNotes": "added default region to target chr7:55270300-55270348:EGFR",
+      "sbg:modifiedOn": 1475700970
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 6,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475702431
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 7,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475835849
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 8,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475835903
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 9,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475844015
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 10,
+      "sbg:revisionNotes": "opened and blanked all parameters for VarDict RNA",
+      "sbg:modifiedOn": 1475844728
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 11,
+      "sbg:revisionNotes": "removed -F input",
+      "sbg:modifiedOn": 1475845588
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 12,
+      "sbg:revisionNotes": "unlocked -R [region to target]",
+      "sbg:modifiedOn": 1475852782
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 13,
+      "sbg:revisionNotes": "now has VCF and Text output",
+      "sbg:modifiedOn": 1475854414
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 14,
+      "sbg:revisionNotes": "I unlocked 3 things",
+      "sbg:modifiedOn": 1475856920
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 15,
+      "sbg:revisionNotes": "added bed input node",
+      "sbg:modifiedOn": 1475859798
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 16,
+      "sbg:revisionNotes": "fixed bed filename on command line added -h for header",
+      "sbg:modifiedOn": 1475863867
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 17,
+      "sbg:revisionNotes": "c3.8xlarge",
+      "sbg:modifiedOn": 1475864047
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 18,
+      "sbg:revisionNotes": "r3.8xlarge",
+      "sbg:modifiedOn": 1475869766
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 19,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475876992
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 20,
+      "sbg:revisionNotes": "c3.8xlarge",
+      "sbg:modifiedOn": 1475894195
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 21,
+      "sbg:revisionNotes": "r3.8xlarge",
+      "sbg:modifiedOn": 1475938526
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 22,
+      "sbg:revisionNotes": "fixed r3.8xlarge",
+      "sbg:modifiedOn": 1475938678
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 23,
+      "sbg:revisionNotes": "added regions to call app",
+      "sbg:modifiedOn": 1475940047
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 24,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475940453
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 25,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475940521
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 26,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475940620
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 27,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475940785
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 28,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1475942565
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 29,
+      "sbg:revisionNotes": "fixed regions to call output",
+      "sbg:modifiedOn": 1475943043
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 30,
+      "sbg:revisionNotes": "c3.8xlarge",
+      "sbg:modifiedOn": 1475943847
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 31,
+      "sbg:revisionNotes": "added bed file scatter",
+      "sbg:modifiedOn": 1476149147
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 32,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476152762
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 33,
+      "sbg:revisionNotes": "added merge variants app",
+      "sbg:modifiedOn": 1476154443
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 34,
+      "sbg:revisionNotes": "m4.10xlarge",
+      "sbg:modifiedOn": 1476156385
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 35,
+      "sbg:revisionNotes": "c3.8xlarge",
+      "sbg:modifiedOn": 1476184456
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 36,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476202197
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 37,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476202420
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 38,
+      "sbg:revisionNotes": "turned on batch by file for bam input",
+      "sbg:modifiedOn": 1476221660
+    }
+  ],
+  "sbg:sbgMaintained": false,
+  "sbg:createdBy": "dave",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 38,
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/vardict-rna/38/raw/",
+  "sbg:modifiedOn": 1476221660,
+  "sbg:latestRevision": 38,
+  "sbg:createdOn": 1475699988,
+  "sbg:batchBy": {
+    "type": "item"
+  },
+  "inputs": [
+    {
+      "label": "reference",
+      "secondaryFiles": [
+        ".fai"
+      ],
+      "sbg:y": 160.9886474609375,
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#reference",
+      "sbg:x": 231
+    },
+    {
+      "label": "bam or bam pairs",
+      "secondaryFiles": [
+        ".bai"
+      ],
+      "batchType": "item",
+      "sbg:y": 515,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#bam",
+      "sbg:x": 269
+    },
+    {
+      "sbg:includeInPorts": true,
+      "label": "bed",
+      "sbg:y": 343,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#bed",
+      "sbg:x": 190
+    },
+    {
+      "label": "threads",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#threads",
+      "default": "",
+      "description": "threads"
+    },
+    {
+      "label": "strand bias",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#strand_bias",
+      "default": "",
+      "description": "strand bias"
+    },
+    {
+      "label": "print header",
+      "streamable": false,
+      "sbg:suggestedValue": "No",
+      "required": false,
+      "type": [
+        "null",
+        {
+          "type": "enum",
+          "name": "print_header",
+          "symbols": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "id": "#print_header",
+      "default": "",
+      "description": "print header"
+    },
+    {
+      "label": "min_number_of_variance_reads",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "int"
+      ],
+      "id": "#min_number_of_variance_reads",
+      "default": "",
+      "description": "default is 2"
+    },
+    {
+      "label": "filter reads hexical",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "string"
+      ],
+      "id": "#filter_reads_hexical",
+      "default": "",
+      "description": "use 0 to turn off, filter 2nd alignments and duplicates 0x500"
+    },
+    {
+      "label": "downsample",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "float"
+      ],
+      "id": "#downsample",
+      "default": "",
+      "description": "downsample - blank is 0"
+    },
+    {
+      "label": "allele_frequency",
+      "streamable": false,
+      "required": false,
+      "type": [
+        "null",
+        "float"
+      ],
+      "id": "#allele_frequency",
+      "default": "",
+      "description": "allele frequency"
+    }
+  ],
+  "description": "",
+  "sbg:batchInput": "#bam",
+  "class": "Workflow",
+  "sbg:revisionNotes": "turned on batch by file for bam input",
+  "outputs": [
+    {
+      "sbg:includeInPorts": true,
+      "label": "merged_variants",
+      "sbg:y": 299,
+      "required": false,
+      "source": [
+        "#merge_variant_text_files.merged_variants"
+      ],
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#merged_variants",
+      "sbg:x": 1146
+    }
+  ],
+  "steps": [
+    {
+      "scatter": "#VarDict_RNA.bed",
+      "sbg:y": 343.7471618652344,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "stdin": "",
+        "sbg:id": "dave/cgrrna/vardict_rna/28",
+        "x": 633,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          }
+        ],
+        "hints": [
+          {
+            "dockerPull": "cgrlab/vardictjava:latest",
+            "class": "DockerRequirement"
+          },
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          }
+        ],
+        "baseCommand": [
+          "/opt/VarDictJava/build/install/VarDict/bin/VarDict",
+          "-c",
+          "1",
+          "-S",
+          "2",
+          "-E",
+          "3"
+        ],
+        "sbg:image_url": null,
+        "sbg:createdBy": "dave",
+        "arguments": [
+          {
+            "position": 0,
+            "separate": true,
+            "prefix": "-N",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "$job.inputs.bam[0].metadata.sample_id",
+              "engine": "#cwl-js-engine"
+            }
+          },
+          {
+            "position": 201,
+            "separate": true,
+            "prefix": ">",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "{return $job.inputs.bam[0].metadata.sample_id + \"_vardict_variants.txt\"}",
+              "engine": "#cwl-js-engine"
+            }
+          }
+        ],
+        "label": "VarDict RNA",
+        "stdout": "",
+        "sbg:sbgMaintained": false,
+        "sbg:project": "dave/cgrrna",
+        "id": "dave/cgrrna/vardict_rna/28",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "sbg:revision": 28,
+        "sbg:modifiedOn": 1476200789,
+        "sbg:latestRevision": 28,
+        "sbg:createdOn": 1475699871,
+        "sbg:job": {
+          "inputs": {
+            "print_header": "Yes",
+            "bam": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "sampleA"
+                },
+                "path": "path/to/sampleA.bam"
+              }
+            ],
+            "reference": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "hg19.fa"
+            },
+            "bed": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "path/to/sample.bed"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "inputs": [
+          {
+            "label": "threads",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-th",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#threads",
+            "default": "",
+            "description": "threads"
+          },
+          {
+            "label": "strand bias",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-B",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#strand_bias",
+            "default": "",
+            "description": "strand bias"
+          },
+          {
+            "label": "region",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-R",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "string"
+            ],
+            "id": "#region_to_target",
+            "default": "",
+            "description": "A optional single region to target chr7:55270300-55270348:EGFR"
+          },
+          {
+            "label": "reference",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "secondaryFiles": [
+                ".fai"
+              ],
+              "sbg:cmdInclude": true,
+              "prefix": "-G",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#reference",
+            "default": "",
+            "description": "reference"
+          },
+          {
+            "label": "print header",
+            "streamable": false,
+            "required": false,
+            "type": [
+              "null",
+              {
+                "type": "enum",
+                "name": "print_header",
+                "symbols": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            ],
+            "id": "#print_header",
+            "default": "",
+            "description": "print header"
+          },
+          {
+            "label": "min_number_of_variance_reads",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-r",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#min_number_of_variance_reads",
+            "default": "",
+            "description": "default is 2"
+          },
+          {
+            "label": "lowest_freq_normal_sample",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-V",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "float"
+            ],
+            "id": "#lowest_freq_normal_sample",
+            "default": "",
+            "description": "The lowest frequency in normal sample allowed for a putative mutation - Default to 0.05"
+          },
+          {
+            "label": "local realignment",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-k",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "int"
+            ],
+            "id": "#local_realignment",
+            "default": "",
+            "description": "0 - no , 1 - yes"
+          },
+          {
+            "label": "filter reads hexical",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-F",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "string"
+            ],
+            "id": "#filter_reads_hexical",
+            "default": "",
+            "description": "use 0 to turn off, filter 2nd alignments and duplicates 0x500"
+          },
+          {
+            "label": "downsample",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-Z",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "float"
+            ],
+            "id": "#downsample",
+            "default": "",
+            "description": "downsample - blank is 0"
+          },
+          {
+            "label": "bed",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "separate": false,
+              "position": 101,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#bed",
+            "default": "",
+            "description": "optional bed file to target"
+          },
+          {
+            "label": "bam",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "secondaryFiles": [
+                ".bai"
+              ],
+              "sbg:cmdInclude": true,
+              "prefix": "-b",
+              "separate": true
+            },
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#bam",
+            "default": "",
+            "description": "BAM file(s)"
+          },
+          {
+            "label": "allele_frequency",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "position": 0,
+              "sbg:cmdInclude": true,
+              "prefix": "-f",
+              "separate": true
+            },
+            "type": [
+              "null",
+              "float"
+            ],
+            "id": "#allele_frequency",
+            "default": "",
+            "description": "allele frequency"
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "sbg:contributors": [
+          "dave"
+        ],
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475699871
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475699913
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475699935
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475700154
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475700175
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475700401
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475702111
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475702343
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475702408
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 9,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475835120
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 10,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475835777
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 11,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475843854
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 12,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475843969
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 13,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475845558
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 14,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475853581
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 15,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475853971
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 16,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475854221
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 17,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475854348
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 18,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475863720
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 19,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475863815
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 20,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475876705
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 21,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1475876940
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 22,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476199754
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 23,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476199902
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 24,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476199947
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 25,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200236
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 26,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200511
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 27,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200627
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 28,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200789
+          }
+        ],
+        "temporaryFailCodes": [],
+        "outputs": [
+          {
+            "label": "vcf",
+            "streamable": false,
+            "outputBinding": {
+              "sbg:metadata": {
+                "from_tool": "VarDict_RNA"
+              },
+              "sbg:inheritMetadataFrom": "#bam",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.vcf\"",
+                "engine": "#cwl-js-engine"
+              }
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#vcf",
+            "default": "",
+            "description": "vcf"
+          },
+          {
+            "label": "variants_text",
+            "streamable": false,
+            "outputBinding": {
+              "sbg:metadata": {
+                "from_tool": "VarDict_RNA"
+              },
+              "sbg:inheritMetadataFrom": "#bam",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.txt\"",
+                "engine": "#cwl-js-engine"
+              }
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#variants_text",
+            "default": "",
+            "description": "variants in text output"
+          }
+        ],
+        "sbg:cmdPreview": "/opt/VarDictJava/build/install/VarDict/bin/VarDict -c 1 -S 2 -E 3 -N sampleA > sampleA_vardict_variants.txt",
+        "y": 343.7471618652344
+      },
+      "outputs": [
+        {
+          "id": "#VarDict_RNA.vcf"
+        },
+        {
+          "id": "#VarDict_RNA.variants_text"
+        }
+      ],
+      "id": "#VarDict_RNA",
+      "inputs": [
+        {
+          "source": [
+            "#threads"
+          ],
+          "id": "#VarDict_RNA.threads"
+        },
+        {
+          "source": [
+            "#strand_bias"
+          ],
+          "id": "#VarDict_RNA.strand_bias"
+        },
+        {
+          "id": "#VarDict_RNA.region_to_target"
+        },
+        {
+          "source": [
+            "#reference"
+          ],
+          "id": "#VarDict_RNA.reference"
+        },
+        {
+          "source": [
+            "#print_header"
+          ],
+          "id": "#VarDict_RNA.print_header",
+          "default": "No"
+        },
+        {
+          "source": [
+            "#min_number_of_variance_reads"
+          ],
+          "id": "#VarDict_RNA.min_number_of_variance_reads"
+        },
+        {
+          "id": "#VarDict_RNA.lowest_freq_normal_sample"
+        },
+        {
+          "id": "#VarDict_RNA.local_realignment"
+        },
+        {
+          "source": [
+            "#filter_reads_hexical"
+          ],
+          "id": "#VarDict_RNA.filter_reads_hexical"
+        },
+        {
+          "source": [
+            "#downsample"
+          ],
+          "id": "#VarDict_RNA.downsample"
+        },
+        {
+          "source": [
+            "#bed"
+          ],
+          "id": "#VarDict_RNA.bed"
+        },
+        {
+          "source": [
+            "#bam"
+          ],
+          "id": "#VarDict_RNA.bam"
+        },
+        {
+          "source": [
+            "#allele_frequency"
+          ],
+          "id": "#VarDict_RNA.allele_frequency"
+        }
+      ],
+      "sbg:x": 633
+    },
+    {
+      "sbg:y": 388.20001220703125,
+      "run": {
+        "sbg:modifiedBy": "dave",
+        "stdin": "",
+        "sbg:id": "dave/cgrrna/merge_variant_text_files/8",
+        "x": 893,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "requirements": [
+              {
+                "dockerPull": "rabix/js-engine",
+                "class": "DockerRequirement"
+              }
+            ],
+            "id": "#cwl-js-engine"
+          }
+        ],
+        "hints": [
+          {
+            "dockerPull": "cgrlab/vardictjava:latest",
+            "class": "DockerRequirement"
+          },
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          }
+        ],
+        "baseCommand": [
+          "cat"
+        ],
+        "sbg:image_url": null,
+        "sbg:createdBy": "dave",
+        "arguments": [
+          {
+            "position": 201,
+            "separate": true,
+            "prefix": ">",
+            "valueFrom": {
+              "class": "Expression",
+              "script": "{return $job.inputs.variant_text_files[0].metadata.sample_id + \"_vardict_variants_merged.txt\"}",
+              "engine": "#cwl-js-engine"
+            }
+          }
+        ],
+        "label": "merge variant text files",
+        "stdout": "",
+        "sbg:sbgMaintained": false,
+        "sbg:project": "dave/cgrrna",
+        "id": "dave/cgrrna/merge_variant_text_files/8",
+        "successCodes": [],
+        "sbg:validationErrors": [],
+        "sbg:revision": 8,
+        "sbg:modifiedOn": 1476201484,
+        "sbg:latestRevision": 8,
+        "sbg:createdOn": 1476199107,
+        "sbg:job": {
+          "inputs": {
+            "variant_text_files": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "metadata": {
+                  "sample_id": "sampleA"
+                },
+                "path": "path/to/sampleA.bam"
+              },
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "path": "path/to/sampleA2.bam"
+              }
+            ]
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "inputs": [
+          {
+            "label": "variant_text_files",
+            "streamable": false,
+            "required": false,
+            "inputBinding": {
+              "separate": false,
+              "position": 1,
+              "sbg:cmdInclude": true
+            },
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "File"
+              }
+            ],
+            "id": "#variant_text_files",
+            "default": "",
+            "description": "variant_text_files"
+          }
+        ],
+        "description": "",
+        "class": "CommandLineTool",
+        "sbg:contributors": [
+          "dave"
+        ],
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 0,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476199107
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 1,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200874
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 2,
+            "sbg:revisionNotes": "deprecated",
+            "sbg:modifiedOn": 1476200932
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 3,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476200977
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 4,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476201044
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 5,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476201180
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 6,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476201328
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 7,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476201415
+          },
+          {
+            "sbg:modifiedBy": "dave",
+            "sbg:revision": 8,
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1476201484
+          }
+        ],
+        "temporaryFailCodes": [],
+        "outputs": [
+          {
+            "label": "merged_variants",
+            "streamable": false,
+            "outputBinding": {
+              "sbg:metadata": {
+                "from_tool": "merge_variant_text_files"
+              },
+              "sbg:inheritMetadataFrom": "#variant_text_files",
+              "glob": {
+                "class": "Expression",
+                "script": "\"*.txt\"",
+                "engine": "#cwl-js-engine"
+              }
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#merged_variants",
+            "default": "",
+            "description": "merged_variants"
+          }
+        ],
+        "sbg:cmdPreview": "cat > sampleA_vardict_variants_merged.txt",
+        "y": 388.20001220703125
+      },
+      "outputs": [
+        {
+          "id": "#merge_variant_text_files.merged_variants"
+        }
+      ],
+      "id": "#merge_variant_text_files",
+      "inputs": [
+        {
+          "source": [
+            "#VarDict_RNA.variants_text"
+          ],
+          "id": "#merge_variant_text_files.variant_text_files"
+        }
+      ],
+      "sbg:x": 893
+    }
+  ],
+  "sbg:contributors": [
+    "dave"
+  ]
+}

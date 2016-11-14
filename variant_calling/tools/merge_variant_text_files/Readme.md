@@ -1,52 +1,28 @@
----
-title: "VarDict Merge Variant Text files"
-output:
-  github_document:
-    fig_width: 5
-    fig_height: 5
-    dev: jpeg
----
-
-
-## {.tabset}
-
-```{r include = FALSE}
-require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
-
-options(max.print = "99"); opts_knit$set(width = 99)
-opts_chunk$set(cache=FALSE, tidy=FALSE)
-
-source("~/cgrRNA/scratch/cgc_auth.R")
-
-```
-
-Variant caller with ability to call indels and snv from RNA-seq reads.
+VarDict Merge Variant Text files
+================
 
 ### base command
 
-```{sh base command, eval=FALSE}
+``` sh
 
 cat sample_A_1_variants.txt sample_A_2_variants.txt > sample_A_merged_variants.txt
-
 ```
 
-### i/o {.tabset}
+### i/o
 
-#### inputs 
+#### inputs
 
-```{r inputs}
-
+``` r
 inputs = list(
   
 input(id = "variant_text_files", label = "variant_text_files", description = "variant_text_files", type = "File...", separate = FALSE, position=1)
 
 )
-
 ```
 
 #### arguments
 
-```{r arguments}
+``` r
 arguments = CCBList(
 CommandLineBinding(position = 201, prefix = ">", valueFrom = list('{return $job.inputs.variant_text_files[0].metadata.sample_id + "_vardict_variants_merged.txt"}'))
 )
@@ -54,8 +30,7 @@ CommandLineBinding(position = 201, prefix = ">", valueFrom = list('{return $job.
 
 #### outputs
 
-```{r output}
-
+``` r
 outputs = list(
 
 output(id = "merged_variants", label = "merged_variants", 
@@ -64,21 +39,19 @@ inheritMetadataFrom = "#variant_text_files", metadata = list(from_tool = "merge_
 glob = Expression(engine = "#cwl-js-engine", 
 script = '"*.txt"'))
 )
-
 ```
 
-### portability {.tabset}
+### portability
 
-####docker
+#### docker
 
-``` cgrlab/vardictjava:latest ```
+`cgrlab/vardictjava:latest`
 
-https://hub.docker.com/r/cgrlab/vardictjava/
+<https://hub.docker.com/r/cgrlab/vardictjava/>
 
-####tool definition
+#### tool definition
 
-```{r 5 create tool object}
-
+``` r
 tool <- Tool(
 id = "merge-variant-text-files", 
 label = "merge variant text files",
@@ -91,21 +64,16 @@ inputs = inputs,
 arguments = arguments,
   
 outputs = outputs)
-
 ```
 
-####cwl file
+#### cwl file
 
-```{r eval=create_cwl=="yes"}
+``` r
 write(tool$toJSON(pretty = TRUE), "../apps/merge_variant_text_files.json")
 ```
 
-####push app to cloud platform
+#### push app to cloud platform
 
-```{r eval=platform_push=="yes"}
+``` r
 project$app_add("merge_variant_text_files", tool)
 ```
-
-####notes
-
-

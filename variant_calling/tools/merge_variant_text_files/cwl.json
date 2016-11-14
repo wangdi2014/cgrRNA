@@ -1,0 +1,193 @@
+{
+  "sbg:modifiedBy": "dave",
+  "sbg:image_url": null,
+  "sbg:id": "dave/cgrrna/merge_variant_text_files/8",
+  "requirements": [
+    {
+      "class": "ExpressionEngineRequirement",
+      "requirements": [
+        {
+          "dockerPull": "rabix/js-engine",
+          "class": "DockerRequirement"
+        }
+      ],
+      "id": "#cwl-js-engine"
+    }
+  ],
+  "hints": [
+    {
+      "dockerPull": "cgrlab/vardictjava:latest",
+      "class": "DockerRequirement"
+    },
+    {
+      "value": 1,
+      "class": "sbg:CPURequirement"
+    },
+    {
+      "value": 1000,
+      "class": "sbg:MemRequirement"
+    }
+  ],
+  "baseCommand": [
+    "cat"
+  ],
+  "stdin": "",
+  "sbg:createdBy": "dave",
+  "arguments": [
+    {
+      "position": 201,
+      "separate": true,
+      "prefix": ">",
+      "valueFrom": {
+        "class": "Expression",
+        "script": "{return $job.inputs.variant_text_files[0].metadata.sample_id + \"_vardict_variants_merged.txt\"}",
+        "engine": "#cwl-js-engine"
+      }
+    }
+  ],
+  "label": "merge variant text files",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 0,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476199107
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 1,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476200874
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 2,
+      "sbg:revisionNotes": "deprecated",
+      "sbg:modifiedOn": 1476200932
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 3,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476200977
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 4,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476201044
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 5,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476201180
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 6,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476201328
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 7,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476201415
+    },
+    {
+      "sbg:modifiedBy": "dave",
+      "sbg:revision": 8,
+      "sbg:revisionNotes": null,
+      "sbg:modifiedOn": 1476201484
+    }
+  ],
+  "stdout": "",
+  "class": "CommandLineTool",
+  "sbg:project": "dave/cgrrna",
+  "sbg:revision": 8,
+  "successCodes": [],
+  "sbg:validationErrors": [],
+  "id": "https://api.sbgenomics.com/v2/apps/dave/cgrrna/merge_variant_text_files/8/raw/",
+  "sbg:modifiedOn": 1476201484,
+  "sbg:latestRevision": 8,
+  "sbg:createdOn": 1476199107,
+  "sbg:job": {
+    "inputs": {
+      "variant_text_files": [
+        {
+          "class": "File",
+          "secondaryFiles": [],
+          "size": 0,
+          "metadata": {
+            "sample_id": "sampleA"
+          },
+          "path": "path/to/sampleA.bam"
+        },
+        {
+          "class": "File",
+          "secondaryFiles": [],
+          "size": 0,
+          "path": "path/to/sampleA2.bam"
+        }
+      ]
+    },
+    "allocatedResources": {
+      "cpu": 1,
+      "mem": 1000
+    }
+  },
+  "inputs": [
+    {
+      "label": "variant_text_files",
+      "streamable": false,
+      "required": false,
+      "inputBinding": {
+        "separate": false,
+        "position": 1,
+        "sbg:cmdInclude": true
+      },
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "File"
+        }
+      ],
+      "id": "#variant_text_files",
+      "default": "",
+      "description": "variant_text_files"
+    }
+  ],
+  "description": "",
+  "sbg:sbgMaintained": false,
+  "temporaryFailCodes": [],
+  "outputs": [
+    {
+      "label": "merged_variants",
+      "streamable": false,
+      "outputBinding": {
+        "sbg:metadata": {
+          "from_tool": "merge_variant_text_files"
+        },
+        "sbg:inheritMetadataFrom": "#variant_text_files",
+        "glob": {
+          "class": "Expression",
+          "script": "\"*.txt\"",
+          "engine": "#cwl-js-engine"
+        }
+      },
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#merged_variants",
+      "default": "",
+      "description": "merged_variants"
+    }
+  ],
+  "sbg:cmdPreview": "cat > sampleA_vardict_variants_merged.txt",
+  "sbg:contributors": [
+    "dave"
+  ]
+}
