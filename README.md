@@ -1,4 +1,4 @@
-
+[![Gitter](https://badges.gitter.im/cgrlab/cgrRNA.svg)](https://gitter.im/cgrlab/cgrRNA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 #cgrRNA
 
