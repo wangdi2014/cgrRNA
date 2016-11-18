@@ -13,12 +13,8 @@ require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges);
 options(max.print = "99"); opts_knit$set(width = 99)
 opts_chunk$set(cache=FALSE, tidy=FALSE)
 
-source("~/cgrRNA/scratch/cgc_auth.R")
 
 ```
 
 
-Docker image auto-builds at `cgrlab/numpy`
-
-STAR-Fusion 0.8.0
-https://hub.docker.com/r/cgrlab/star-fusion/
+Docker image auto-builds at `cgrlab/numpy` ? (not active yet)
