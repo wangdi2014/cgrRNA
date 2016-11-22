@@ -4,11 +4,11 @@ cgrRNA Fusions Module
 -   [Data harmonization](#data-harmonization)
     -   [File naming conventions](#file-naming-conventions)
 -   [Fusion Finders](#fusion-finders)
-    -   [1. Chimerascan](#chimerascan)
-    -   [2. EricScript](#ericscript)
-    -   [3. Mapsplice](#mapsplice)
-    -   [4. Fusion Catcher](#fusion-catcher)
-    -   [5. STAR Fusion](#star-fusion)
+    -   [Chimerascan](#chimerascan)
+    -   [EricScript](#ericscript)
+    -   [Mapsplice](#mapsplice)
+    -   [Fusion Catcher](#fusion-catcher)
+    -   [STAR Fusion](#star-fusion)
 -   [Summary and Utility Apps](#summary-and-utility-apps)
     -   [Multi-Fusion Tool Output Collector](#multi-fusion-tool-output-collector)
     -   [Fusion Output Archiver](#fusion-output-archiver)
@@ -30,18 +30,18 @@ All files will be tab delimited.
 Fusion Finders
 ==============
 
-1. Chimerascan
---------------
+Chimerascan
+-----------
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png"/> </a>
 
-2. EricScript
--------------
+EricScript
+----------
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png"/> </a>
 
-3. Mapsplice
-------------
+Mapsplice
+---------
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png"/> </a>
 
@@ -49,11 +49,11 @@ Make sure the gtf file has a "gene\_biotype" field.
 
 In house tests on merged fastqs took 3.5 days on HPC with 8 cores and 1 day on HPC with 20 cores. The same files took just under 2 days on AWS with 16 cores.
 
-4. Fusion Catcher
------------------
-
-5. STAR Fusion
+Fusion Catcher
 --------------
+
+STAR Fusion
+-----------
 
 ### Workflow Graphs
 

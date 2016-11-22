@@ -29,27 +29,27 @@ All files will be tab delimited.
 
 # Fusion Finders
 
-## 1. Chimerascan
+## Chimerascan
 
 ```{r child = '~/cgrRNA/fusions/workflows/chimerascan/Readme.Rmd'}
 ```
 
-## 2. EricScript
+## EricScript
 
 ```{r child = '~/cgrRNA/fusions/workflows/ericscript/Readme.Rmd'}
 ```
 
-## 3. Mapsplice
+## Mapsplice
 
 ```{r child = '~/cgrRNA/fusions/workflows/mapslice/Readme.Rmd'}
 ```
 
-## 4. Fusion Catcher
+## Fusion Catcher
 
 ```{r child = '~/cgrRNA/fusions/workflows/fusion_catcher/Readme.Rmd'}
 ```
 
-## 5. STAR Fusion
+## STAR Fusion
 
 ```{r child = '~/cgrRNA/fusions/workflows/star_fusion/Readme.Rmd'}
 ```
