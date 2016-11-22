@@ -3,6 +3,7 @@ title: "STAR-Fusion WF"
 output:
   github_document:
     toc: true
+    toc_depth: 5
     fig_width: 5
     fig_height: 5
     dev: jpeg
@@ -17,9 +18,9 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 
 ```
 
-### Workflow Graphs
+#### Workflow Graphs
 
-#### STAR-Fusion with alignment
+##### STAR-Fusion with alignment
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank">
 <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/>
@@ -28,13 +29,13 @@ opts_chunk$set(cache=FALSE, tidy=FALSE)
 Example of a workflow withing a wofklow.
 
 
-#### STAR-Fusion Only
+##### STAR-Fusion Only
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank">
 <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/>
 </a>
 
-### CTAT Database
+#### CTAT Database
 
 Download the CTAT database from
 

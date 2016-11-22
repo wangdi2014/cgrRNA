@@ -13,8 +13,6 @@ cgrRNA Pipeline
         -   [Mapsplice](#mapsplice)
         -   [Fusion Catcher](#fusion-catcher)
         -   [STAR Fusion](#star-fusion)
-        -   [Workflow Graphs](#workflow-graphs)
-        -   [CTAT Database](#ctat-database)
     -   [Summary and Utility Apps](#summary-and-utility-apps)
         -   [Multi-Fusion Tool Output Collector](#multi-fusion-tool-output-collector)
         -   [Fusion Output Archiver](#fusion-output-archiver)
@@ -81,19 +79,19 @@ In house tests on merged fastqs took 3.5 days on HPC with 8 cores and 1 day on H
 
 ### STAR Fusion
 
-### Workflow Graphs
+#### Workflow Graphs
 
-#### STAR-Fusion with alignment
+##### STAR-Fusion with alignment
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/> </a>
 
 Example of a workflow withing a wofklow.
 
-#### STAR-Fusion Only
+##### STAR-Fusion Only
 
 <a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/> </a>
 
-### CTAT Database
+#### CTAT Database
 
 Download the CTAT database from
 
