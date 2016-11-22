@@ -1,0 +1,104 @@
+---
+title: "cgrRNA Pipeline"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+    fig_width: 5
+    fig_height: 5
+    dev: jpeg
+---
+
+```{r include = FALSE}
+require(tidyverse); require(rmarkdown); require(knitr); require(sevenbridges); 
+
+options(max.print = "99"); opts_knit$set(width = 99)
+opts_chunk$set(cache=FALSE, tidy=FALSE)
+
+```
+
+This project represents the current pre-release and actively developed comprehensive RNA-seq analysis pipeline used at the Cancer Genomics Research Laboratory. It is a work in progress. The goal is to document the tools and workflows that our analysts currently use, make them portable and share with the community.
+  
+Modules Included 
+  
+  * Alignment and QC
+  * Differential Expression
+  * Fusions (with concordance to WGS data)
+  * miRNA
+  * RNA Variant Calling
+
+Tools will be described in the common workflow language and have have associated docker images hosted in the cgrlab docker registry. CWL and Docker are not a requirement to run any of the workflows.
+Portability will demonstrated by using several framework/executors depending on the environment. Potential options include Rabix, Toil, SevenBridges, SnakeMake...etc.
+
+
+
+
+# Alignment and QC
+
+## STAR Alignment Workflows
+
+```{r child = '~/cgrRNA/modules/alignment_and_qc/star_alignment/Readme.Rmd'}
+```
+
+
+# Fusions
+
+## Data harmonization
+
+### File naming conventions
+
+All fusion output files follow the same naming schema which is the concatenation of the Sample ID, Fusion tool name, and then file extension.
+ 
+e.g. SA01234_chimerascan_output.bedpe, SA01234_ericscript_output.txt
+ 
+All files will be tab delimited.
+
+## Fusion Finders
+
+### Chimerascan
+
+```{r child = '~/cgrRNA/modules/fusions/chimerascan/Readme.Rmd'}
+```
+
+### EricScript
+
+```{r child = '~/cgrRNA/modules/fusions/ericscript/Readme.Rmd'}
+```
+
+### Mapsplice
+
+```{r child = '~/cgrRNA/modules/fusions/mapslice/Readme.Rmd'}
+```
+
+### Fusion Catcher
+
+```{r child = '~/cgrRNA/modules/fusions/fusion_catcher/Readme.Rmd'}
+```
+
+### STAR Fusion
+
+```{r child = '~/cgrRNA/modules/fusions/star_fusion/Readme.Rmd'}
+```
+
+## Summary and Utility Apps
+
+### Multi-Fusion Tool Output Collector
+
+```{r child = '~/cgrRNA/modules/fusions/multi_fusion_tool_output_collector/Readme.Rmd'}
+```
+
+### Fusion Output Archiver
+
+```{r child = '~/cgrRNA/modules/fusions/fusion_output_archiver/Readme.Rmd'}
+```
+
+### Fastq Decompress and Merge
+
+```{r child = '~/cgrRNA/modules/fusions/fastq_decompress_and_merge/Readme.Rmd'}
+```
+
+### Combine EricScript Fusion Lists
+
+```{r child = '~/cgrRNA/modules/fusions/combine_EricScript_fusion_lists/Readme.Rmd'}
+```
+
