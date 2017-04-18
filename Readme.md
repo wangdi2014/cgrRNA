@@ -40,7 +40,7 @@ STAR Alignment Workflows
 
 <https://igor.sbgenomics.com/u/dave/cgrrna/apps/#dave/cgrrna/star-rna-seq-alignment-with-dedup/>
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-rna-seq-alignment-with-dedup/1.png" target="_blank"><img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-rna-seq-alignment-with-dedup/1.png"/></a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-rna-seq-alignment-with-dedup/1.png" target="_blank"><img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/star-rna-seq-alignment-with-dedup/1.png"/></a>
 
 Fusions
 =======
@@ -61,15 +61,15 @@ Fusion Finders
 
 ### Chimerascan
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-transcript-detection-chimerascan-ID-CsR/1.png"/> </a>
 
 ### EricScript
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/ericscript-wf/1.png"/> </a>
 
 ### Mapsplice
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/mapsplice2-1/1.png"/> </a>
 
 Make sure the gtf file has a "gene\_biotype" field.
 
@@ -83,13 +83,13 @@ In house tests on merged fastqs took 3.5 days on HPC with 8 cores and 1 day on H
 
 ##### STAR-Fusion with alignment
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion-with-alignment/13.png"/> </a>
 
 Example of a workflow withing a wofklow.
 
 ##### STAR-Fusion Only
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/star-fusion/5.png"/> </a>
 
 #### CTAT Database
 
@@ -118,15 +118,15 @@ Written with Pandas and other python libraries.
 
 <https://igor.sbgenomics.com/u/dave/cgrrna/apps/#dave/cgrrna/fusion-output-archiver-wf>
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/fusion-output-archiver-wf/5.png"/> </a>
 
 ### Fastq Decompress and Merge
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/fastq-decompress-and-merge/1.png"/> </a>
 
 ### Combine EricScript Fusion Lists
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/combine-eric-script-filtered-fusions/1.png"/> </a>
 
 RNA Variant Calling
 ===================
@@ -136,7 +136,7 @@ VarDict for RNA
 
 Variant caller with ability to call indels and snv from RNA-seq reads.
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/vardict-rna/38.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/vardict-rna/38.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/vardict-rna/38.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/vardict-rna/38.png"/> </a>
 
 miRNA
 =====
@@ -148,4 +148,4 @@ This workflow uses cutadapt to remove adapters and trim low quality bases. The t
 
 To use, copy the miRNA Analysis WF app and all the files in this project to a new project.
 
-<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png" target="_blank"> <img width="1200" border="0" align="center"src="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png"/> </a>
+<a href="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png" target="_blank"> <img width="1200" border="0" align="center" src="https://brood.sbgenomics.com/static/dave/cgrrna/mirna-analysis-wf-BATCH/0.png"/> </a>
